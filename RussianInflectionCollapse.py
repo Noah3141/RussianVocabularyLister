@@ -39,7 +39,8 @@ roots_adj_ый = list()
 roots_verb = list()
 ство_words = list()
 PreProcessLength = len(dictionary)
-
+remove_words = list()
+add_words = list()
 
                          ## Collapse oblique -ый Adjectives into Nominative ##
 
@@ -63,10 +64,12 @@ for root in roots_adj_ый:
 # Sorts ий ending words into nouns or adjectives based on presence of -ия
 for word in dictionary: 
         if word.endswith('ий'):
-            if word.removesuffix("ий") + "ия" not in dictionary:
-                roots_adj_ий.append(word.removesuffix("ий"))
+            root = word.removesuffix("ий")
+            if root + "ия" not in dictionary:
+                roots_adj_ий.append(root)
             else:
-                roots_noun.append(word.removesuffix("ий"))
+                roots_noun.append(root)
+
 
 # -ий occurs at the end of: genitive plural abstract nouns, and half of 
 # nominative adjectives. We will need to distinguish which root belongs to 
@@ -107,7 +110,6 @@ for root in roots_noun:
                             ## Collapsing Nouns ending in -ство ##
 
 ство_endings = ["ства", "ств", "ству", "ством","стве","ствах","ствами","ствам"]
-remove_words = list()
 for word in dictionary:
     if word.endswith("ство"):
         root = word.removesuffix("ство")
@@ -132,6 +134,108 @@ for root in roots_adj_ий:
 
 
 
+                                ## Сollapsing -ать conjugations ##
+
+
+# For those words who only have (at least) third-person singular and plural (one would
+# expect very few first person conjugations in the dictionary)
+
+for word in dictionary:
+    if word.endswith("ает") or word.endswith("ают") and word.removesuffix("ает")+"ают" in dictionary or word.removesuffix("ают")+"ает" in dictionary:
+        if word.endswith("ает"):
+            add_words.append(word.removesuffix("ает")+"ать")
+        if word.endswith("ают"):
+            add_words.append(word.removesuffix("ают")+"ать")
+        remove_words.append(word)
+        remove_words.append(word.removesuffix("ать")+"ает")
+        remove_words.append(word.removesuffix("ать")+"ают")
+        remove_words.append(word.removesuffix("ать")+"аем")
+        remove_words.append(word.removesuffix("ать")+"аю")
+        remove_words.append(word.removesuffix("ать")+"аешь")
+        remove_words.append(word.removesuffix("ать")+"аете") # 6 non-reflexive forms
+        remove_words.append(word.removesuffix("ать")+"ается")
+        remove_words.append(word.removesuffix("ать")+"аются")
+        remove_words.append(word.removesuffix("ать")+"аемся")
+        remove_words.append(word.removesuffix("ать")+"аюсь")
+        remove_words.append(word.removesuffix("ать")+"аешься")
+        remove_words.append(word.removesuffix("ать")+"аетесь") # 6 reflexive forms
+        
+        
+for word in add_words:
+    dictionary[word] = dictionary.get(word.removesuffix("ать")+"ает", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"ают", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аю", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аем", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аешь", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аете", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аются", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аюсь", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аемся", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аешься", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аетесь", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"ается", 0) \
+
+for word in remove_words:
+    try: del dictionary[word]
+    except: continue
+remove_words.clear()
+
+
+
+
+
+for word in dictionary:
+    if word.endswith("аю") or word.endswith("аем") and word.removesuffix("аю")+"аем" in dictionary or word.removesuffix("ают")+"ает" in dictionary:
+        if word.endswith("ает"):
+            add_words.append(word.removesuffix("ает")+"ать")
+        if word.endswith("ают"):
+            add_words.append(word.removesuffix("ают")+"ать")
+        remove_words.append(word)
+        remove_words.append(word.removesuffix("ать")+"ает")
+        remove_words.append(word.removesuffix("ать")+"ают")
+        remove_words.append(word.removesuffix("ать")+"аем")
+        remove_words.append(word.removesuffix("ать")+"аю")
+        remove_words.append(word.removesuffix("ать")+"аешь")
+        remove_words.append(word.removesuffix("ать")+"аете") # 6 non-reflexive forms
+        remove_words.append(word.removesuffix("ать")+"ается")
+        remove_words.append(word.removesuffix("ать")+"аются")
+        remove_words.append(word.removesuffix("ать")+"аемся")
+        remove_words.append(word.removesuffix("ать")+"аюсь")
+        remove_words.append(word.removesuffix("ать")+"аешься")
+        remove_words.append(word.removesuffix("ать")+"аетесь") # 6 reflexive forms
+        
+        
+for word in add_words:
+    dictionary[word] = dictionary.get(word.removesuffix("ать")+"ает", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"ают", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аю", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аем", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аешь", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аете", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аются", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аюсь", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аемся", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аешься", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"аетесь", 0) \
+                     + dictionary.get(word.removesuffix("ать")+"ается", 0) \
+
+for word in remove_words:
+    try: del dictionary[word]
+    except: continue
+remove_words.clear()
+
+
+
+
+
+# test_word = "рассказывать"
+# print(dictionary[test_word], test_word in dictionary)
+
+# for word in dictionary:
+#     if word.endswith("аю"):
+#         print(word)
+
+##
 
 
 ## Collapsing perfective and imperfective verbs where there is an imperfective -ивать ##
