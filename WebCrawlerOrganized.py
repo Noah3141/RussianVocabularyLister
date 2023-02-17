@@ -19,7 +19,9 @@ if len(URL) < 2:
 
 # Preparing a bunch of variables for later usage
 Links = []
-stop_words = ["в","на","с","от","к","из","по", "и","для", "а", "что", "не","это", "при", "как"]
+stop_words = ["в","на","с","от","к","из","по", "и","для", "а",
+              "что", "не","это", "при", "как", "чтобы", "об",
+              "также", "то","когда"]
 Words = dict()
 
 
@@ -42,7 +44,7 @@ while len(Links) < Max:
         if len(Links) > Max: break
         rcv = urllib.request.urlopen(Link, context =ctx).read()
         soup = BeautifulSoup(rcv, 'html.parser')
-        Link_A_tags = str(soup.find_all('a'))
+        Link_A_tags = str(soup.select('#mw-content-text'))
         Extensions = re.findall('href="(/wiki/\S+?)"', Link_A_tags)
         for ending in Extensions:
             if 'https://ru.wikipedia.org' + ending not in Links:
