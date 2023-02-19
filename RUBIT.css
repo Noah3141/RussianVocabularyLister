@@ -26,7 +26,7 @@ img{
     ;
 }
 p{
-    margin: 2px 1rem 1rem 1rem;
+    margin: 2px 30px 1rem 30px;
 }
 form.Entry-Group{
     margin: 15px 20px 0px 20px;
@@ -87,16 +87,6 @@ button{
     border-left: none;
 }
 
-
-div.tooltip{
-    display:none;
-    position:absolute;
-}
-select.btn:hover#Output_Style + div.tooltip{
-    display: inline;
-}
-
-
 /* Hover over orange effect for EACH BUTTON CHRIST */
 button.btn:hover{
     background-color: var(--Color-Base);
@@ -107,8 +97,11 @@ select.btn#Output_Breadth:hover{
 select.btn#Output_Style:hover{
     background-color: var(--Color-Base);
 }
-
 option{
     background-color: var(--Background-Default);
     color: var(--Text-Color);
+}
+#Output_Style::after{
+    content: "Top Words: Only from 10% to 30% Broad List: Only from 5% to 80% Full List: All words from input text"
+    
 }

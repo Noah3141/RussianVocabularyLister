@@ -12,32 +12,28 @@
 <body>
  <h1>Russian Vocabulary List Maker</h1>
  <img src="/Underline-Stroke.png">
- <p> Explanation Text </p><!--The most important thing for language learning is not so much to use the most effective techniques for learning,
-     but rather to use techniques which can be sustained for the longest period of time. Among this is the act of varying 
-     which techniques are used to study a language, and what types of language input are used. At beginner to intermediate 
-     stages, one of the available tools is material that comes with a corresponding vocabulary list. While vocabulary lists 
-     are not an impressively effective way of learning, it is possible for them to make otherwise quite inaccessible texts 
-     perfectly comprehensible, and a much better form of input. Advanced learners basically lose access to materials with 
-     vocabulary lists. So, although a vocabulary list in essence isn't the best way to learn almost anything, 
-     mostly-comprehensible, native language-input most certainly is, and being able to create a vocabulary list easily can 
-     radically increase material of this kind.</p>
- <p>Advanced learners benefit most from engaging with native language material: speeches, podcasts, movies, internet videos, 
-    and, most of all, books, made by Russians for Russian speakers. This application can offer more advanced learners of 
-    Russian the ability to create an organized, efficient vocabulary list for large amounts of native material. By putting 
-    in a whole YouTube transcript, and studying the most frequently used, novel vocabulary beforehand, the student has greatly 
-    increased access to increasingly high level mostly-comprehensible language input.</p>
-- -->
+ <p>The most important part of learning language is not that you use the best methods for learning. It is that you use methods that 
+    can be sustained. Varying what tools you use goes a long way towards longevity in learning. While vocabulary lists in and of themselves
+    are not incredible tools for language input, they can be very helpful for augmenting the usefulness of a text. Beginners and more advanced
+    learners both can benefit from easily being able to quickly create vocabulary lists for unstructured, uncurated, naturally
+    produced content.
+ </p>
+ <p>
+    This tool can be used to create vocabulary lists from YouTube transcripts of podcasts or speeches, book chapters, articles — any
+    Russian text.
+ </p>
  <form class="Entry-Group">
     <label for="text-field">Enter your study material here:</label><br>
-    <textarea name="text-field" id="text-field"></textarea><br>
+    <textarea name="text_field" id="text-field"></textarea><br>
     <div class="button-line">
-            <button class="btn" type="submit"  name="Create-List" id="Create_List">Create List</button>
+            <button class="btn" type="submit"  name="Create_List" id="Create_List">Create List</button>
+            
             <select class="btn" name="Output-Breadth" id="Output_Breadth">  
                 <option>Top Words</option>
                 <option>Broad List</option>
                 <option>Full List</option>
             </select>
-            <div class="tooltip">Selects to what degree related vocabulary terms are presented together, as opposed to separate entries.</div>
+
             <select class="btn" name="Output-Style" id="Output_Style">  
                 <option>Raw Vocabulary</option>
                 <option>Verbs Paired</option>
