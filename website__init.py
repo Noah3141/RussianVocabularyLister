@@ -7,11 +7,10 @@ api = Api(app)
 @app.route("/", methods=["POST","GET"])
 def RUBIT():
     if request.method == "POST":
-        text_field = request.form["text_field"]
+        text = request.form["text_field"]
         Output_Breadth = request.form["Output_Breadth"]
         Output_Style = request.form["Output_Style"]
-        print(text_field)
-        return render_template("RUBIT.html")
+        return render_template("RUBIT.html", text_field=text)
     else:
         return render_template("RUBIT.html")
 

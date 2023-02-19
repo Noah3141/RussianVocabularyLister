@@ -1,0 +1,12 @@
+:root{
+    --Background-Default: rgb(51, 51, 51);
+    --Background-Fronted: rgb(73, 67, 65);
+    --Dark-Outline: rgb(20,20,20);
+    --Element-Default: rgb(102, 102, 102);
+    --Element-Highlight: rgb(136, 136, 136);
+    --Color-Base: rgb(255, 100, 0) ;
+    --Color-Highlight: rgb(255, 112, 17);
+    --Color-Lowlight: rgb(230, 54, 0);
+    --Text-Color: rgb(235, 235, 235);
+    
+}

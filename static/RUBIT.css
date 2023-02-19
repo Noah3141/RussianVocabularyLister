@@ -1,0 +1,134 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+ 
+}
+body{
+    background-color: var(--Background-Default);
+    color: var(--Text-Color);
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+#page-container{
+    position: relative;
+    min-height: 100vh;
+}
+#content-wrap {
+    padding-bottom: 8rem;    /* Footer height */
+}
+h1{
+    text-align: center;
+    margin: 15px;
+    margin-bottom: 2rem;
+
+}
+img{
+    height:20px;
+    display: block;
+    width: 300px;
+    margin:auto;
+    margin-top:-20px;
+    margin-bottom: 20px;
+    ;
+}
+p{
+    margin: 2px 30px 1rem 30px;
+}
+form.Entry-Group{
+    margin: 15px 20px 0px 20px;
+}
+
+label{
+    margin:0px 10px;
+
+}
+
+#text-field{
+    width: 100%;
+    height: 10rem;
+    border: 2px solid var(--Dark-Outline);
+    border-radius: 8px;
+    margin:5px 0px;
+    background-color: var(--Element-Default);
+    color: var(--Text-Color);
+    resize: vertical;
+   
+    
+    
+    /* BUTTON LINE SECTION */
+
+}
+.button-line{
+    display: flex;
+}
+
+/* Tries to apply to all three buttons */
+.btn{
+    background-color: var(--Element-Default);
+    padding: 4px 8px;
+    cursor: pointer;
+    color: var(--Text-Color);
+    outline: none;
+    border-bottom: 2px solid var(--Dark-Outline);
+    border-top: 2px solid var(--Dark-Outline);
+    width: 7rem;
+    transition: background-color .35s;
+}
+
+/* Applies to the SUBMIT button */
+button{
+    border-radius: 16px 0px 0px 16px;
+    border: 0px;
+    border-left: 2px solid var(--Dark-Outline);
+    border-right: 1px solid var(--Dark-Outline);
+}
+/* Applies to the Righthand button */
+#Output_Style{
+    border-radius: 0px 16px 16px 0px;
+    background-color: var(--Element-Default);
+    width: 9.2rem;
+    border-right: 2px solid var(--Dark-Outline);
+    border-left: 1px solid var(--Dark-Outline);
+}
+/* Applies to the Middle button */
+#Output_Breadth{
+    border-right: none;
+    border-left: none;
+}
+
+/* Hover over orange effect for EACH BUTTON CHRIST */
+button.btn:hover{
+    background-color: var(--Color-Base);
+}
+select.btn#Output_Breadth:hover{
+    background-color: var(--Color-Base);
+}
+select.btn#Output_Style:hover{
+    background-color: var(--Color-Base);
+}
+option{
+    background-color: var(--Background-Default);
+    color: var(--Text-Color);
+}
+#Output_Style::after{
+    content: "Top Words: Only from 10% to 30% Broad List: Only from 5% to 80% Full List: All words from input text"
+    
+}
+
+footer{
+    background-color: var(--Element-Default);
+    display: flex;
+    flex-direction: row-reverse;
+    border-top: 2px solid var(--Dark-Outline);
+    padding: 20px 30px 30px 30px;
+    text-align: right;
+    height: 4rem;
+    bottom: 0;
+    position: absolute;
+    right:0;
+    width: 100%;
+    line-height: 1.5rem;
+}
