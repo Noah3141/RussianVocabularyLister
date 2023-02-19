@@ -55,12 +55,18 @@ label{
     background-color: var(--Element-Default);
     color: var(--Text-Color);
     resize: vertical;
-   
+    padding: 6px;
+}
+#text-field:focus{
+    outline: 2px solid var(--Color-Base);
+    outline-offset: 1px;
+    border:2px solid var(--Dark-Outline);
+}
     
     
     /* BUTTON LINE SECTION */
 
-}
+
 .button-line{
     display: flex;
 }
