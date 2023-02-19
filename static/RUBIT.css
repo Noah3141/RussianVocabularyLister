@@ -128,7 +128,7 @@ footer{
     background-color: var(--Element-Default);
     display: flex;
     flex-direction: row-reverse;
-    border-top: 2px solid var(--Dark-Outline);
+    border-top: 1px solid var(--Dark-Outline);
     padding: 20px 30px 30px 30px;
     text-align: right;
     height: 4rem;
