@@ -7,11 +7,18 @@ import pickle
 # Part 3: Having passed those checks, vaccuum up all the forms
 #           a) Sum frequency within the head (infinitive for verbs, nom-sing for nouns, nom-masc-sing for adjectives)
 #           b) Go through and delete all the other entries we just summed from
-
+#
+# Alternatively put:
+# Catch     (get words by qualities reminiscent of X, e.g. being a masculine noun)
+# Reject    (test that suspected word passes abilities of a veritable masculine noun)
+# Inflect   (if it passed, assume it is a masc noun, generate all the other forms)
+# Collect   (sum the occurances, delete non-dictionary forms)
 
 
 # Known deficiencies:
 # Some -вать ending verbs, like создать-создавать get collapsed into their perfective form only, because создаю is treated as if a normal -ать ending word, whose infinitive must be создать.... 
+# During the processing of жать/-жимать, жать/-жинать is destroyed.
+
 
 with open('Words.pkl', 'rb') as f:
     dictionary = pickle.load(f)
@@ -39,7 +46,8 @@ declensions_noun = ["ие", "ия", "ий", "ии", "ию", "иям", "иями"
 
 
 # Masculine noun basic endings
-declension_hard_endings_nouns = ["а", "у", "ы", "е", "ом", "ах", "ами", "ов", "ам"]
+declension_masc_hard_endings_nouns = ["а", "у", "ы", "е", "ом", "ах", "ами", "ов", "ам"]
+declension_fem_hard_endings_nouns = ["у", "ы", "е", "ой", "ах", "ами", "ам", "и"] # !SOFT И INCLUDED FOR SPELLING RULE!
 
 ать_endings = ["аю","аешь","ает","аем","аете","ают",
                "аюсь","аешься","ается","аемся","аетесь","аются",
@@ -71,7 +79,7 @@ for word in dictionary:
 for root in roots_adj_ый:
     for declension in declensions_adj: #Go through the combination of a root, and each possible ending
         proposed_adj = root + declension #Build a non-nominative-masculine proposed word such as: *последное or коммунистического
-        dictionary[root+"ый"] = dictionary[root+"ый"] + dictionary.get(proposed_adj, 0) # Find the nom-masc entry, and add the proposed word's count, 0 if does not exist
+        dictionary[root + "ый"] = dictionary[root + "ый"] + dictionary.get(proposed_adj, 0) # Find the nom-masc entry, and add the proposed word's count, 0 if does not exist
         try: del dictionary[proposed_adj]
         except: continue
 
@@ -101,7 +109,7 @@ for word in dictionary:
 for root in roots_adj_ий:
     for declension in declensions_adj: #Go through the combination of a root, and each possible ending
         proposed_adj = root + declension #Build a non-nominative-masculine proposed word such as: *последное or коммунистического
-        dictionary[root+"ий"] = dictionary[root+"ий"] + dictionary.get(proposed_adj, 0) # Find the nom-masc entry, and add the proposed word's count, 0 if does not exist
+        dictionary[root + "ий"] = dictionary[root + "ий"] + dictionary.get(proposed_adj, 0) # Find the nom-masc entry, and add the proposed word's count, 0 if does not exist
         try: del dictionary[proposed_adj]
         except: continue
     
@@ -115,11 +123,11 @@ for root in roots_noun:
     for declension in declensions_noun: #Go through the combination of a root, and each possible ending
         proposed_noun = root + declension #Build a non-nominative-masculine proposed word such as: *последное or коммунистического
         try: 
-            dictionary[root+"ие"] = dictionary[root+"ие"] + dictionary.get(proposed_adj, 0) # Find the nom-masc entry, and add the proposed word's count, 0 if does not exist
+            dictionary[root +" ие"] = dictionary[root + "ие"] + dictionary.get(proposed_adj, 0) # Find the nom-masc entry, and add the proposed word's count, 0 if does not exist
             #print("oh look an иe word: ", root+"иe")
         except: 
-            dictionary[root+"ия"] = dictionary[root+"ия"] + dictionary.get(proposed_adj, 0)
-            #print("oh look an ия word: ", root+"ия")
+            dictionary[root + "ия"] = dictionary[root + "ия"] + dictionary.get(proposed_adj, 0)
+            #print("oh look an ия word: ", root + "ия")
             try: del dictionary[proposed_adj]
             except: continue
         try: del dictionary[proposed_adj]
@@ -148,9 +156,16 @@ remove_words.clear()
 for root in roots_adj_ий:
     for ending in ство_endings: #Go through the combination of a root, and each possible ending
         proposed_noun = root + declension #Build a non-nominative-masculine proposed word such as: *последное or коммунистического
-        dictionary[root+"ий"] = dictionary[root+"ий"] + dictionary.get(proposed_adj, 0) # Find the nom-masc entry, and add the proposed word's count, 0 if does not exist
+        dictionary[root + "ий"] = dictionary[root + "ий"] + dictionary.get(proposed_adj, 0) # Find the nom-masc entry, and add the proposed word's count, 0 if does not exist
         try: del dictionary[proposed_adj]
         except: continue
+
+
+                        ## Collapsing cases of feminine nouns ##
+                        
+# for word in dictionary:
+#     if word.endswith("а"
+
 
 
                         ## Сollapsing -ать verbs FOUND AS present conjugations ##
@@ -160,19 +175,19 @@ for root in roots_adj_ий:
 # expect very few first person conjugations in the dictionary)
 
 for word in dictionary:
-    if word.endswith("ает") or word.endswith("ают") and word.removesuffix("ает")+"ают" in dictionary or word.removesuffix("ают")+"ает" in dictionary:
+    if word.endswith("ает") or word.endswith("ают") and word.removesuffix("ает") + "ают" in dictionary or word.removesuffix("ают")+"ает" in dictionary:
         if word.endswith("ает"):
-            add_words.append(word.removesuffix("ает")+"ать")
+            add_words.append(word.removesuffix("ает") + "ать")
         if word.endswith("ают"):
-            add_words.append(word.removesuffix("ают")+"ать")
+            add_words.append(word.removesuffix("ают") + "ать")
         remove_words.append(word) # First add to the remove list the word, then all its other forms
         for suffix in ать_endings:
-            remove_words.append(word.removesuffix("ать")+suffix) # Take the FOUND word's presumed infinitive, and generate me all the other stable forms and add them to remove list
+            remove_words.append(word.removesuffix("ать") + suffix) # Take the FOUND word's presumed infinitive, and generate me all the other stable forms and add them to remove list
         
         
 for word in add_words: # Take the FOUND word, checked to be derived from -ать, and subsume all the forms' frequencies under the infinitive
     for suffix in ать_endings:
-        dictionary[word] = dictionary.get(word,0) + dictionary.get(word.removesuffix("ать")+suffix, 0)
+        dictionary[word] = dictionary.get(word, 0) + dictionary.get(word.removesuffix("ать") + suffix, 0)
 
 for word in remove_words: # Having subsumed all the frequencies under infinitive, clear out other forms where extant
     try: del dictionary[word]
@@ -184,19 +199,19 @@ remove_words.clear()
 
 # The previous section checked for either third person, spanning number, but in order to succintly collect all forms, this section spans *person*, within number
 for word in dictionary:
-    if word.endswith("аю") or word.endswith("аешь") and word.removesuffix("аю")+"аешь" in dictionary or word.removesuffix("аешь")+"аю" in dictionary:
+    if word.endswith("аю") or word.endswith("аешь") and word.removesuffix("аю") + "аешь" in dictionary or word.removesuffix("аешь")+"аю" in dictionary:
         if word.endswith("аю"):
-            add_words.append(word.removesuffix("аю")+"ать")
+            add_words.append(word.removesuffix("аю") + "ать")
         if word.endswith("аешь"):
-            add_words.append(word.removesuffix("аешь")+"ать")
+            add_words.append(word.removesuffix("аешь") + "ать")
         for suffix in ать_endings:
-            remove_words.append(word.removesuffix("ать")+suffix) # Add all its forms to remove list
+            remove_words.append(word.removesuffix("ать") + suffix) # Add all its forms to remove list
         
         
 for word in add_words:
     for suffix in ать_endings:
-        dictionary[word] = dictionary.get(word,0) \
-                      + dictionary.get(word.removesuffix("ать")+suffix, 0)
+        dictionary[word] = dictionary.get(word, 0) \
+                      + dictionary.get(word.removesuffix("ать") + suffix, 0)
 
 for word in remove_words:
     try: del dictionary[word]
@@ -210,19 +225,19 @@ for word in dictionary:
         match = re.search("ал", word) # Find me where the "ал" occurs in this word (think скандал, e.g. NOT a verb)
         index = match.start() # give me the index of the start of that "ал" or "алось" etc.
         # If the root plus one of our other endings exists :
-        if (word[:index:]+("ало" or "али" or "ала" or "ать" or "ал") in dictionary) \
-        and word[:index:]+"ы" not in dictionary and word[:index:]+"у" not in dictionary: # But a noun form doesn't (скандалы now removes скандал from consideration)
-            infinitive = word[:index:]+"ать"
+        if (word[:index:] + ("ало" or "али" or "ала" or "ать" or "ал") in dictionary) \
+        and word[:index:] + "ы" not in dictionary and word[:index:] + "у" not in dictionary: # But a noun form doesn't (скандалы now removes скандал from consideration)
+            infinitive = word[:index:] + "ать"
             infinitives_list.append(infinitive)
     
 for infinitive in infinitives_list:
         dictionary[infinitive] = dictionary.get(infinitive, 0) \
-                                +dictionary.get(infinitive.removesuffix("ать")+"ал",0) \
-                                +dictionary.get(infinitive.removesuffix("ать")+"ала",0) \
-                                +dictionary.get(infinitive.removesuffix("ать")+"ало",0) \
-                                +dictionary.get(infinitive.removesuffix("ать")+"али",0)
+                                +dictionary.get(infinitive.removesuffix("ать") + "ал", 0) \
+                                +dictionary.get(infinitive.removesuffix("ать") + "ала", 0) \
+                                +dictionary.get(infinitive.removesuffix("ать") + "ало", 0) \
+                                +dictionary.get(infinitive.removesuffix("ать") + "али", 0)
         for ending in ["ал", "ало", "али", "ала"]:
-            conjugated_form = infinitive.removesuffix("ать")+ending
+            conjugated_form = infinitive.removesuffix("ать") + ending
             try: del conjugated_form
             except: continue
     
@@ -238,14 +253,6 @@ infinitives_list.clear()
 ##
 
 
-## Collapsing perfective and imperfective verbs where there is an imperfective -ивать ##
-# The ending -ивать also sometimes causes a stem change, which can be dealt with using regular expressions:
-# говорить > -говаривать
-# 
-#
-#
-#
-
 
 
 ########################################################
@@ -254,10 +261,10 @@ infinitives_list.clear()
 
 
 for word in dictionary:
-    for ending in declension_hard_endings_nouns:
+    for ending in declension_masc_hard_endings_nouns:
         if word.endswith(ending): # Find me words that look like they end in masc case endings (but not the nominative)
-            if word.removesuffix(ending) in dictionary and word.removesuffix(ending) + "ами" in dictionary:
-                # Test IF you can remove the ending and still find a real word, AND you can add on a standard masc ending and still find a word...
+            if word.removesuffix(ending) in dictionary and (word.removesuffix(ending) + "ом" or word.removesuffix(ending) + "ов") in dictionary:
+                # Test IF you can remove the ending and still find a real word (still might be a feminine noun until:), AND you can add on a standard masc-only ending and still find a word...
                 # If so, sounds like a masculine word in a
                 dictionary[word.removesuffix(ending)] = dictionary[word.removesuffix(ending)] + dictionary.get(word, 0)
                 remove_words.append(word)
@@ -277,6 +284,63 @@ remove_words.clear()
 
 
 ########################################################
+                                ## Creating verb pair list ##
+addressed_words = list() # Working from exceptions inwards (to broader scale blocks), add finished pairs to a list and stop addressing them
+pair_dictionary = dict()
+
+    # -ы- infix pairs:
+# More specifically, those verbs that take a -ы-/-и- stem change rather than a simple suffix
+infixed_ы_verbs = ["мереть", "мирать",
+                   "звать", "зывать",
+                   "переть", "пирать",
+                   "брать", "бирать",
+                   "тереть", "тирать",
+                   "спать", "сыпать",
+                   "мять", "минать",
+                   "жать", "жимать", # -жинать has been thrown to the wolves...
+                   ]
+
+
+    # -сти verbs б д с 
+# грести - гребать, спасти - спасать
+
+    
+    # -вать
+#
+
+
+for word in dictionary:
+    if word.endswith("ивать"): #Must check for possible stem's consonant mutations
+        word.removesuffix("ивать")
+    
+        pair_dictionary[word] = word.removesuffix("ивать") + "ить"
+    
+    if word.endswith("ывать"): #Must check for shortlist -ы- infix words, and shortlist -вать words -- exceptions.
+        pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                ## Creating verb Tree lists ##
+
+
+
+
+
 
 print("Length of dictionary before processing: ", PreProcessLength)
 print("Length after processing: ", len(dictionary))
