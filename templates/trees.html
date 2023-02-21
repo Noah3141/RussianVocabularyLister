@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-
 {% block title %}
     <title>Verb Trees</title>
 {% endblock %}
@@ -12,12 +11,21 @@
 <h1>Verbs as Trees</h1>
         <img src="/static/images/Underline-Stroke.png">
 
-
-
-
-
-
-
+<div>
+    <div class="headers">
+        <div class="button-row">
+            <button id="wiki-button">Wiktionary Links:</button>
+            <div>RU</div>
+        </div>
+        <h2 id="list-header">Branch Imperfective - Prefixes</h2>
+        
+    </div>
+    {% for word in tree_list %}
+    <p class="list-entry">
+        <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{word}}">{{word}}</a> - {{tree_list[word]}}   
+    </p>
+    {% endfor %}
+</div>
 
 
 

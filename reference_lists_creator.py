@@ -51,7 +51,11 @@ def create_verb_list(reference_dictionary):
     for word in pair_dictionary: 
         for prefix in prefix_list:
             if word.startswith(prefix):
-                word.removeprefix(prefix)
+                word = "-" + word.removeprefix(prefix)
+                if isinstance(tree_dictionary[word], list):
+                    tree_dictionary[word] = tree_dictionary[word].append(prefix + "-")
+                else:
+                    tree_dictionary[word] = tree_dictionary.get(word, [prefix])
                 
         
     return(pair_dictionary, tree_dictionary) 

@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, url_for
 from flask_restful import Api, Resource, reqparse
 from russian_inflection_collapser import ruic
 from input_vocabulary_compiler import rubit
@@ -10,6 +10,10 @@ api = Api(app)
 
 with open("reference_dictionary.pkl", "rb") as f:
     reference_dictionary = pickle.load(f)
+
+@app.route("/", methods=["GET"])
+def home():
+    return redirect(url_for("RUBIT"))
 
 
 @app.route("/rubit", methods=["POST","GET"])
