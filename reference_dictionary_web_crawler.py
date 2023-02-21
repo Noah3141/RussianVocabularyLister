@@ -11,9 +11,10 @@ ctx.verify_mode = ssl.CERT_NONE
 
 
 # Controller inputs from user
-url = input("\nStarting url: ")
+url = input("\nStarting url: ", "\n Or press 'Enter' to use default")
 maximum_links = int(input("Choose a number of links to collect and scan:"))
 if len(url) < 2:
+    print("Default link used")
     url = "https://ru.wikipedia.org/wiki/%D0%A8%D1%80%D0%B5%D0%BA_(%D0%BF%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D0%B0%D0%B6)"
 
 
@@ -22,11 +23,11 @@ links = []
 
 stop_words = list()
 stop_words_txt = open("stop_words.txt", 'r', encoding='UTF-8')
-for word in stop_words_txt:
-    stop_words.append(word)
+for line in stop_words_txt:
+    stop_words.append(line.rstrip())
 
 
-Words = dict()
+reference_dictionary = dict()
 
 
 
@@ -50,7 +51,11 @@ while len(links) < maximum_links:
      for link in links:
         print(len(links),"/",maximum_links, "links found.")
         if len(links) > maximum_links: break
-        rcv = urllib.request.urlopen(link, context =ctx).read()
+        try:
+            rcv = urllib.request.urlopen(link, context =ctx).read()
+        except: 
+            print("\n\n!Something went wrong opening this link:\n", link, "\n\n")
+            continue
         soup = BeautifulSoup(rcv, 'html.parser')
         
         
@@ -70,10 +75,14 @@ print("Link list has reached minimum depth. Switching to Dictionary Phase.")
 print("Resulting length of link list: ", len(links))             
 link_index = 0
 for link in links:
-    old_size = len(Words)
+    old_size = len(reference_dictionary)
     page = ""
     link_index = link_index + 1
-    rcv = urllib.request.urlopen(link, context =ctx).read()
+    try:
+        rcv = urllib.request.urlopen(link, context =ctx).read()
+    except: 
+        print("\n\n!Something went wrong opening this link:\n", link, "\n\n")
+        continue
     soup = BeautifulSoup(rcv, 'html.parser')
     print('Link', link_index, "soup created.")    
     
@@ -84,20 +93,20 @@ for link in links:
     #Page processing
     #   Page = Page.replace('[править|править код]', ' ')
     #Word processing
-    page_words = re.findall('\s([А-Я]*[а-я]+?)\s', page)
+    page_words = re.findall('([А-Я]*[а-я]+)', page)
     page_words = [word.lower() for word in page_words if word not in stop_words]
-    for item in page_words:
-        Words[item] = Words.get(item,0)+1
-    print('New length of dictionary:', len(Words))
-    new_size = len(Words)
+    for word in page_words:
+        reference_dictionary[word] = reference_dictionary.get(word, 0) + 1
+    print('New length of dictionary:', len(reference_dictionary))
+    new_size = len(reference_dictionary)
     print("Number of new words:", new_size-old_size)
+    print("Estimated time remaining: ", (len(links)-link_index)*.3/60, "m")
     pass 
 
 print("\n\nLink list of ",len(links), " links exhausted.")
-print('Final length of dictionary:', len(Words))
+print('Final length of dictionary:', len(reference_dictionary))
 print("Starting url was: \n", url ,"\n")
 print("Depth was set to: ", maximum_links)
 
-with open('Words.pkl', 'wb') as f:
-    pickle.dump(Words, f)
- 
+with open("reference_dictionary.pkl", "wb") as f:
+    pickle.dump(reference_dictionary, f)

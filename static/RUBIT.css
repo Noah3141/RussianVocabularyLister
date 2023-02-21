@@ -8,7 +8,6 @@ body{
     background-color: var(--Background-Default);
     color: var(--Text-Color);
     width: 100%;
-    min-height: 100vh;
     position: relative;
 }
 
@@ -19,6 +18,33 @@ body{
 #content-wrap {
     padding-bottom: 8rem;    /* Footer height */
 }
+
+
+nav{
+    display: flex;
+    flex-direction:row;
+    gap: 30px;
+    padding: 20px;
+    border-bottom: 3px solid var(--Dark-Outline);
+    background: var(--Background-Fronted);
+}
+nav div{
+    cursor: pointer;
+    background-color: var(--Element-Default);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 2px solid var(--Dark-Outline);
+    transition: background-color .25s;
+}
+nav div:hover{
+background-color: var(--Color-Base);
+}
+nav a{
+    text-decoration: none;
+    color: var(--Text-Color);
+}
+
+
 h1{
     text-align: center;
     margin: 15px;
@@ -32,18 +58,18 @@ img{
     margin:auto;
     margin-top:-20px;
     margin-bottom: 20px;
-    ;
 }
 p{
     margin: 2px 30px 1rem 30px;
 }
 form.Entry-Group{
-    margin: 15px 20px 0px 20px;
+    margin-top: 60px;
+    padding: 0px 35px 0px 20px;
 }
 
 label{
-    margin:0px 10px;
-
+    margin:0px 30px;
+    margin-top: 60px;
 }
 
 #text-field{
@@ -56,7 +82,32 @@ label{
     color: var(--Text-Color);
     resize: vertical;
     padding: 6px;
+    scroll-behavior: smooth;
 }
+/* scrollbar width */
+::-webkit-scrollbar {
+    width: .6rem;
+    border-radius: .5px;
+    height: 95%;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 3px;
+    background: rgb(42, 42, 42);
+    margin: 5px 0px;
+
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: var(--Element-Default);
+    border: .5px solid var(--Dark-Outline);
+}
+
+
+
 #text-field:focus{
     outline: 2px solid var(--Color-Base);
     outline-offset: 1px;
@@ -81,15 +132,16 @@ label{
     border-bottom: 2px solid var(--Dark-Outline);
     border-top: 2px solid var(--Dark-Outline);
     width: 7rem;
-    transition: background-color .35s;
+    transition: background-color .25s;
 }
 
 /* Applies to the SUBMIT button */
-button{
+button#Create_List{
     border-radius: 16px 0px 0px 16px;
-    border: 0px;
+    border: 2px solid var(--Dark-Outline);
     border-left: 2px solid var(--Dark-Outline);
     border-right: 1px solid var(--Dark-Outline);
+
 }
 /* Applies to the Righthand button */
 #Output_Style{
@@ -124,17 +176,69 @@ option{
     
 }
 
-footer{
-    background-color: var(--Element-Default);
+footer div{
+    background: linear-gradient(vertical,rgb(40,40,40),red);
     display: flex;
     flex-direction: row-reverse;
-    border-top: 1px solid var(--Dark-Outline);
-    padding: 20px 30px 30px 30px;
+    gap: 40px;
+    border-top: 3px solid var(--Dark-Outline);
+    padding: 20px 30px 20px 30px;
     text-align: right;
-    height: 4rem;
+    height: 20px;
     bottom: 0;
     position: absolute;
     right:0;
     width: 100%;
     line-height: 1.5rem;
+}
+
+footer div a, footer div a:visited{
+    text-decoration: underline;
+    color: var(--Text-Color);
+}
+.list-entry a{
+    color: var(--Text-Color);
+    text-decoration: none;
+}
+.list-entry a:visited{
+    color: var(--Color-Base);
+    text-decoration: none;
+}
+.list-entry{
+    line-height: .65rem;
+}
+#list-header{
+    margin-top: 15px;
+    margin-left: 30px;
+    margin-bottom: 15px;
+}
+#wiki-button:hover{
+    background-color: var(--Color-Base);
+}
+.button-row{
+    display: flex;
+    flex-direction: row;
+}
+.button-row div{
+    background: var(--Element-Default);
+    border: 2px solid var(--Dark-Outline);
+    border-radius: 0px 20px 20px 0px;
+    padding: 4px 8px;
+    outline: none;
+    margin-bottom:15px;
+    border-left: .5px solid var(--Dark-Outline);
+}
+#wiki-button{
+    background-color: var(--Element-Default);
+    padding: 4px 8px;
+    cursor: pointer;
+    color: var(--Text-Color);
+    outline: none;
+    border: 2px solid var(--Dark-Outline);
+    width: 140px;
+    border-radius: 20px 0px 0px 20px;
+    transition: background-color .25s;
+    margin-left: 30px;
+    margin-bottom: 15px;
+    border-right: .5px solid var(--Dark-Outline);
 }

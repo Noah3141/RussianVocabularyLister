@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Verb Pairs</title>
+{% endblock %}
+
+
+
+{% block content %}
+
+<h1>Verbs as Pairs</h1>
+        <img src="/static/images/Underline-Stroke.png">
+
+<div>
+    <div class="headers">
+        <div class="button-row">
+            <button id="wiki-button">Wiktionary Links:</button>
+            <div>RU</div>
+        </div>
+        <h2 id="list-header">Imperfective - Perfective</h2>
+        
+    </div>
+    {% for word in pair_list %}
+    <p class="list-entry">
+        <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{word}}">{{word}}</a> - {{pair_list[word]}}   
+    </p>
+    {% endfor %}
+</div>
+
+
+
+<script src="/static/lists.js"></script>
+{% endblock %}
