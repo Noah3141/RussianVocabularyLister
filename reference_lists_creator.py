@@ -44,18 +44,18 @@ def create_verb_list(reference_dictionary):
 
 
                                 ## Creating verb Tree lists ##
-    prefix_list = ["в", "на","с","воз","вос"] 
+    prefix_list = ["вы","в", "на","с", "со","воз","вос", "вс", "вз", "под", "раз", "про","до", "за","рас"] 
 
     tree_dictionary = dict()
 
     for word in pair_dictionary: 
         for prefix in prefix_list:
             if word.startswith(prefix):
-                word = "-" + word.removeprefix(prefix)
-                if isinstance(tree_dictionary[word], list):
-                    tree_dictionary[word] = tree_dictionary[word].append(prefix + "-")
+                root = "-" + word.removeprefix(prefix)
+                if root not in tree_dictionary:
+                    tree_dictionary[root] = [prefix + "-"]
                 else:
-                    tree_dictionary[word] = tree_dictionary.get(word, [prefix])
+                    tree_dictionary[root].append([prefix + "-"])
                 
         
     return(pair_dictionary, tree_dictionary) 

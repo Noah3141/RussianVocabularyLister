@@ -1,6 +1,6 @@
 :root{
     --Background-Default: rgb(51, 51, 51);
-    --Background-Fronted: linear-gradient(rgb(70, 70, 70),rgb(40,40,40));
+    --Background-Fronted: rgb(70, 70, 70);
     --Dark-Outline: rgb(20,20,20);
     --Element-Default: rgb(102, 102, 102);
     --Element-Highlight: rgb(136, 136, 136);

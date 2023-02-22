@@ -30,13 +30,15 @@ def ruic(dictionary:dict, name:str, breadth, style):
 # Russian Adjective take a case and a number-gender. Number-gender can be either: masculine, neuter, feminine, or plural.
 # Creating lists that provide endings
     
-    declensions_adj = ["ое","ая","ие","ее","яя","ые", #Nominative non-masculine
-                      "ого","его", #Gen-Masc
-                      "ой","ей", #Oblique-Fem
-                      "их","ых",  #Gen/Acc-Pl
-                      "ему", "ому", #Dat-Masc
+    declensions_adj = ["ое", "ее",
+                       "ая", "яя",
+                       "ые", "ие", #Nominative non-masculine
+                      "ого", "его", #Gen-Masc
+                      "ой", "ей", #Oblique-Fem
+                      "ых", "их",  #Gen/Acc-Pl
+                      "ому", "ему", #Dat-Masc
                       "ым", "им", #Dat-Pl
-                      "ими","ыми", #Instr-Pl
+                      "ыми", "ими", #Instr-Pl
                       "ую", "юю",  #Acc-Fem 
                       "ом", "ем"] #Instr-Masc
 
@@ -277,9 +279,8 @@ def ruic(dictionary:dict, name:str, breadth, style):
 
 
 ###############################################################################
-# Once collapsing is complete, some attempts can be made to reformulate those entries which were only 
-# found in non-dictionary forms, e.g. автоматными (1) should be replaced with автоматный (1)
-
+# Collapsing Masculine Nouns
+###############################################################################
 
     for word in dictionary:
         for ending in declension_masc_hard_endings_nouns:
@@ -294,6 +295,10 @@ def ruic(dictionary:dict, name:str, breadth, style):
         try: del dictionary[word]
         except: continue
     remove_words.clear()
+
+
+#Once collapsing is complete, some attempts can be made to reformulate those entries which were only 
+# found in non-dictionary forms, e.g. автоматными (1) should be replaced with автоматный (1)
 
 
     print("Length of ", name, " before processing: ", pre_process_length)

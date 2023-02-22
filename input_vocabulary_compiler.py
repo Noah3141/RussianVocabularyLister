@@ -1,6 +1,7 @@
 import re
 import pickle
 from russian_inflection_collapser import ruic 
+from reference_lists_creator import create_verb_list
 # This file supposed to take:
 # 1) WebCrawler's master list (RUBIT'ed)
 # 2) Input from user from website (RUBIT'ed)
@@ -66,5 +67,38 @@ def rubit(input_text, breadth, style):
             del ruic_input_dictionary[word]
     ruic_input_dictionary = {k: v for k, v in sorted(ruic_input_dictionary.items(), key=lambda x: x[1], reverse=True)}
 
+###############################################################################
+    # Adjusting output based on user's settings:    
+
+    del_list = []
     
+    # Breadth
+    
+    if breadth == "Top Words":
+        for word in ruic_input_dictionary:
+            if ruic_input_dictionary[word] < 4: # Filter certain threshold of words
+                del_list.append(word)
+                pass
+
+    if breadth == "Broad List":
+       for word in ruic_input_dictionary:
+           if ruic_input_dictionary[word] <= 1: # Filter certain threshold of words
+               del_list.append(word)
+               pass
+               
+    for word in del_list:
+        del ruic_input_dictionary[word]
+    
+    # Style
+    
+    if style == "Verb Pairs":
+        ruic_input_dictionary, null = create_verb_list(ruic_input_dictionary)
+
+    if style == "Verb Trees":
+        null, ruic_input_dictionary = create_verb_list(ruic_input_dictionary)
+        
+        
+
+    
+
     return ruic_input_dictionary

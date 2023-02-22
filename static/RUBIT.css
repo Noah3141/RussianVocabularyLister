@@ -5,7 +5,7 @@
  
 }
 body{
-    background-color: var(--Background-Default);
+    background: var(--Background-Default);
     color: var(--Text-Color);
     width: 100%;
     position: relative;
@@ -241,4 +241,14 @@ footer div a, footer div a:visited{
     margin-left: 30px;
     margin-bottom: 15px;
     border-right: .5px solid var(--Dark-Outline);
+}
+
+#output-readout{
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+.TreeDiagram{
+    
+    width: 600px;
+    height: auto;
 }
