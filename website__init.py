@@ -29,13 +29,13 @@ def RUBIT():
     
 @app.route("/pairs", methods=["GET"])
 def PairsList():
-    pair_list, tree_list = create_verb_list(reference_dictionary)
+    pair_list, _ = create_verb_list(reference_dictionary)
     return render_template("pairs.html", pair_list=pair_list)
 
 
 @app.route("/trees", methods=["GET"])  
 def TreesList():
-    pair_list, tree_list = create_verb_list(reference_dictionary)
+    _ , tree_list = create_verb_list(reference_dictionary)
     return render_template("trees.html", tree_list=tree_list)
 
 @app.route("/treeModel", methods=["GET"])  
