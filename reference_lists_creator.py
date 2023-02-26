@@ -1,8 +1,10 @@
 # Master Lists Creation
+
+from russian_inflection_collapser import ruic
       
 def create_verb_list(reference_dictionary):
   
-
+    #reference_dictionary = ruic(reference_dictionary, reference_dictionary, "Full List", "Raw Vocabulary")
 ###############################################################################
                                 ## Creating verb pair list ##
     addressed_words = list() # Working from exceptions inwards (to broader scale blocks), add finished pairs to a list and stop addressing them
@@ -44,7 +46,9 @@ def create_verb_list(reference_dictionary):
 
 
                                 ## Creating verb Tree lists ##
-    prefix_list = ["вы","в", "на","с", "со","воз","вос", "вс", "вз", "под", "раз", "про","до", "за","рас"] 
+    prefix_list = ["при", "по", "от", "об", "о", "вы","в", "на","с", "со",
+                   "воз","вос", "вс", "вз", "под", "раз", "про","до",
+                   "за","рас"] 
 
     tree_dictionary = dict()
 

@@ -43,11 +43,11 @@ def ruic(dictionary:dict, name:str, breadth, style):
                       "ом", "ем"] #Instr-Masc
 
 # сомнение - neuter nominative noun, сомнения plural nominative form   VS     виктория feminine nominative
-    declensions_noun = ["ие", "ия", "ий", "ии", "ию", "иям", "иями", "иях", "ию", "ией"]
+    declensions_ия_noun = ["ие", "ия", "ий", "ии", "ию", "иям", "иями", "иях", "ию", "ией"]
 
 
 # Masculine noun basic endings
-    declension_masc_hard_endings_nouns = ["а", "у", "ы", "е", "ом", "ах", "ами", "ов", "ам"]
+    declension_masc_hard_endings_nouns = ["а", "у", "ы", "е", "ом", "ах", "ами", "ов", "ам", "и"]
     declension_fem_hard_endings_nouns = ["у", "ы", "е", "ой", "ах", "ами", "ам", "и"] # !SOFT И INCLUDED FOR SPELLING RULE!
     
     ать_endings = ["аю","аешь","ает","аем","аете","ают",
@@ -58,7 +58,9 @@ def ruic(dictionary:dict, name:str, breadth, style):
                    "ай", "айте",
                    "айся", "айтесь"]
     
-
+    ать_past_tense_endings = ["ал", "ало","ала","али",
+                              "ался", "алось","алась","ались"]
+    
         
     roots_noun = list()
     roots_adj_ий = list()
@@ -70,7 +72,34 @@ def ruic(dictionary:dict, name:str, breadth, style):
     add_words = list()
     infinitives_list = list()
 
+###############################################################################
+# Bolstering Dictionary Presence
+###############################################################################
+# Find those forms that are present which definitively imply a particular 
+# dictionary form, and deal with all those first
+    add_words = list()
 
+    for word in dictionary:
+        if word.endswith("ией"):
+            add_words.append(word.removesuffix("ией") + "ия")
+            remove_words.append(word)
+        if word.endswith("ения"):
+            add_words.append(word.removesuffix("ения") + "ие")
+            remove_words.append(word)
+        if word.endswith("ания"):
+            add_words.append(word.removesuffix("ания") + "ие")
+            remove_words.append(word)
+            
+            
+    for word in add_words:
+        dictionary.get(word, 0) + 1
+    
+    for word in remove_words:
+        try: del dictionary[word]
+        except: continue
+    
+    remove_words.clear()        
+    add_words.clear()
 ###############################################################################
 # Collapse -вать special cases !EARLY!
 ###############################################################################
@@ -83,16 +112,13 @@ def ruic(dictionary:dict, name:str, breadth, style):
     for word in dictionary:
             if word.endswith('ый'):
                     roots_adj_ый.append(word.removesuffix("ый"))
-    
+                    
     for root in roots_adj_ый:
         for declension in declensions_adj: #Go through the combination of a root, and each possible ending
             proposed_adj = root + declension #Build a non-nominative-masculine proposed word such as: *последное or коммунистического
             dictionary[root + "ый"] = dictionary[root + "ый"] + dictionary.get(proposed_adj, 0) # Find the nom-masc entry, and add the proposed word's count, 0 if does not exist
             try: del dictionary[proposed_adj]
             except: continue
-
-
-
 
 ###############################################################################
 # Collapse oblique -ий Adjectives into Nominative
@@ -129,14 +155,12 @@ def ruic(dictionary:dict, name:str, breadth, style):
 # Else, if the noun can be found as either, the -ие is the nominative (сомнение, сомнения)
 
     for root in roots_noun:
-        for declension in declensions_noun: #Go through the combination of a root, and each possible ending
+        for declension in declensions_ия_noun: #Go through the combination of a root, and each possible ending
             proposed_noun = root + declension #Build a non-nominative-masculine proposed word such as: *последное or коммунистического
             try: 
                 dictionary[root +" ие"] = dictionary[root + "ие"] + dictionary.get(proposed_adj, 0) # Find the nom-masc entry, and add the proposed word's count, 0 if does not exist
-                #print("oh look an иe word: ", root+"иe")
             except: 
                 dictionary[root + "ия"] = dictionary[root + "ия"] + dictionary.get(proposed_adj, 0)
-                #print("oh look an ия word: ", root + "ия")
                 try: del dictionary[proposed_adj]
                 except: continue
             try: del dictionary[proposed_adj]
@@ -148,36 +172,27 @@ def ruic(dictionary:dict, name:str, breadth, style):
 ###############################################################################
 # Collapsing Nouns ending in -ство 
 ###############################################################################
-    ство_endings = ["ства", "ств", "ству", "ством","стве","ствах","ствами","ствам"]
-    for word in dictionary:
-        if word.endswith("ство"):
-            root = word.removesuffix("ство")
-            for ending in ство_endings:
-                proposed_noun = root + ending
-                remove_words.append(proposed_noun)
-                dictionary[word] = dictionary[word] + dictionary.get(proposed_noun, 0)
+    # ство_endings = ["ства", "ств", "ству", "ством","стве","ствах","ствами","ствам"]
+    # for word in dictionary:
+    #     if word.endswith("ство"):
+    #         root = word.removesuffix("ство")
+    #         for ending in ство_endings:
+    #             proposed_noun = root + ending
+    #             remove_words.append(proposed_noun)
+    #             dictionary[word] = dictionary[word] + dictionary.get(proposed_noun, 0)
     
-    for word in remove_words:
-        try: del dictionary[word]
-        except: continue
-    remove_words.clear()
+    # for word in remove_words:
+    #     try: del dictionary[word]
+    #     except: continue
+    # remove_words.clear()
 
-##
-        
-       
-    for root in roots_adj_ий:
-        for ending in ство_endings: #Go through the combination of a root, and each possible ending
-            proposed_noun = root + declension #Build a non-nominative-masculine proposed word such as: *последное or коммунистического
-            dictionary[root + "ий"] = dictionary[root + "ий"] + dictionary.get(proposed_adj, 0) # Find the nom-masc entry, and add the proposed word's count, 0 if does not exist
-            try: del dictionary[proposed_adj]
-            except: continue
+
 
 ###############################################################################
 # Collapsing cases of feminine nouns
 ###############################################################################                        
 # for word in dictionary:
 #     if word.endswith("а"
-
 
 ###############################################################################
 #Сollapsing -ать verbs FOUND AS present conjugations
@@ -233,15 +248,16 @@ def ruic(dictionary:dict, name:str, breadth, style):
 ###############################################################################
 
     for word in dictionary:
-        if (word.endswith("али") or word.endswith("ала") or word.endswith("ало") or word.endswith("ал")):
-            match = re.search("ал", word) # Find me where the "ал" occurs in this word (think скандал, e.g. NOT a verb)
-            index = match.start() # give me the index of the start of that "ал" or "алось" etc.
-            # If the root plus one of our other endings exists :
-            if (word[:index:] + ("ало" or "али" or "ала" or "ать" or "ал") in dictionary) \
-            and word[:index:] + "ы" not in dictionary and word[:index:] + "у" not in dictionary: # But a noun form doesn't (скандалы now removes скандал from consideration)
-                infinitive = word[:index:] + "ать"
-                if infinitive not in infinitives_list:
-                    infinitives_list.append(infinitive)
+        for ending in ать_past_tense_endings:
+            if (word.endswith(ending)):
+                match = re.search("ал", word) # Find me where the "ал" occurs in this word (think скандал, e.g. NOT a verb)
+                index = match.start() # give me the index of the start of that "ал" or "алось" etc.
+                # If the root plus one of our other endings exists :
+                if (word[:index:] + ("ало" or "али" or "ала" or "ать" or "ал" or "алась" or "ался") in dictionary) \
+                    and word[:index:] + "ы" not in dictionary and word[:index:] + "у" not in dictionary: # But a noun form doesn't (скандалы now removes скандал from consideration)
+                    infinitive = word[:index:] + "ать"
+                    if infinitive not in infinitives_list:
+                        infinitives_list.append(infinitive)
         
     for infinitive in infinitives_list:
             dictionary[infinitive] = dictionary.get(infinitive, 0) \
@@ -266,7 +282,8 @@ def ruic(dictionary:dict, name:str, breadth, style):
         for ending in ить_past_tense_ending:
             if word.endswith(ending) and (word.removesuffix(ending) + "ит" in dictionary or word.removesuffix(ending) + "ится" in dictionary):
                 infinitive = word.removesuffix(ending) + "ить"
-                infinitives_list.append(infinitive)
+                if infinitive not in infinitives_list:
+                    infinitives_list.append(infinitive)
                 remove_words.append(word)
     for infinitive in infinitives_list:
         for ending in ить_past_tense_ending:

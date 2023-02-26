@@ -218,6 +218,9 @@ footer div a, footer div a:visited{
 .button-row{
     display: flex;
     flex-direction: row;
+    position: fixed;
+    right: 75px;
+
 }
 .button-row div{
     background: var(--Element-Default);
@@ -227,6 +230,7 @@ footer div a, footer div a:visited{
     outline: none;
     margin-bottom:15px;
     border-left: .5px solid var(--Dark-Outline);
+    box-shadow: 2px 2px rgb(15, 15, 15);
 }
 #wiki-button{
     background-color: var(--Element-Default);
@@ -241,6 +245,7 @@ footer div a, footer div a:visited{
     margin-left: 30px;
     margin-bottom: 15px;
     border-right: .5px solid var(--Dark-Outline);
+    box-shadow: 2px 2px rgb(15, 15, 15);
 }
 
 #output-readout{
@@ -251,4 +256,23 @@ footer div a, footer div a:visited{
     
     width: 600px;
     height: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: 3px solid rgb(5, 5, 5)
+}
+.download-btn{
+    background-color: var(--Element-Default);
+    padding: 8px 12px;
+    cursor: pointer;
+    color: var(--Text-Color);
+    outline: none;
+    border-bottom: 2px solid var(--Dark-Outline);
+    border-top: 2px solid var(--Dark-Outline);
+    width: 12rem;
+    transition: background-color .25s;
+    border-radius: 30px;
+    margin-left: 30px;
+}
+.download-btn:hover{
+    background-color: var(--Color-Base);
 }

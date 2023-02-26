@@ -11,7 +11,8 @@ ctx.verify_mode = ssl.CERT_NONE
 
 
 # Controller inputs from user
-url = input("\nStarting url: ", "\n Or press 'Enter' to use default")
+print("\nEnter a starting URL, or press 'Enter' to use default")
+url = input("URL:")
 maximum_links = int(input("Choose a number of links to collect and scan:"))
 if len(url) < 2:
     print("Default link used")
@@ -28,6 +29,9 @@ for line in stop_words_txt:
 
 
 reference_dictionary = dict()
+
+
+non_russian_stop_words = ["аз","нея","воно","він","це", "тя", "мене", "па", "з", "від"]
 
 
 
@@ -84,6 +88,7 @@ for link in links:
         print("\n\n!Something went wrong opening this link:\n", link, "\n\n")
         continue
     soup = BeautifulSoup(rcv, 'html.parser')
+    print("================================")
     print('Link', link_index, "soup created.")    
     
     body_paras = soup.find_all("p")
@@ -92,15 +97,27 @@ for link in links:
     
     #Page processing
     #   Page = Page.replace('[править|править код]', ' ')
+    #   if X in page: continue
+ 
     #Word processing
     page_words = re.findall('([А-Я]*[а-я]+)', page)
+    
+    #   If a non-Russian slavic language is found, we need to reject the whole page and move on:
+    if any(word in non_russian_stop_words for word in page_words):
+        print("\x1b[31mThis page may have not been Russian: \x1b[0m", link)
+        continue
+    
     page_words = [word.lower() for word in page_words if word not in stop_words]
     for word in page_words:
         reference_dictionary[word] = reference_dictionary.get(word, 0) + 1
+    
     print('New length of dictionary:', len(reference_dictionary))
     new_size = len(reference_dictionary)
     print("Number of new words:", new_size-old_size)
-    print("Estimated time remaining: ", (len(links)-link_index)*.3/60, "m")
+    if new_size-old_size > 100:
+        print("Found at:", link)
+    
+    print("Estimated time remaining: ", round(((len(links) - link_index)*.4/60)   , 1), "m")
     pass 
 
 print("\n\nLink list of ",len(links), " links exhausted.")
