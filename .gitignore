@@ -1,0 +1,5 @@
+#Directories to be ignored by git
+# * means a fiel
+# ** means all files (not needed when wanting to ignore all files in a directory)
+__pycache__
+.idea
