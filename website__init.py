@@ -1,6 +1,5 @@
 from flask import Flask, request, redirect, render_template, url_for
-from flask_restful import Api, Resource, reqparse
-from russian_inflection_collapser import ruic
+from flask_restful import Api
 from input_vocabulary_compiler import rubit
 from reference_lists_creator import create_verb_list
 import pickle
@@ -13,7 +12,7 @@ with open("reference_dictionary.pkl", "rb") as f:
 
 @app.route("/", methods=["GET"])
 def home():
-    return redirect(url_for("RUBIT"))
+    return redirect(url_for("RUBIT")) #Named after the def RUBIT
 
 
 @app.route("/rubit", methods=["POST","GET"])
@@ -42,6 +41,11 @@ def TreesList():
 @app.route("/treeModel", methods=["GET"])  
 def TreeModel():
     return render_template("treeModel.html")
+
+
+@app.route("/ankiDeck", methods=["GET"])  
+def AnkiDeck():
+    return render_template("ankiDeck.html")
 
 
 

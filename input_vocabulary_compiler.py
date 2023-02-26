@@ -48,11 +48,13 @@ def rubit(input_text, breadth, style):
     
     # Create a dictionary within which to embed input dictionary with reference
     def create_incubation_dictionary(reference_dictionary, input_dictionary):
-        incubation_dictionary = dict()
-        for word in reference_dictionary:
-            incubation_dictionary[word] = reference_dictionary[word] + input_dictionary.get(word, 0)
-        for word in input_dictionary:
-            incubation_dictionary[word] = reference_dictionary.get(word, 0) + input_dictionary[word]
+        incubation_dictionary = {}
+                                # for word in reference_dictionary:
+                                #     incubation_dictionary[word] = reference_dictionary[word] + input_dictionary.get(word, 0)
+                                # for word in input_dictionary:
+                                #     incubation_dictionary[word] = reference_dictionary.get(word, 0) + input_dictionary[word]
+        for word in reference_dictionary | input_dictionary:
+            incubation_dictionary[word] = reference_dictionary.get(word, 0) + input_dictionary.get(word, 0)
         return incubation_dictionary
     
     incubation_dictionary = create_incubation_dictionary(reference_dictionary, input_dictionary)
@@ -76,7 +78,7 @@ def rubit(input_text, breadth, style):
     
     if breadth == "Top Words":
         for word in ruic_input_dictionary:
-            if ruic_input_dictionary[word] < 4: # Filter certain threshold of words
+            if ruic_input_dictionary[word] <= 4: # Filter certain threshold of words
                 del_list.append(word)
                 pass
 
@@ -96,9 +98,6 @@ def rubit(input_text, breadth, style):
 
     if style == "Verb Trees":
         null, ruic_input_dictionary = create_verb_list(ruic_input_dictionary)
-        
-        
-
     
 
     return ruic_input_dictionary
