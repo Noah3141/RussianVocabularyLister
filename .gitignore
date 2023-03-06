@@ -3,3 +3,4 @@
 # ** means all files (not needed when wanting to ignore all files in a directory)
 __pycache__
 .idea
+.DX_Store
