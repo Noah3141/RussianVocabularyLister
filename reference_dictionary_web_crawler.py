@@ -223,10 +223,8 @@ cursor = conn.cursor()
 cursor.execute("CREATE TABLE IF NOT EXISTS words (id int NOT NULL AUTO_INCREMENT PRIMARY KEY, word varchar(64) NOT NULL, frequency INT)")
 
 
-chunker = 0
 
 for word in reference_dictionary:
-    chunker +=1
     print("Next word: ", word)
     cursor.execute(f"SELECT 1 FROM words WHERE word = '{word}'")
     find = cursor.fetchall()

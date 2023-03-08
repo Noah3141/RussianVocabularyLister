@@ -7,8 +7,8 @@ import pickle
 app = Flask(__name__)
 api = Api(app)
 
-with open("reference_dictionary.pkl", "rb") as f:
-    reference_dictionary = pickle.load(f)
+with open("dictionary_forms.pkl", "rb") as f:
+    dictionary_forms = pickle.load(f)
 
 @app.route("/", methods=["GET"])
 def home():
@@ -18,24 +18,26 @@ def home():
 @app.route("/rubit", methods=["POST","GET"])
 def RUBIT():
     if request.method == "POST":
-        text = request.form["text_field"]
-        Output_Breadth = request.form["Output_Breadth"]
-        Output_Style = request.form["Output_Style"]
-        ruic_dictionary = rubit(text, Output_Breadth, Output_Style)
-        return render_template("RUBIT_Output.html", dictionary=ruic_dictionary, breadth=Output_Breadth, style=Output_Style)
+        input_text = request.form["text_field"]
+        output_breadth = request.form["Output_Breadth"]
+        output_style = request.form["Output_Style"]
+        output_dictionary = rubit(input_text, output_breadth, output_style)
+        return render_template("RUBIT_Output.html", dictionary=output_dictionary, breadth=output_breadth, style=output_style)
     else:
         return render_template("RUBIT.html")
     
     
 @app.route("/pairs", methods=["GET"])
 def PairsList():
-    pair_list, _ = create_verb_list(reference_dictionary)
+    with open("pair_list.pkl", "rb") as f:
+        pair_list = pickle.load(f)
     return render_template("pairs.html", pair_list=pair_list)
 
 
 @app.route("/trees", methods=["GET"])  
 def TreesList():
-    _ , tree_list = create_verb_list(reference_dictionary)
+    with open("tree_list.pkl", "rb") as f:
+        tree_list = pickle.load(f)
     return render_template("trees.html", tree_list=tree_list)
 
 @app.route("/treeModel", methods=["GET"])  
@@ -51,4 +53,4 @@ def AnkiDeck():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True) # Add port 

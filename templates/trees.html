@@ -21,7 +21,7 @@
     </div>
     {% for word in tree_list %}
     <p class="list-entry">
-        <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{word}}">{{word}}</a> - {{tree_list[word]}}   
+        <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{word}}">{{word}}&nbsp</a>({{tree_list[word][0]}}): {{tree_list[word][1]}}  
     </p>
     {% endfor %}
 </div>

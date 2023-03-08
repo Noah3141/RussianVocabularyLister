@@ -27,27 +27,46 @@ non_russian_stop_words = [" нея "," воно "," він "," це ", " тя ",
 
 
 # Build links
+book_page_links = []
 
-link = "https://ilibrary.ru/text/"
+
+
+
+
+
+
+
+# link = "https://ilibrary.ru/text/"
+
+# (["span"], class_="p")
 
 # "https://ilibrary.ru/text/    11/      p.1/      index.html"
 #                           война и мир   page 1    look for: "span.p"
 #
 # https://ilibrary.ru/text/      1199/   p.97/      index.html
 
-book_page_links = []
+
 # War and Peace
-for i in range(1 , 361):
-    book_page_links.append(link + "11/p." + str(i) + "/index.html") 
-# Brothers Karamazov
-for i in range(1 , 97):
-    book_page_links.append(link + "1199/p." + str(i) + "/index.html")
-# The Idiot
-for i in range(1 , 50):
-    book_page_links.append(link + "94/p." + str(i) + "/index.html")
-# Anna Karenina
-for i in range(1 , 239):
-    book_page_links.append(link + "1099/p." + str(i) + "/index.html")
+# for i in range(1 , 361):
+#     book_page_links.append(link + "11/p." + str(i) + "/index.html") 
+# # Brothers Karamazov
+# for i in range(1 , 97):
+#     book_page_links.append(link + "1199/p." + str(i) + "/index.html")
+# # The Idiot
+# for i in range(1 , 50):
+#     book_page_links.append(link + "94/p." + str(i) + "/index.html")
+# # Anna Karenina
+# for i in range(1 , 239):
+#     book_page_links.append(link + "1099/p." + str(i) + "/index.html")
+
+
+
+link = "http://loveread.ec/read_book.php?id=106723&p="
+#(["p"], class_="MsoNormal")  << Insert this  at the "body_paras = soup.find_all" below
+
+for i in range (1, 40):              # Check the final page number, and insert here
+    book_page_links.append(link + str(i))
+
 
 
 
@@ -64,8 +83,8 @@ for link in book_page_links:
     soup = BeautifulSoup(rcv, 'html.parser')
     print("================================")
     print(link)
-    
-    body_paras = soup.find_all(["span"], class_="p")
+
+    body_paras = soup.find_all(["p"], class_="MsoNormal")
     for p in body_paras:
         page = page + p.text
     
@@ -87,4 +106,33 @@ for link in book_page_links:
     print("Number of new words:", new_size-old_size)
     if new_size-old_size > 100:
         print("Found at:", link)
+        
+        
+# Run the script and review the sucess of the scraping. 
+# Once done, reference_dictionary is in the variables.
+# Now uncomment, copy, comment, and paste the code from below
+# Into the console. I generally had 4 or 5 consoles running from that
+# point, at the same time.
+
+        
+import mysql.connector     
+conn = mysql.connector.connect(
+    host = "localhost",
+    user = "root",
+    password = "nnssoteck3434###",
+    database = "Database_001")
+
+cursor = conn.cursor()
+
+for word in reference_dictionary:
+    
+    print("Next word: ", word)
+    cursor.execute(f"SELECT 1 FROM words WHERE word = '{word}'")
+    find = cursor.fetchall()
+    if len(find) == 0:
+        print(word, " not found in database. Adding...")
+        cursor.execute(f"INSERT INTO words (word, frequency) VALUES ('{word}', {reference_dictionary[word]});")
+        conn.commit()
+    else: 
+        continue
     

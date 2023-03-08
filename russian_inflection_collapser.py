@@ -8,7 +8,8 @@ def ruic(dictionary:dict, name:str, breadth, style) -> dict:
     
     def russ_match(word: str, ending_list: list) -> int:
         match = 0
-        if any(word.endswith(ending) for ending in ending_list): 
+        if any(word.endswith(ending) for ending in ending_list):
+            match = 1
             for ending in ending_list:
                 if word.endswith(ending):
                     stem = word.removesuffix(ending)
@@ -16,6 +17,7 @@ def ruic(dictionary:dict, name:str, breadth, style) -> dict:
                         if stem + other_ending in dictionary:
                             match += 1
                     break
+        print("Match calculated for", word, "against", ending_list, "as", match)
         return match      
     
     

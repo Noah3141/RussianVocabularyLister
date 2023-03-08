@@ -22,7 +22,7 @@
     </div>
     {% for word in pair_list %}
     <p class="list-entry">
-        <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{word}}">{{word}}</a> - {{pair_list[word]}}   
+        <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{word}}">{{word}}</a> - <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{pair_list[word]}}">{{pair_list[word]}} </a>   
     </p>
     {% endfor %}
 </div>

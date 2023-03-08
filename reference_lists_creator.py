@@ -1,10 +1,8 @@
 # Master Lists Creation
-
-from russian_inflection_collapser import ruic
       
-def create_verb_list(reference_dictionary):
+def create_verb_list(dictionary):
   
-    #reference_dictionary = ruic(reference_dictionary, reference_dictionary, "Full List", "Raw Vocabulary")
+
 ###############################################################################
                                 ## Creating verb pair list ##
     addressed_words = list() # Working from exceptions inwards (to broader scale blocks), add finished pairs to a list and stop addressing them
@@ -30,14 +28,16 @@ def create_verb_list(reference_dictionary):
     # -вать
 #
     
-    for word in reference_dictionary:
+    for word in dictionary:
         if word.endswith("ивать"): #Must check for possible stem's consonant mutations
-            word.removesuffix("ивать")
-            pair_dictionary[word] = word.removesuffix("ивать") + "ить"
+            
+            pair_dictionary[word] = word[:len(word)-len("ивать")] + "ить"
     
-        if word.endswith("ывать"): #Must check for shortlist -ы- infix words, and shortlist -вать words -- exceptions.
-            pair_dictionary[word] = word.removesuffix("ывать") + "ать"
-    pass
+        elif word.endswith("ывать"): #Must check for shortlist -ы- infix words, and shortlist -вать words -- exceptions.
+            pair_dictionary[word] = word[:len(word)-len("ывать")] + "ать"
+        
+        elif word.endswith("ять"):
+            pair_dictionary[word] = word[:len(word)-len("ять")] + "ить"
 
 
 
