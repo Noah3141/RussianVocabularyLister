@@ -1,0 +1,5 @@
+urllib3==1.26.14
+mysql-connector-python==8.0.18
+beautifulsoup4==4.11.1
+flask==2.2.2
+flask-restful==0.3.9
