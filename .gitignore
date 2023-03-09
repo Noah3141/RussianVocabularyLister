@@ -4,3 +4,8 @@
 __pycache__
 .idea
 .DX_Store
+russian_inflection_collapse_v.06.py
+russian_inflection_collapser.py
+russian_inflection_collapser_old.py
+russian_inflection_collapser_v.75.py
+reference_lists_creator.py
