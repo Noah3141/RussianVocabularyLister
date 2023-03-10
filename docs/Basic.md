@@ -1,4 +1,4 @@
-# Instructions for setup
+# Instructions for Setup
 
 
 1. *reference_dictionary_web_crawler.py
