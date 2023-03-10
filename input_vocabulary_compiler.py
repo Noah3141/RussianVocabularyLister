@@ -1,3 +1,18 @@
+###############################################################################
+
+# This is the script to take inputted Russian text, and return a lemmatized
+# dictionary. Input is passed through website__init.py as a POST request
+# on the input page, and fed into the HTML of the output page, to display the
+# user's vocabulary list.
+
+# This is the file that utilizes the dictionary_forms.pkl (arranged as 
+# key = word:value = dictionary form
+
+###############################################################################
+###############################################################################
+
+
+
 import re
 import pickle
 from reference_lists_creator import create_verb_list
@@ -41,7 +56,7 @@ def rubit(input_text, breadth, style) -> dict:
             dict_form = dictionary_forms[word]
             dictionary_input_words[dict_form] = dictionary_input_words.get(dict_form, 0) + input_count.get(word, 0)
         except:
-            dictionary_input_words[word] = "This form wasn't in our key!"
+            dictionary_input_words[word] = "*"
         
     
     output_dictionary = dictionary_input_words
@@ -66,7 +81,7 @@ def rubit(input_text, breadth, style) -> dict:
         del output_dictionary[word]
     
     # Style
-    
+    #################################################### In need of update to phase out "reference_lists_creator" and "create_verb_list"
     if style == "Verb Pairs":
         output_dictionary, _ = create_verb_list(output_dictionary)
 

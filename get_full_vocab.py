@@ -1,11 +1,24 @@
+###############################################################################
+
+# This script is run as an admin on a PC for creating updated .pkl files.
+# Those .pkl files can then be pushed to the GIT repository, for use in the site.
+
+# This file pulls the database, and creates a .pkl file, to push to GIT.
+
+###############################################################################
+###############################################################################
+
+
+
+
 import mysql.connector
 import pickle
 
 
 conn = mysql.connector.connect(
-    host = "localhost",
-    user = "root",
-    password = "nnssoteck3434###",
+    host = "192.168.1.200", # IP Address of server computer
+    user = "distant_user", # User defined in mySQL workbench as being able to have any IP
+    password = "distance_connect",
     database = "Database_001")
 
 cursor = conn.cursor()
@@ -21,12 +34,24 @@ word_list = list()
                     "ывал", "ывало","ывала","ывали",
                     "ывая", "ывай", "ывайте"]
 
+ать_trns_endings = ["ать", "аю","аешь","ает","аем","аете","ают",
+                    "ал", "ало","ала","али",
+                    "ая", "ай", "айте"]
 
 
+spelling_rule_1_letters = ["г", "к", "х"]
+spelling_rule_2_letters = ["ж", "ч", "ш", "щ"]
 
 
-
-
+mutation_key = {"пл":"п",
+                "бл":"б",
+                "фл":"ф",
+                "вл":"в",
+                "мл":"м",
+                "ч":"к", # MISSING Т
+                "ж":"з", # MISSING Д and Г
+                "ш":"с", # MISSING Х
+                "щ":"ст"}# MISSING СК
 
 
 
@@ -44,13 +69,13 @@ def russ_match(word: str, ending_list: list) -> int:
                     if stem + other_ending in word_list:
                         match += 1
                 break
-    print(word, ending_list, match)
+    print(f'{word} checked for {ending_list} reached {match}')
     #print("Match calculated for", word, "against", ending_list, "as", match)
     return match  
 
 
 prefix_list = ["при", "у", "пере", "от", "об", "объ", "отъ", "вы", "на","с",
-               "воз","вос", "вс", "вз", "под", "раз", "про","до",
+               "воз","вос", "вс", "вз", "под", "раз", "про","пре","до",
                "за","рас","по", "в"] 
 
 # под  -   по
@@ -67,7 +92,7 @@ prefix_list = ["при", "у", "пере", "от", "об", "объ", "отъ", "
 
 def root_match(word):
     root = "default"
-    print("\n\nChecking word", word)
+    print("\n\nRoot_Match checking word", word)
     for prefix in prefix_list:
         if word.startswith(prefix):
             root = word[len(prefix):]
@@ -97,9 +122,15 @@ for row in words:
 
 
 cursor.close()
-conn.close()    
- 
+conn.close()   
 
+
+delete_words = ("пять","девять","десять","вспять","зять","память")
+for word in delete_words:
+    if word in word_list:
+        word_list.remove(word)
+ 
+print("Word List Ready...")
 ###############################################################################
 
 
@@ -108,36 +139,158 @@ conn.close()
 pair_list= {} # Not calling a "dictionary" because the relationship between key and value is not any sort of change. Key and values are just pairs, arranged in a list
 
 
-for word in word_list[:250000]:
+for word in word_list:
+    if len(word) <= 6: continue
+    
     if word.endswith("ивать"): #Must check for possible stem's consonant mutations
+        stem = word[:len(word)-len("ивать")]
         
-        pair_list[word] = word[:len(word)-len("ивать")] + "ить"
+        
+        # Catch consonant mutations in stem
+        if any(stem.endswith(mutation) for mutation in mutation_key):
+            for mutation in mutation_key:
+                if stem.endswith(mutation):
+                    stem = stem[:len(stem)-len(mutation)] + mutation_key[mutation]
+                    break
+        
+        
+        if len(stem) <= 2:
+            pair_list[word] = stem + "ить"
+            continue
+        
+        # Catch о > а mutations in stem
+        if stem[-2] == "а": # Check to see if the stem has an "а", if so, check if an "о" replacement exists (e.g. отговорить when analyzing отговаривать), IF it exists, you may assume отговорить instead of отговарить
+            if (stem[:len(stem)-2] + "о" + stem[len(stem)-1] + "ить") in word_list:
+                stem = stem[:len(stem)-2] + "о" + stem[len(stem)-1]
+
+       
+        
+        
+        if stem[-1] in (spelling_rule_1_letters or spelling_rule_2_letters):
+            pair_list[word] = stem + "ать"
+        else:
+            pair_list[word] = stem + "ить"
+
+    
+
+
+
+
+
 
     elif word.endswith("ывать"): #Must check for shortlist -ы- infix words, and shortlist -вать words -- exceptions.
-        pair_list[word] = word[:len(word)-len("ывать")] + "ать"
+        stem = word[:len(word)-len("ывать")]
+        
+        
+        
+        # Catch consonant mutations in stem
+        if any(stem.endswith(mutation) for mutation in mutation_key):
+            for mutation in mutation_key:
+                if stem.endswith(mutation):
+                    stem = stem[:len(stem)-len(mutation)] + mutation_key[mutation]
+                    break
+        
+        
+        
+        # Catch о > а mutations in stem
+        
+        if stem[-2] == "а":
+            if (stem[:len(stem)-2] + "о" + stem[len(stem)-1] + "ать") in word_list:
+                stem = stem[:len(stem)-2] + "о" + stem[len(stem)-1]
+        
+        pair_list[word] = stem + "ать"
+    
+    
+    
+    
     
     elif word.endswith("ять"):
-        pair_list[word] = word[:len(word)-len("ять")] + "ить"
-    
-    elif russ_match(word, ывать_trns_endings) > 4:
-        for ending in ывать_trns_endings:
-            if word.endswith(ending):
-                stem = word[:len(word)-len(ending)]
-                dict_form = stem + "ывать"    
-                break
-        pair_list[dict_form] = stem + "ать"
+        stem = word[:len(word)-len("ять")]
+        
+        # Catch consonant mutations in stem
+        if any(stem.endswith(mutation) for mutation in mutation_key):
+            for mutation in mutation_key:
+                if stem.endswith(mutation):
+                    stem = stem[:len(stem)-len(mutation)] + mutation_key[mutation]
+                    break
+        
+        # Catch о > а mutations in stem
+        try:
+            if stem[-2] == "а": # Check to see if the stem has an "а", if so, check if an "о" replacement exists (e.g. отговорить when analyzing отговаривать), IF it exists, you may assume отговорить instead of отговарить
+                if (stem[:len(stem)-2] + "о" + stem[len(stem)-1] + "ить") in word_list:
+                    stem = stem[:len(stem)-2] + "о" + stem[len(stem)-1]
+        except:
+            pair_list[stem + "инать"] = word
+            try:
+                del pair_list[word]
+                continue
+            except: continue
+            
+        pair_list[word] = stem + "ить"
+
+    # # откинуть - откидать, отряхнуть - отрясать
+    # elif word.endswith("нуть"):
+    #     russ_match("")
         
 
     
+    # elif russ_match(word, ывать_trns_endings) > 4:
+    #     for ending in ывать_trns_endings:
+    #         if word.endswith(ending):
+    #             stem = word[:len(word)-len(ending)]
+    #             dict_form = stem + "ывать"    
+    #             break
+    #     pair_list[dict_form] = stem + "ать"
+    
+    # Before adding these blocks in, finished the above
+        
+
+   
+
+    
+
+
+
+
 # Overrides:
-override_list = {"калывать":"колоть", "говаривать": "говорить","крывать":"крыть",
-                 "кладывать":"класть", "рывать":"рвать","мирать":"мереть", "бирать": "брать",
-                 "секать":"сечь"}
+    
+# Override all prefixed forms
+override_list = {"калывать":"колоть","крывать":"крыть",
+                 "кладывать":"ложить", "рывать":"рвать","мирать":"мереть", "бирать": "брать",
+                 "секать":"сечь", "зывать":"звать", "бывать":"быть", "ращивать":"расти", 
+                 "плывать":"плыть","мывать":"мыть"}
     
 for override in override_list:
     for entry in [entry for entry in pair_list if root_match(entry) == override]:
         pair_list[entry] = (entry[:len(entry)-len(override)] + override_list[override])
     
+    
+нятьs = [word for word in pair_list if root_match(word) == "нять"]
+for нять_word in нятьs:    
+    del pair_list[нять_word]
+    pair_list[(нять_word[:len(нять_word)-4] + "нимать")] = нять_word
+    
+
+
+# Override the unprefixed:
+unprefixed_override_list = {"бывать":"быть", "взять":"брать"}
+for override in unprefixed_override_list:
+    pair_list[override] = unprefixed_override_list[override]
+
+
+
+
+# Fixing consonant cluster mistakes
+clusters = {"отрв":"оторв","разрв":"разорв","обрв":"оборв"}
+
+for word in pair_list:
+    for cluster in clusters:
+        if cluster in pair_list[word]:
+            mismade_word = pair_list[word]
+            pair_list[word] = mismade_word.replace(cluster, clusters[cluster])
+
+
+
     
 # Making tree list
 ####################   

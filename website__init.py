@@ -1,14 +1,24 @@
+###############################################################################
+
+# This script runs the website, and provides the VIEWS and CONTROLLERS.
+
+# Object relational mapping is completed by administrative scripts, which
+# save .pkl files, which are then used in the functions/scripts referenced in
+# this file.
+
+###############################################################################
+###############################################################################
+
+
 from flask import Flask, request, redirect, render_template, url_for
 from flask_restful import Api
 from input_vocabulary_compiler import rubit
-from reference_lists_creator import create_verb_list
 import pickle
 
 app = Flask(__name__)
 api = Api(app)
 
-with open("dictionary_forms.pkl", "rb") as f:
-    dictionary_forms = pickle.load(f)
+###############################################################################
 
 @app.route("/", methods=["GET"])
 def home():
@@ -49,7 +59,7 @@ def TreeModel():
 def AnkiDeck():
     return render_template("ankiDeck.html")
 
-
+###############################################################################
 
 
 if __name__ == "__main__":

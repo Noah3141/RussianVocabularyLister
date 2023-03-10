@@ -1,3 +1,18 @@
+###############################################################################
+
+# This script is run as an admin on a PC for creating updated .pkl files.
+# Those .pkl files can then be pushed to the GIT repository, for use in the site.
+
+# This file feeds the database, others pull that database into a .pkl file.
+
+###############################################################################
+###############################################################################
+
+
+
+
+
+
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 import ssl
@@ -61,10 +76,10 @@ book_page_links = []
 
 
 
-link = "http://loveread.ec/read_book.php?id=106723&p="
+link = "http://loveread.ec/read_book.php?id=104731&p="
 #(["p"], class_="MsoNormal")  << Insert this  at the "body_paras = soup.find_all" below
 
-for i in range (1, 40):              # Check the final page number, and insert here
+for i in range (1, 107):              # Check the final page number, and insert here
     book_page_links.append(link + str(i))
 
 
@@ -106,6 +121,7 @@ for link in book_page_links:
     print("Number of new words:", new_size-old_size)
     if new_size-old_size > 100:
         print("Found at:", link)
+               
         
         
 # Run the script and review the sucess of the scraping. 
@@ -114,8 +130,7 @@ for link in book_page_links:
 # Into the console. I generally had 4 or 5 consoles running from that
 # point, at the same time.
 
-        
-import mysql.connector     
+     
 conn = mysql.connector.connect(
     host = "localhost",
     user = "root",

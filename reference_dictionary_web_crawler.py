@@ -1,3 +1,14 @@
+###############################################################################
+
+# This script is run as an admin on a PC for creating updated .pkl files.
+# Those .pkl files can then be pushed to the GIT repository, for use in the site.
+
+# This file feeds the database, others pull that database into a .pkl file.
+
+###############################################################################
+###############################################################################
+
+
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 import ssl
