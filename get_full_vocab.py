@@ -105,18 +105,13 @@ def root_match(word):
 
 ###############################################################################
 print("Inputting data from database...")
-cursor.execute("SELECT id, word, frequency FROM words")
+cursor.execute("SELECT word FROM words")
 words = cursor.fetchall()
 
-# Words is a list of tuples, each tuple: [0 - id, 1 - word, 2 - freq]
-# for row in words:
-#     id_  = row[0]
-#     word = row[1]
-#     freq = row[2]
     
     
 for row in words:
-    word = row[1]
+    word = row[0]
     word = word.replace("'","")
     word_list.append(word)
 
@@ -253,33 +248,53 @@ for word in word_list:
 
 
 # Overrides:
-    
+############  
+
+
 # Override all prefixed forms
+
 override_list = {"калывать":"колоть","крывать":"крыть",
                  "кладывать":"ложить", "рывать":"рвать","мирать":"мереть", "бирать": "брать",
                  "секать":"сечь", "зывать":"звать", "бывать":"быть", "ращивать":"расти", 
                  "плывать":"плыть","мывать":"мыть"}
-    
-for override in override_list:
+# Our pair list is arranged as imperfective:perfective. We catch verb pairs from the database
+# by catching the imperfective (almost always -ывать/-ивать). A handful of verbs
+# end in these endings in the imperfective, but their perfective form ends in a non-routine
+# form, e.g. откалывать - отколоть. 
+
+for override in override_list: # For each imperfective form, tied to a perfective override
     for entry in [entry for entry in pair_list if root_match(entry) == override]:
         pair_list[entry] = (entry[:len(entry)-len(override)] + override_list[override])
     
+# For each pair we made up above, look at the imperfective, and remove the prefix,
+# Does this form now look like the override's imperfective? If so, we found one
+# of the pairs for which we should: set the perfective of that 'entry' equal to
+# the entry's prefix + the corresponding perfective tied to the given 
+# imperfective, from the override list. 
+# e.g. We find скрывать, it matches крывать, therefore с- + крыть is its REAL perfective.
     
+ 
+    
+# These words got caught by their PERFECTIVE, and so this block does the converse
+# of the above.
+
 нятьs = [word for word in pair_list if root_match(word) == "нять"]
 for нять_word in нятьs:    
     del pair_list[нять_word]
     pair_list[(нять_word[:len(нять_word)-4] + "нимать")] = нять_word
     
 
-
-# Override the unprefixed:
+# The above overrides rely on being able to peel out a root from prefixes.
+# If a found entry is completely unprefixed, it needs different processing:
 unprefixed_override_list = {"бывать":"быть", "взять":"брать"}
 for override in unprefixed_override_list:
     pair_list[override] = unprefixed_override_list[override]
 
 
 
-
+# Certain prefixes naturally gain a vowel to prevent consonant clusters.
+# When an imperfective is converted to its perfective form, consonant arrangements
+# Can change in a subset of verbs, causing the vowel to appear, e.g. -рывать -рвать
 # Fixing consonant cluster mistakes
 clusters = {"отрв":"оторв","разрв":"разорв","обрв":"оборв"}
 
@@ -288,7 +303,9 @@ for word in pair_list:
         if cluster in pair_list[word]:
             mismade_word = pair_list[word]
             pair_list[word] = mismade_word.replace(cluster, clusters[cluster])
-
+# If you find "отрв" in the perfective of a pair (that is, the one we generated,
+# not the one we found naturalistically), take that word and replace the cluster
+# with the corresponding fix.
 
 
     

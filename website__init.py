@@ -3,8 +3,8 @@
 # This script runs the website, and provides the VIEWS and CONTROLLERS.
 
 # Object relational mapping is completed by administrative scripts, which
-# save .pkl files, which are then used in the functions/scripts referenced in
-# this file.
+# process database data into saved .pkl files, which are then used 
+# in the functions/scripts referenced in this file.
 
 ###############################################################################
 ###############################################################################

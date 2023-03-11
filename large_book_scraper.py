@@ -141,7 +141,7 @@ cursor = conn.cursor()
 
 for word in reference_dictionary:
     
-    print("Next word: ", word)
+    #print("Next word: ", word)
     cursor.execute(f"SELECT 1 FROM words WHERE word = '{word}'")
     find = cursor.fetchall()
     if len(find) == 0:
