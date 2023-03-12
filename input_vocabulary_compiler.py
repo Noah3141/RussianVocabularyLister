@@ -12,17 +12,23 @@
 ###############################################################################
 
 
-
 import re
 import pickle
 from reference_lists_creator import create_verb_list
 
-with open("dictionary_forms.pkl", "rb") as f:
-    dictionary_forms = pickle.load(f)
 
-def rubit(input_text, breadth, style) -> dict:
-    del_list = ()
-    output_dictionary = {}
+
+def rubit(input_text: str, breadth: str, style: str) -> dict:
+    
+    
+    try:
+        with open("dictionary_forms.pkl", "rb") as f:
+            dictionary_forms = pickle.load(f)
+    except:
+        raise FileNotFoundError("No dictionary_forms.pkl found! Run get_reference_russian_key.py")
+    
+    del_list = []
+    dictionary_input_words = {}
     
         # cleaning text
     input_text = re.sub("[А-Я]{2, 10}+", "", input_text) # Acronym/Abbreviation filter (more of a cultural than vocabulary thing)
@@ -35,11 +41,11 @@ def rubit(input_text, breadth, style) -> dict:
     
     input_count = {}
     
-    stop_words = list()
+    stop_words = set()
     stop_words_txt = open("stop_words.txt", 'r', encoding='UTF-8')
     for line in stop_words_txt:
-        stop_words.append(line.rstrip())
-
+        stop_words.add(line.rstrip())
+    
     
     
     # Creating raw count of inflected forms
@@ -49,44 +55,59 @@ def rubit(input_text, breadth, style) -> dict:
         input_count[word] = input_count.get(word, 0) + 1
     
     
-    dictionary_input_words = {}
+    try:
+        with open("morfo_list.pkl", "rb") as f:
+            morfo = pickle.load(f)
+    except:
+        morfo = list()
+         
     
     for word in input_count:
         try: 
             dict_form = dictionary_forms[word]
             dictionary_input_words[dict_form] = dictionary_input_words.get(dict_form, 0) + input_count.get(word, 0)
         except:
-            dictionary_input_words[word] = "*"
+            dictionary_input_words[word] = "Key missing. Automatically adding to update list."
+            if word not in morfo:
+                morfo.append(word)
         
-    
-    output_dictionary = dictionary_input_words
+        
+    with open("morfo_list.pkl", "wb") as f:
+        pickle.dump(morfo, f)
+            
+        
+    dictionary_input_words = {k: v for k, v in sorted(dictionary_input_words.items(), key=lambda item: (isinstance(item[1], int), item[1]), reverse=True)}
     
 ###############################################################################    
     
     # Breadth
     
+    try: 
+        ave_count = (sum(dictionary_input_words.values()) / len(dictionary_input_words))
+    except: ave_count = 0
+    
     if breadth == "Top Words":
-        for word in output_dictionary:
-            if output_dictionary[word] <= 4: # Filter certain threshold of words
+        for word in dictionary_input_words:
+            if dictionary_input_words[word] <= (ave_count): # Filter certain threshold of words
                 del_list.append(word)
                 pass
 
     if breadth == "Broad List":
-       for word in output_dictionary:
-           if output_dictionary[word] <= 1: # Filter certain threshold of words
+       for word in dictionary_input_words:
+           if dictionary_input_words[word] <= (ave_count - 1): # Filter certain threshold of words
                del_list.append(word)
                pass
                
     for word in del_list:
-        del output_dictionary[word]
+        del dictionary_input_words[word]
     
     # Style
     #################################################### In need of update to phase out "reference_lists_creator" and "create_verb_list"
     if style == "Verb Pairs":
-        output_dictionary, _ = create_verb_list(output_dictionary)
+        dictionary_input_words, _ = create_verb_list(dictionary_input_words)
 
     if style == "Verb Trees":
-        _ , output_dictionary = create_verb_list(output_dictionary)
+        _ , dictionary_input_words = create_verb_list(dictionary_input_words)
     
 
-    return output_dictionary
+    return dictionary_input_words

@@ -338,6 +338,8 @@ for word in pair_list:
 ###############################################################################    
     
 
+pair_list = {v: k for k, v in pair_list.items()}
+
 with open("pair_list.pkl", "wb") as f:
     pickle.dump(pair_list, f)
 

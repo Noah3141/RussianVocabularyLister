@@ -291,7 +291,9 @@ clear_list = []
 #     if "кю" in word or "шю" in word or "гю" in word or "щю" in word or "хю" in word or "жю" in word or "чю" in word or "цю" in word:
 #         clear_list.append(word)
         
-                
+
+
+# Double vowels, esp double a          
         
 
 

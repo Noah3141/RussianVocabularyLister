@@ -1,7 +1,7 @@
 * {
     margin: 0px;
     padding: 0px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
  
 }
 body{
@@ -205,12 +205,17 @@ footer div a, footer div a:visited{
     text-decoration: none;
 }
 .list-entry{
-    line-height: .65rem;
+    line-height: 1px;
+    font-size: 25px;
+    border-bottom: 2px solid var(--Dark-Outline);
+    padding: 5px;
+    padding-bottom: 25px;
 }
 #list-header{
     margin-top: 15px;
     margin-left: 30px;
     margin-bottom: 15px;
+
 }
 #wiki-button:hover{
     background-color: var(--Color-Base);
@@ -275,4 +280,9 @@ footer div a, footer div a:visited{
 }
 .download-btn:hover{
     background-color: var(--Color-Base);
+}
+#asterisk-label{
+    padding: 35px;
+    position: relative;
+    bottom: 0px;
 }
