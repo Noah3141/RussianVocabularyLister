@@ -1,6 +1,6 @@
-*Python Relationship Structure*:
+# Python Relationship Structure:
     
-**Functions:
+## Functions:
     > def update_dictionary(setting:str)
         Defined in: 
             auto_update_dictionary_by_user_input.py
@@ -12,13 +12,14 @@
         Called in:
             website_init.py with "soft" when user inputs Create List
             website_init.py with "last" when flags a word
+            
     > def rubit(input_text: str, breadth: str, style: str) -> dict:
     
-**Scripts
+## Scripts
     > py get_reference_russian_key.py
         Running resets for word in database the dictionary_forms (dict) to my script
         
-**Variables & Pickles
+## Variables & Pickles
     > dictionary_forms (dict)
         Utility:
             Stores a connection between a word (key) and its dictionary form (value)
