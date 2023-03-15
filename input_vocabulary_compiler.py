@@ -35,6 +35,8 @@ def rubit(input_text: str, breadth: str, style: str) -> dict:
     dictionary_input_words = {}
     
         # cleaning text
+
+    input_text = re.sub("ё", "е", input_text)
     input_text = re.sub("[А-Я]{2, 10}+", "", input_text) # Acronym/Abbreviation filter (more of a cultural than vocabulary thing)
     input_text = re.sub("[А-Я]\.\s", "", input_text)
     
