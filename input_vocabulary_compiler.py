@@ -17,6 +17,10 @@ import pickle
 from reference_lists_creator import create_verb_list
 
 
+# Cleans user input, then creates a dictionary_input_words which is used to generate
+# the HTML for the output page. Words that are not in the key are given a label instead
+# of a dictionary form, and that input word is entered into the "morfo" pickle, to be later updated
+# by "from auto_update_dictionary_by_user_input import update_dictionary" in website__init.py
 
 def rubit(input_text: str, breadth: str, style: str) -> dict:
     
@@ -33,7 +37,10 @@ def rubit(input_text: str, breadth: str, style: str) -> dict:
         # cleaning text
     input_text = re.sub("[А-Я]{2, 10}+", "", input_text) # Acronym/Abbreviation filter (more of a cultural than vocabulary thing)
     input_text = re.sub("[А-Я]\.\s", "", input_text)
+    
     input_text = input_text.lower() # Now lowercase words, e.g. beginning of sentence
+    input_text = re.sub('([а-я]+-[а-я]+)', "", input_text)
+    
     input_text = re.sub("[0-9]", "", input_text) # Remove any digits
     input_text = re.sub('[()[\]{}\-"—«»]', "", input_text) # Remove special symbols, especially Russian «» chevron quotes and their beloved m-dash
     input_russian_words = re.findall("([а-я]+)", input_text) # Now find me all the sequences of Russian letters (e.g. "words")
@@ -67,7 +74,7 @@ def rubit(input_text: str, breadth: str, style: str) -> dict:
             dict_form = dictionary_forms[word]
             dictionary_input_words[dict_form] = dictionary_input_words.get(dict_form, 0) + input_count.get(word, 0)
         except:
-            dictionary_input_words[word] = "Key missing. Automatically adding to update list."
+            dictionary_input_words[word] = "*"
             if word not in morfo:
                 morfo.append(word)
         
@@ -110,4 +117,4 @@ def rubit(input_text: str, breadth: str, style: str) -> dict:
         _ , dictionary_input_words = create_verb_list(dictionary_input_words)
     
 
-    return dictionary_input_words
+    return dictionary_input_words, input_count

@@ -14,15 +14,25 @@
 <div>
     <div class="headers">
         <div class="button-row">
-            <button id="wiki-button">Wiktionary Links:</button>
+            <button id="wiki-button" title="Switch vocabulary links between Викисловарь and Wiktionary">Wiktionary Links:</button>
             <div>RU</div>
         </div>
         <h2 id="list-header">Branch Imperfective - Prefixes<br>{{tree_list|length}} Trees</h2>
     </div>
     {% for word in tree_list %}
-    <p class="list-entry">
-        <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{word}}">{{word}}&nbsp</a>({{tree_list[word][0]}}): {{tree_list[word][1]}}  
-    </p>
+    
+    <div class="list-row">
+        <div id="list-entry" class="entry-{{loop.index}}">
+            <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{word}}">{{word}}&nbsp</a>
+        ({{tree_list[word][0]}}): {{tree_list[word][1]}}  
+        </div>
+        
+        <div id="update" title="Flag entry for update">
+            <button name="flag-word" value="Verb Trees: {{word}} ({{tree_list[word][0]}}): {{tree_list[word][1]}}" id="update-entry-{{loop.index}}" class="update-entry">
+                <i class="fa-lg fa-solid fa-flag" id="flag"></i>
+            </button>
+        </div>
+    </div>
     {% endfor %}
 </div>
 

@@ -14,22 +14,35 @@
 <div>
     <div class="headers">
         <div class="button-row">
-            <button id="wiki-button">Wiktionary Links:</button>
+            <button id="wiki-button" title="Switch vocabulary links between Викисловарь and Wiktionary">Wiktionary Links:</button>
             <div>RU</div>
         </div>
         <h2 id="list-header">Word - Frequency in Study material</h2>
             <h3 id="output-readout">{{dictionary|length}} Words (Breadth: {{breadth}})
         
     </div>
+    <!--This will need to be broken into if blocks that test for if {{style}}=="Verb Pairs" and then list out a different entry system, and value inside the button-->
     {% for word in dictionary %}
-    <p class="list-entry">
-        <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{word}}">{{word}}</a> - {{dictionary[word]}}   
-    </p>
+    
+                <div class="list-row">
+                    
+                    <div id="list-entry" class="entry-{{loop.index}}">
+                        <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{word}}">
+                            {{word}}</a> - {{dictionary[word]}}   
+                    </div>
+                
+                    <div id="update" title="Flag entry for update">
+                        <button name="flag-word" value="Raw Vocabulary: {{word}} - {{dictionary[word]}}" id="update-entry-{{loop.index}}" class="update-entry">
+                            <i class="fa-lg fa-solid fa-flag" id="flag"></i>
+                        </button>
+                    </div>
+    </div>
 
     {% endfor %}
 </div>
-<span id="asterisk-label">* Entry was not found in the lemmatization key</span>
+<br><span id="asterisk-label">* Key missing. Automatically adding to update list.</span>
+<br><span id="asterisk-label">** Automatic update could not find dictionary form.</span>
 
-
+<input type="hidden" id="input_text" name="input_text" value="{{input_text}}">
 <script src="/static/lists.js"></script>
 {% endblock %}

@@ -8,7 +8,25 @@
 ###############################################################################
 ###############################################################################
 
+# Define test set
 
+def Test_Output(dictionary: dict):
+    print(        "Test        Input       Dictionary      Should Be")
+    test_input = ["языки", "языков","стреляют","кошку","кошек","разговаривает","говорит", "сказал","хороших", "последнем"]
+    test_output = [dictionary[word] for word in test_input]
+    
+    test_key =   ["язык",   "язык","стрелять","кошка", "кошка","разговаривать","говорить","сказать","хороший", "последний"]
+
+    for idx in len(test_input):
+        word = test_input[idx]
+        test_output = dictionary[word]
+        if test_output == test_key[idx]:
+            print("Passed: ", word, test_output, test_key[idx])
+        else:
+            print("FAILED: ", word, test_output, test_key[idx])
+        
+
+###############################################################################
 
 
 import mysql.connector

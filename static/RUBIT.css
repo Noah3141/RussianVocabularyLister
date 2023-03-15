@@ -196,20 +196,21 @@ footer div a, footer div a:visited{
     text-decoration: underline;
     color: var(--Text-Color);
 }
-.list-entry a{
+.list-row a{
     color: var(--Text-Color);
     text-decoration: none;
 }
-.list-entry a:visited{
+.list-row a:visited{
     color: var(--Color-Base);
     text-decoration: none;
 }
-.list-entry{
-    line-height: 1px;
+.list-row{
     font-size: 25px;
+    margin: 0px 15px 0px 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-bottom: 2px solid var(--Dark-Outline);
-    padding: 5px;
-    padding-bottom: 25px;
+
 }
 #list-header{
     margin-top: 15px;
@@ -271,8 +272,7 @@ footer div a, footer div a:visited{
     cursor: pointer;
     color: var(--Text-Color);
     outline: none;
-    border-bottom: 2px solid var(--Dark-Outline);
-    border-top: 2px solid var(--Dark-Outline);
+    border: 2px solid var(--Dark-Outline);
     width: 12rem;
     transition: background-color .25s;
     border-radius: 30px;
@@ -282,7 +282,47 @@ footer div a, footer div a:visited{
     background-color: var(--Color-Base);
 }
 #asterisk-label{
-    padding: 35px;
+    margin: 35px;
     position: relative;
     bottom: 0px;
 }
+
+#list-entry{
+    display: inline;
+}
+#update{
+    color: var(--Element-Default);
+    display: inline;
+    position: relative;
+    float: right;
+    transition: background-color .25s;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 2px solid var(--Dark-Outline);
+
+}
+.update-entry{
+    background: none;
+    padding: 0px;
+    border: none;
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    cursor: pointer;
+
+}
+#update:hover{
+    background-color: var(--Background-Fronted);
+}
+
+.fa-flag{
+    color: var(--Element-Default);
+    transition: all ease-in-out .25s;
+}
+
+#update:hover .fa-flag{
+    color: var(--Color-Base);
+
+}
+
