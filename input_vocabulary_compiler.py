@@ -62,6 +62,8 @@ def rubit(input_text: str, breadth: str, style: str) -> dict:
         if word in stop_words:
             continue
         input_count[word] = input_count.get(word, 0) + 1
+        with open("backflow_to_database_text.txt", "a", encoding="UTF-8") as f:
+            f.write(f"\n{word}")
     
     
     try:

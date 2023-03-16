@@ -152,7 +152,7 @@ def update_dictionary(setting: str):
     len_new_forms = len(new_forms)
     with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
  
-        f.write(f"\n\n'{setting}' call: {log_time}-{log_time_end}\nUpdated {len_updated} Inputs: [")
+        f.write(f"\n\n'{setting}' call: {log_time}-{log_time_end}\nUpdated {len_updated} inputs: [")
         for item in updated_words:
             f.write(item + "   ")
         f.write(f"]\nWith {len_new_forms} dict forms: [")
@@ -160,7 +160,9 @@ def update_dictionary(setting: str):
             f.write(item + "   ")
         f.write("]\n")
 
-    
+    for word in new_forms:
+        with open("backflow_to_database_text.txt", "a", encoding="UTF-8") as f:
+            f.write(f"\n{word}")
     
     
     return updated_words, new_forms

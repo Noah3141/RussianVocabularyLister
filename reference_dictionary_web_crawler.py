@@ -34,16 +34,16 @@ if len(url) < 2:
 # Preparing a bunch of variables for later usage
 links = []
 
-stop_words = list()
+stop_words = set()
 stop_words_txt = open("stop_words.txt", 'r', encoding='UTF-8')
 for line in stop_words_txt:
-    stop_words.append(line.rstrip())
+    stop_words.add(line.rstrip())
 
 
 reference_dictionary = dict()
 
 
-non_russian_stop_words = [" нея "," воно "," він "," це ", " тя ", " мене ", " па ", " з ", " від "]
+non_russian_stop_words = set(" нея "," воно "," він "," це ", " тя ", " мене ", " па ", " з ", " від ")
 
 
 

@@ -226,8 +226,14 @@ reflexive_participle_endings = ["ийся",
 сти_refl_endings = ["стись","усь","ешься","ется","емся","етесь","утся","ись","шись","ясь"]
 сти_infixes = ["д", "с", "б","т"]
 
-ой_stems = ["прост", "люб", "остальн", "друг", "ин", "чуж","втор", "густ","годов", "трудов",
-            "языков","адов", "путев", "сед", "полов","смыслов"]
+ой_stems = set("прост", "люб", "остальн", "друг", "ин", "чуж","втор", "густ","годов", "трудов",
+            "языков","адов", "путев", "сед", "полов","смыслов", "седьм", "худ")
+
+
+
+
+
+
 
 
 print("Lists initialized.")
@@ -261,10 +267,10 @@ cursor.execute("SELECT word FROM words")
 words = cursor.fetchall()
 
 
-stop_words = list()
+stop_words = set()
 stop_words_txt = open("stop_words.txt", 'r', encoding='UTF-8')
 for line in stop_words_txt:
-    stop_words.append(line.rstrip())
+    stop_words.add(line.rstrip())
 
     
 for row in words:
@@ -273,10 +279,10 @@ for row in words:
         word_list.append(word)
 
 try:
-    with open("dictionary_forms.pkl", "rb") as f:
+    with open("dictionary_forms.pkl", "rb") as f: # Bring up the current state of pickle
         dictionary_forms = pickle.load(f)
 except: 
-    dictionary_forms = {}
+    dictionary_forms = dict() # or make it 
 
 # Close the cursor and connection
 cursor.close()
@@ -293,7 +299,7 @@ word_list_set = set(word_list)
 
 
 print("Database inputted. Beginning scan...")
-for word in word_list[:90700]:
+for word in word_list:
     
     print("\033[0m========================================")
     print("\nCurrent word: ", word)
@@ -549,14 +555,15 @@ for word in word_list[:90700]:
             print("\033[0;32mfeminine  ", word, dict_form, "\033[0m\n\n======================================")
             continue
         
-    if any(word.endswith(ending) for ending in neuter_hard_endings_all):
+    if any(word.endswith(ending) for ending in neuter_hard_endings_all): # Beware sneaking vocative forms
         print("\n\n          neuter_hard_endings_all")
-        if russ_match(word, neuter_hard_endings_all) == 9:
-            
-            dict_form = stem + "о"
-            dictionary_forms[word] = dict_form
-            print("\033[0;32mneuter    ", word, dict_form, "\033[0m\n\n======================================")
-            continue
+        if russ_match(word, neuter_hard_endings_all) == 6:
+            if stem + "о" in word_list_set:
+                
+                dict_form = stem + "о"
+                dictionary_forms[word] = dict_form
+                print("\033[0;32mneuter    ", word, dict_form, "\033[0m\n\n======================================")
+                continue
                 
         
     if any(word.endswith(ending) for ending in masc_hard_endings_all):
@@ -610,13 +617,13 @@ for word in word_list[:90700]:
 ################ ADDRESSING INSUFFICIENT DATABASE VARIETY #####################
 ################## These are less necessary as db grows #######################
      
-    if "н" in word[-4:]:
-         print("\n\n          hard_adjective_endings")
-         if russ_match(word, hard_adjective_endings + ["о", "ы", "а"]) >= 1:
-             dict_form = stem + "ый" 
-             dictionary_forms[word] = dict_form
-             print("\033[35mный ", word, dict_form, "\033[0m\n\n======================================")
-             continue
+    # if "н" in word[-4:]: # Volatile block, produces "ый" outputs on some words
+    #      print("\n\n          hard_adjective_endings")
+    #      if russ_match(word, hard_adjective_endings + ["о", "ы", "а"]) >= 1:
+    #          dict_form = stem + "ый" 
+    #          dictionary_forms[word] = dict_form
+    #          print("\033[35mный ", word, dict_form, "\033[0m\n\n======================================")
+    #          continue
     
  
 
@@ -669,7 +676,104 @@ for word in fleeting_overrides_ц:
         pass
     pass
 
+nasal_я_words = ["имя","пламя","знамя","пленя","беремя","время", "бремя","семя","темя","стремя","рамя"]
+nasal_я_endings = ["ени", "енам", "енами", "енах", "ен", "енем"]
+
+for word in nasal_я_words:
+    dictionary_forms[word] = word
+    stem = word[:-1]
+    for ending in nasal_я_endings:
+        form = stem + ending
+        dictionary_forms[form] = word
+        
+
+# The dreaded class 6c verbs
+
+   
+class_6c_words = ["свистать", "искать", "чесать", "писать", "казаться", "казать", "вязать", "топтать", "хлестать", "плескать"]
+    
+
+
+
+
+
+class_6c_endings_trns = ["у","ешь","ем","ете","ет","ут","а"]
+class_6c_endings_refl = ["усь","ешься","емся","етесь","ется","утся","ась"]
+   
+
+for word in list:
+    for prefix in ["","по","при","с","рас","раз","о","об","за","под","от","из"]:
+        
+        if word == "искать" and prefix == "раз" or prefix == "от" or prefix == "под" or prefix == "об" or prefix == "с" or prefix == "из":
+            word = "ыскать"
+        
+        word = prefix + word    
+            
+        if word.endswith("зать") or word.endswith("заться"):
+            if word.endswith("ся"):
+                stem = word[:-6] + "ж"
+                for ending in class_6c_endings_refl:
+                    dictionary_forms[stem + ending] = word
+            else:
+                stem = word[:-4] + "ж"
+                for ending in class_6c_endings_trns:
+                    dictionary_forms[stem + ending] = word
+        
+        elif word.endswith("сать") or word.endswith("саться"):
+            if word.endswith("ся"):
+                stem = word[:-6] + "ш"
+                for ending in class_6c_endings_refl:
+                    dictionary_forms[stem + ending] = word
+            else:
+                stem = word[:-4] + "ш"
+                for ending in class_6c_endings_trns:
+                    dictionary_forms[stem + ending] = word
+            
+        elif word.endswith("скать") or word.endswith("скаться"):
+            if word.endswith("ся"):
+                stem = word[:-7] + "щ"
+                for ending in class_6c_endings_refl:
+                    dictionary_forms[stem + ending] = word
+            else:
+                stem = word[:-5] + "щ"
+                for ending in class_6c_endings_trns:
+                    dictionary_forms[stem + ending] = word
+        
+        elif word.endswith("пать") or word.endswith("паться"):
+            if word.endswith("ся"):
+                stem = word[:-6] + "пл"
+                for ending in class_6c_endings_refl:
+                    dictionary_forms[stem + ending] = word
+            else:
+                stem = word[:-4] + "пл"
+                for ending in class_6c_endings_trns:
+                    dictionary_forms[stem + ending] = word
+        
+        elif word.endswith("стать") or word.endswith("статься"):
+            if word.endswith("ся"):
+                stem = word[:-7] + "щ"
+                for ending in class_6c_endings_refl:
+                    dictionary_forms[stem + ending] = word
+            else:
+                stem = word[:-5] + "щ"
+                for ending in class_6c_endings_trns:
+                    dictionary_forms[stem + ending] = word
+        
+        elif word.endswith("тать") or word.endswith("таться"):
+            if word.endswith("ся"):
+                stem = word[:-6] + "ч"
+                for ending in class_6c_endings_refl:
+                    dictionary_forms[stem + ending] = word
+            else:
+                stem = word[:-4] + "ч"
+                for ending in class_6c_endings_trns:
+                    dictionary_forms[stem + ending] = word
+
+
 # долг's forms as долг, because долгий interferes
+
+for form in ["долг","долга","долги","долгов","долгам","долгами","долгу","долге"]:
+    dictionary_forms[form] = "долг"
 # компания as компания
 
 

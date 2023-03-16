@@ -28,10 +28,10 @@ ctx.verify_mode = ssl.CERT_NONE
 
 links = []
 
-stop_words = list()
+stop_words = set()
 stop_words_txt = open("stop_words.txt", 'r', encoding='UTF-8')
 for line in stop_words_txt:
-    stop_words.append(line.rstrip())
+    stop_words.add(line.rstrip())
 
 
 reference_dictionary = dict()

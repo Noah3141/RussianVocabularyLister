@@ -41,19 +41,24 @@ def RUBIT():
 def RUBIT_OUTPUT():
     if request.method == "POST":
         
-        input_text = request.form["text_field"]
+        input_text = request.form["text_field"]        
         output_breadth = request.form["Output_Breadth"]
         output_style = request.form["Output_Style"]
         
         output_dictionary, _ = rubit(input_text, output_breadth, output_style)
         
         updates, _ = update_dictionary("soft")
-        if len(updates) >= 5:
+        if len(updates) >= 3:
             thread = threading.Thread(target=update_dictionary,args=["hard"])
             thread.start()
 
-                                                    # In the format:   HTML_Jinja_Variable = Python_Variable
-        return render_template("RUBIT_Output.html", dictionary = output_dictionary, breadth = output_breadth, style = output_style, input_text=input_text)
+        missing_count = 0
+        for word in output_dictionary:
+            if output_dictionary[word] == "*":
+                missing_count += 1
+        missing_count = round(missing_count / 14)
+                                            # In the format:   HTML_Jinja_Variable = Python_Variable
+        return render_template("RUBIT_Output.html", dictionary = output_dictionary, breadth = output_breadth, style = output_style, input_text=input_text, missing = missing_count)
 
 
 @app.route("/pairs", methods=["GET"])
