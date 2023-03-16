@@ -13,3 +13,5 @@ Since the database is inevitably not large enough, the app notices when words ar
 
 Finally, the site includes an anki deck, and the contents of that deck explained and displayed in-page, which proposes an alternative model of Russian verbs as trees, more than pairs. It contains a hand-made list of over 200 verb trees, which, together with the database's tree output, amounts to a fully comprehensive list of Russian verbs.
 
+Excluding the verb pairs and verb trees, the app's data flow is as follows:
+![Data_Flow](https://user-images.githubusercontent.com/66894106/225705839-5dfa9ce5-0ba4-4802-bbe3-ee0c995a9820.png)
