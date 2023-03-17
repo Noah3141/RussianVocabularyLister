@@ -8,7 +8,7 @@
 
 import sys
 import mysql.connector
-from update_database_by_user_input import clean_database
+from database_cleaner import clean_database
 
 
 with open("backflow_to_database_text.txt", "r", encoding="UTF-8") as f:

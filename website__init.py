@@ -92,8 +92,9 @@ def FlagWord():
     # Update dictionary_forms through 'auto_update_dictionary_by_user_input.py'
     if value.startswith("Raw Vocabulary:"):
         
-        input_text = data['input_text']
-        input_text = re.sub("\n", " ", input_text)
+        input_text = data['input_text'] 
+        input_text = re.sub("\n", " ", input_text) # Remove newlines for when we file away the input txt in the log
+        
         with open("dictionary_forms.pkl", "rb") as f:
             dictionary_forms = pickle.load(f)
         
@@ -102,13 +103,13 @@ def FlagWord():
         
         flag_word_start = value.find(": ") + 2
         flag_word_end = value.find(" -")
-        problem_word_out = value[flag_word_start:flag_word_end]
+        problem_word_out = value[flag_word_start:flag_word_end] # Extract the problem word from the list-entry (e.g. "казить - 12")
         
-        if problem_word_out.endswith("**"):
+        if problem_word_out.endswith("**"): #
             log_time = datetime.now().strftime("%Y-%m-%d @ %H:%M:%S")
             with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
                 f.write(f"\n\n{log_time}:{problem_word_out} was flagged. Ignored.")
-                return '', 200 # Return an empty response with a 200 status code
+                return '', 405 # Return an empty response with a "Method not allowed" code
         
         
         
@@ -129,11 +130,19 @@ def FlagWord():
         with open("morfo_list.pkl", "wb") as f:
             pickle.dump(morfo, f)
     
-        updated_words, new_forms = update_dictionary("last")
-
+        thread = threading.Thread(target=update_dictionary,args=["last"])
+        thread.start()
         
+        log = f"Input text:    {input_text}\nFlagged entry: <{problem_word_out}> generated from '{problem_word_in}'"
+        # Save log of all this in user_flagged_update_log.txt
+        with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
+            f.write(log)
         
         pass
+    
+    
+    
+    
     
     # "Verb Pairs: поддерзить - поддерживать" 
     # Update verb list (will be undone when get_full_verbs.py is run)
@@ -166,13 +175,10 @@ def FlagWord():
     
     
     
-    log = f"Input text:    {input_text}\nFlagged entry: <{problem_word_out}> generated from '{problem_word_in}'\n"
-    # Save log of all this in user_flagged_update_log.txt
-    with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
-        f.write(log)
+ 
     
     
-    return '', 200 # Return an empty response with a 200 status code
+    return '', 201 # Return an empty response with a "Created" status code
 
     
     
@@ -197,7 +203,7 @@ def AnkiDeck():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='127.0.0.1', port='5500') # Add port 
+    app.run(debug=True, host='127.0.0.1', port='8080') # Add port 
     
 
 

@@ -13,16 +13,19 @@
 
 <div>
     <div class="headers">
+        
         <div class="button-row">
             <button id="wiki-button" title="Switch vocabulary links between Викисловарь and Wiktionary">Wiktionary Links:</button>
-            <div>RU</div>
+            <div id="lang">RU</div>
         </div>
-        <h2 id="list-header">Imperfective - Perfective<br>{{pair_list|length}} Pairs</h2>
+
+
+        <h2 id="list-header">Imperfective - Perfective</h2><h3>{{pair_list|length}} Pairs</h3>
         
     </div>
 
     {% for word in pair_list %}
-    <div class="list-row">
+    <div class="list-row" id="list-row-{{loop.index}}">
         <div id="list-entry" class="entry-{{loop.index}}">
             <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{word}}">{{word}}</a>
              - 
@@ -30,7 +33,7 @@
         </div>
         
         <div id="update" title="Flag entry for update">
-            <button type="submit" name="flag-word" value="Verb Pairs: {{word}} - {{pair_list[word]}}" id="update-entry-{{loop.index}}" class="update-entry">
+            <button name="flag-word" value="Verb Pairs: {{word}} - {{pair_list[word]}}" id="update-entry-{{loop.index}}" class="update-entry">
                 <i class="fa-lg fa-solid fa-flag" id="flag"></i>
             </button>
         </div>

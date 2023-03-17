@@ -37,7 +37,7 @@ nav div{
     transition: background-color .25s;
 }
 nav div:hover{
-background-color: var(--Color-Base);
+    background-color: var(--Color-Base);
 }
 nav a{
     text-decoration: none;
@@ -204,12 +204,24 @@ footer div a, footer div a:visited{
     color: var(--Color-Base);
     text-decoration: none;
 }
+.link{
+    color: var(--Color-Base);
+}
+.link:visited{
+        color: var(--Element-Default);
+        text-decoration: none;
+
+}
 .list-row{
     font-size: 25px;
-    margin: 0px 15px 0px 15px;
+    margin: 0px 30px 0px 30px;
     padding-top: 10px;
     padding-bottom: 10px;
+    position: relative;
     border-bottom: 2px solid var(--Dark-Outline);
+    transition: all .25s;
+    z-index: 0;
+
 
 }
 #list-header{
@@ -218,6 +230,10 @@ footer div a, footer div a:visited{
     margin-bottom: 15px;
 
 }
+
+/* Add Floating Buttons */
+
+
 #wiki-button:hover{
     background-color: var(--Color-Base);
 }
@@ -225,8 +241,19 @@ footer div a, footer div a:visited{
     display: flex;
     flex-direction: row;
     position: fixed;
-    right: 75px;
-
+    right: 130px;
+    z-index: 5;
+    
+}
+#wiki-row{
+    top: 205px;
+}
+#toggle-row{
+    top: 245px;
+}
+h3{
+    margin-left: 30px;
+    margin-bottom: 20px;
 }
 .button-row div{
     background: var(--Element-Default);
@@ -237,6 +264,7 @@ footer div a, footer div a:visited{
     margin-bottom:15px;
     border-left: .5px solid var(--Dark-Outline);
     box-shadow: 2px 2px rgb(15, 15, 15);
+    font-size: 1rem;
 }
 #wiki-button{
     background-color: var(--Element-Default);
@@ -245,7 +273,7 @@ footer div a, footer div a:visited{
     color: var(--Text-Color);
     outline: none;
     border: 2px solid var(--Dark-Outline);
-    width: 140px;
+    width: 125px;
     border-radius: 20px 0px 0px 20px;
     transition: background-color .25s;
     margin-left: 30px;
@@ -253,18 +281,83 @@ footer div a, footer div a:visited{
     border-right: .5px solid var(--Dark-Outline);
     box-shadow: 2px 2px rgb(15, 15, 15);
 }
+#tog, #lang{
+    width: 25px;
+}
+
+#toggle-button:hover{
+    background-color: var(--Color-Base);
+}
+
+#toggle-button{
+    background-color: var(--Element-Default);
+    padding: 4px 8px;
+    cursor: pointer;
+    color: var(--Text-Color);
+    outline: none;
+    border: 2px solid var(--Dark-Outline);
+    width: 125px;
+    border-radius: 20px 0px 0px 20px;
+    transition: background-color .25s;
+    margin-left: 30px;
+    margin-bottom: 15px;
+    border-right: .5px solid var(--Dark-Outline);
+    box-shadow: 2px 2px rgb(15, 15, 15);
+}
+/* End Floating Buttons */
+
 
 #output-readout{
     margin-left: 30px;
     margin-bottom: 30px;
 }
-.TreeDiagram{
+.image-pair{
+    display: flex;
+}
+.TreeDiagram-right{
     
+    width: 600px;
+    height: auto;
+    margin: 15px;
+    border: 3px solid rgb(5, 5, 5);
+}
+.TreeDiagram-left{
+    
+    width: 600px;
+    height: auto;
+    margin: 15px;
+    border: 3px solid rgb(5, 5, 5);
+
+}
+.prefix-image{
+    
+    max-width: 300px;
+    height: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: 3px solid rgb(5, 5, 5);
+    float: right;
+    right: 30px;
+}
+.text_adjacent{
+    float:left;
+}
+.semantic-map-1{
+    
+    width: 800px;
+    height: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: 3px solid rgb(5, 5, 5);
+}
+.semantic-map-2{
+
     width: 600px;
     height: auto;
     margin-top: 0px;
     margin-bottom: 0px;
-    border: 3px solid rgb(5, 5, 5)
+    border: 3px solid rgb(5, 5, 5);
+
 }
 .download-btn{
     background-color: var(--Element-Default);
@@ -293,8 +386,8 @@ footer div a, footer div a:visited{
 #update{
     color: var(--Element-Default);
     display: inline;
-    position: relative;
-    float: right;
+    position: absolute;
+    right: 30px;
     transition: background-color .25s;
     width: 30px;
     height: 30px;
@@ -325,4 +418,6 @@ footer div a, footer div a:visited{
     color: var(--Color-Base);
 
 }
-
+.page{
+    padding: 40px;
+}

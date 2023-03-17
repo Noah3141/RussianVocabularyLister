@@ -139,11 +139,7 @@ def update_dictionary(setting: str):
         pass
     print("New words added to key.")
     
-    
-
-
-    
-    
+        
     # Save all our work
 
         
@@ -158,7 +154,7 @@ def update_dictionary(setting: str):
         f.write(f"]\nWith {len_new_forms} dict forms: [")
         for item in new_forms:
             f.write(item + "   ")
-        f.write("]\n")
+        f.write("]")
 
     for word in new_forms:
         with open("backflow_to_database_text.txt", "a", encoding="UTF-8") as f:

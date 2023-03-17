@@ -74,13 +74,23 @@ book_page_links = []
 # for i in range(1 , 239):
 #     book_page_links.append(link + "1099/p." + str(i) + "/index.html")
 
+all_books = {"http://loveread.ec/read_book.php?id=1352&p":101,
+             "http://loveread.ec/read_book.php?id=1552&p=":110,
+             "": ,
+             "": ,
+             "": ,
+             "": ,
+             "": ,
+             "": ,
+             "": ,
+             "":    
+                 }
 
-
-link = "http://loveread.ec/read_book.php?id=104731&p="
 #(["p"], class_="MsoNormal")  << Insert this  at the "body_paras = soup.find_all" below
 
-for i in range (1, 107):              # Check the final page number, and insert here
-    book_page_links.append(link + str(i))
+for link in all_books:    
+    for i in range (1, all_books[link]):              # Check the final page number, and insert here
+        book_page_links.append(link + str(i))
 
 
 
@@ -130,6 +140,8 @@ for link in book_page_links:
 # Into the console. I generally had 4 or 5 consoles running from that
 # point, at the same time.
 
+
+
      
 conn = mysql.connector.connect(
     host = "localhost",
@@ -139,15 +151,36 @@ conn = mysql.connector.connect(
 
 cursor = conn.cursor()
 
+
+cursor.execute("SELECT word FROM words")
+words = cursor.fetchall()
+
+
+stop_words = set()
+stop_words_txt = open("stop_words.txt", 'r', encoding='UTF-8')
+for line in stop_words_txt:
+    stop_words.add(line.rstrip())
+
+    
+for row in words:
+    word = row[0]
+    if word not in stop_words:
+        word_list.append(word)
+
+word_list_set = set(word_list)
+
+
+
 for word in reference_dictionary:
     
     #print("Next word: ", word)
-    cursor.execute(f"SELECT 1 FROM words WHERE word = '{word}'")
-    find = cursor.fetchall()
-    if len(find) == 0:
+    if word not in word_list_set:
         print(word, " not found in database. Adding...")
         cursor.execute(f"INSERT INTO words (word, frequency) VALUES ('{word}', {reference_dictionary[word]});")
         conn.commit()
     else: 
         continue
     
+    
+cursor.close()
+conn.close() 

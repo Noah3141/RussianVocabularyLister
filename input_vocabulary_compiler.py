@@ -73,12 +73,12 @@ def rubit(input_text: str, breadth: str, style: str) -> dict:
         morfo = list()
          
     
-    for word in input_count:
+    for word in input_count: # For word inputted, try to convert it to dict form
         try: 
             dict_form = dictionary_forms[word]
             dictionary_input_words[dict_form] = dictionary_input_words.get(dict_form, 0) + input_count.get(word, 0)
         except:
-            dictionary_input_words[word] = "*"
+            dictionary_input_words[word] = "*" # If you can't, send it to morfo and display an asterisk on the webpage
             if word not in morfo:
                 morfo.append(word)
         

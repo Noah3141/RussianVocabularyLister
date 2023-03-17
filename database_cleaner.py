@@ -213,39 +213,30 @@ def clean_database():
     consonants = ["ь","б", "в", "г", "д", "ж", "з", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ"]
 ###############################################################################
 
-
-
     import mysql.connector
-    
-    
     conn = mysql.connector.connect(
         host = "localhost",
         user = "root",
         password = "nnssoteck3434###",
         database = "Database_001")
-    
     cursor = conn.cursor()
     print("Connected to database!")
-    
-    
     
     
     print("Inputting data from database...")
     cursor.execute("SELECT word FROM words")
     words = cursor.fetchall()
-    
-        
-    word_list = []
+    word_list = list()  # List containing all the database's words
     for row in words:
         word = row[0]
         word_list.append(word)
     
-    clear_list = []
+    clear_list = list() # List culled from database's words, that will be deleted from it
 
 ###############################################################################
-    
+    print("Checking database words against blocks...")
     for word in word_list:
-        if len(word) < 3:
+        if len(word) <= 2:         # Remove word 2 letters or shorter
             clear_list.append(word)
     
     for word in word_list:
@@ -257,7 +248,7 @@ def clean_database():
     #         clear_list.append(word)
     
     for word in word_list:
-        if word.startswith("ы"):
+        if word.startswith("ы"):           # Russian words cannot start with ы
             clear_list.append(word)
     
     
@@ -280,24 +271,25 @@ def clean_database():
     
     # This does remove technically Russian words, but essentially only ones with
     # Alternative spellings. Pretty much all words caught are related to Kyrgyz.
+    
     for word in word_list: # Russian spelling rule 1
         if "кы" in word or "шы" in word or "гы" in word or "щы" in word or "хы" in word or "жы" in word or "чы" in word:
             clear_list.append(word)
-     
-    
-           
     for word in word_list: # Russian spelling rule 3
         if "кя" in word or "шя" in word or "гя" in word or "щя" in word or "хя" in word or "жя" in word or "чя" in word or "ця" in word:
             clear_list.append(word)
-    
     for word in word_list: # Russian spelling rule 4
         if "кю" in word or "шю" in word or "гю" in word or "щю" in word or "хю" in word or "жю" in word or "чю" in word or "цю" in word:
             clear_list.append(word)
-            
-    mistaken_o_words = ["человеко","народо"]
+
+    mistaken_o_words = ["человеко","народо"] # Vocatives? Anyway, breaks neuter noun triangulation
     for word in mistaken_o_words:
         clear_list.append(word)
-    # Double vowels, esp double a          
+    
+    # Double vowels, esp double a 
+    for word in word_list:
+        if ("ааа" in word) or ("ууу" in word) or ("эээ" in word) or ("ыы" in word) or ("ооо" in word):
+            clear_list.append(word)
         
 
 
@@ -307,13 +299,14 @@ def clean_database():
 # If clear list only contains words to remove, un-comment the following block,
 # And run script.
 
-
+    print("Deleting clear_list words from database:")
 
     for word in clear_list:
         cursor.execute(f"DELETE FROM words WHERE word = '{word}';")
         conn.commit()
         print("Deleted word ", word, " from database.")
 
-
+    length = len(clear_list)
+    print(f"Cleared datbase of {length} words.")
     cursor.close()
     conn.close() 

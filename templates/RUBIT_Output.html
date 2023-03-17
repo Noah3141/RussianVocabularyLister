@@ -8,27 +8,34 @@
 
 {% block content %}
 
+<div class="button-row" id="wiki-row">
+    <button id="wiki-button" title="Switch vocabulary links between Викисловарь and Wiktionary">Wiktionary Links:</button>
+    <div id="lang">RU</div>
+</div>
+
+<div class="button-row" id="toggle-row">
+    <button id="toggle-button" title="Toggle frequency count">Frequencies:</button>
+    <div id="tog">ON</div>
+</div>
+
+
+
 <h1>Vocabulary List</h1>
         <img src="/static/images/Underline-Stroke.png">
 
 <div>
     <div class="headers">
-        <div class="button-row">
-            <button id="wiki-button" title="Switch vocabulary links between Викисловарь and Wiktionary">Wiktionary Links:</button>
-            <div>RU</div>
-        </div>
         <h2 id="list-header">Word - Frequency in Study material</h2>
-            <h3 id="output-readout">{{dictionary|length}} Words (Breadth: {{breadth}})
-        
+            <h3 id="output-readout">{{dictionary|length}} Words (Breadth: {{breadth}})</h3>
     </div>
     <!--This will need to be broken into if blocks that test for if {{style}}=="Verb Pairs" and then list out a different entry system, and value inside the button-->
     {% for word in dictionary %}
     
-                <div class="list-row">
+                <div class="list-row" id="list-row-{{loop.index}}">
                     
                     <div id="list-entry" class="entry-{{loop.index}}">
                         <a class="wiki-link-RU" target="_blank" href="https://ru.wiktionary.org/wiki/{{word}}">
-                            {{word}}</a> - {{dictionary[word]}}   
+                            {{word}}</a><span class="freq"> - {{dictionary[word]}}</span>
                     </div>
                 
                     <div id="update" title="Flag entry for update">
@@ -36,6 +43,7 @@
                             <i class="fa-lg fa-solid fa-flag" id="flag"></i>
                         </button>
                     </div>
+                
     </div>
 
     {% endfor %}
