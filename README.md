@@ -11,7 +11,7 @@ Together, these fill a database which is used to triangulate lemma forms of a gi
 
 Since the database is inevitably not large enough, the app notices when words are inputted by the user, which aren't in the key. It then searches these words on *kak-pishetsya.com*, and scrubs the page for the dictionary form. The web app learns over time based on user inputted text, and can have entries explicity flagged for this kind of update when the Python lemmatization script offers a faulty output.
 
-Finally, the site includes an anki deck, and the contents of that deck explained and displayed in-page, which proposes an alternative model of Russian verbs as trees, more than pairs. It contains a hand-made list of over 200 verb trees, which, together with the database's tree output, amounts to a fully comprehensive list of Russian verbs.
+Finally, the site includes an anki deck, and the contents of that deck explained and displayed in-page, which proposes an alternative model of Russian verbs as trees, more than pairs. It contains a hand-made list of over 200 verb trees, which, together with the database's tree output, amounts to a fully comprehensive list of Russian verbs for the purposes of second language acquisition.
 
 Excluding the verb pairs and verb trees, the app's data flow is as follows:
 ![Data_Flow](https://user-images.githubusercontent.com/66894106/225706490-6824d0be-be70-47b2-ba40-0ffd2fc05cb1.png)
