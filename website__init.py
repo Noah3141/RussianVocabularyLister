@@ -81,6 +81,12 @@ def TreesList():
 def FlagWord():
     data = request.json
     value = data['value']
+    
+    while True: # This allows us to double-dutch into the update at exactly the right moment not to trip over unpickling error from overlapping open-&-save
+        with open("updator_status.txt", "r", encoding="UTF-8") as f:
+            status = f.read()
+        if status == "Open": break
+        else: time.sleep(0.5)
 
     # The data sent from each of the three pages looks like the following:
 
@@ -130,10 +136,10 @@ def FlagWord():
         with open("morfo_list.pkl", "wb") as f:
             pickle.dump(morfo, f)
     
-        thread = threading.Thread(target=update_dictionary,args=["last"])
-        thread.start()
+        thread_2 = threading.Thread(target=update_dictionary,args=["last"])
+        thread_2.start()
         
-        log = f"Input text:    {input_text}\nFlagged entry: <{problem_word_out}> generated from '{problem_word_in}'"
+        log = f"\n\nInput text:    {input_text}\nFlagged entry: <{problem_word_out}> generated from '{problem_word_in}'"
         # Save log of all this in user_flagged_update_log.txt
         with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
             f.write(log)
@@ -203,7 +209,7 @@ def AnkiDeck():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='127.0.0.1', port='8080') # Add port 
+    app.run(debug=False, host='127.0.0.1', port='5000') # Add port 
     
 
 

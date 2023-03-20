@@ -3,6 +3,7 @@
 
 def clean_database():
 
+    print("** Beginning database cleaning process **")
 ###############################################################################
     masc_hard_endings_all =        ["ы", "а", "у", "е", "ом", "ах", "ами", "ов", "ам","и","ей", ""]
     masc_hard_endings_default =    ["ы", "а", "у", "е", "ом", "ах", "ами", "ов", "ам", ""]    
@@ -307,6 +308,6 @@ def clean_database():
         print("Deleted word ", word, " from database.")
 
     length = len(clear_list)
-    print(f"Cleared datbase of {length} words.")
+    print(f"Cleared database of {length} words.")
     cursor.close()
     conn.close() 

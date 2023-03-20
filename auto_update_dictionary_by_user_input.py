@@ -25,8 +25,12 @@ import time
 # dicitonary_forms pickle, and the morfo pickle is cleared of words.
 
 def update_dictionary(setting: str):
+   
+
+
     
     log_time = datetime.datetime.now().strftime("%Y-%m-%d @ %H:%M:%S")
+
     
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
@@ -97,8 +101,12 @@ def update_dictionary(setting: str):
     # Going through the words in the morfo as it was at the start, minus the **
     for word in morfo[start:end]:
         
+        
         if delayer: # This is to avoid pinging their poor site 500 times relentlessly, spreading out the load over time
             time.sleep(2)
+        
+        with open("updator_status.txt", "w", encoding="UTF-8") as f:
+            f.write(f"Running '{setting}' call on word {word}")
         
         # We need a within loop instance of morfo so that the function doesn't constantly overlap itself and overwrite previous fixes
         with open("morfo_list.pkl", "rb") as f:
@@ -136,6 +144,11 @@ def update_dictionary(setting: str):
             pickle.dump(morfo_iter, f)
         with open("dictionary_forms.pkl", "wb") as f:
             pickle.dump(dictionary_forms, f)
+        
+        with open("updator_status.txt", "w", encoding="UTF-8") as f:
+            f.write("Open")
+        
+        
         pass
     print("New words added to key.")
     

@@ -11,20 +11,21 @@
 # Define test set
 
 def Test_Output(dictionary: dict):
-    print(        "Test        Input       Dictionary      Should Be")
+    print(        "Test        Input    Dictionary   Should Be")
     test_input = ["языки", "языков","стреляют","кошку","кошек","разговаривает","говорит", "сказал","хороших", "последнем"]
-    test_output = [dictionary[word] for word in test_input]
+    test_output = [dictionary.get(word, "-") for word in test_input]
     
     test_key =   ["язык",   "язык","стрелять","кошка", "кошка","разговаривать","говорить","сказать","хороший", "последний"]
 
-    for idx in len(test_input):
+    for idx in range(0,len(test_input)):
         word = test_input[idx]
-        test_output = dictionary[word]
+        test_output = dictionary.get(word,"-")
         if test_output == test_key[idx]:
-            print("Passed: ", word, test_output, test_key[idx])
+            print(f"Passed:     {word}   {test_output}   {test_key[idx]}")
         else:
-            print("FAILED: ", word, test_output, test_key[idx])
+            print(f"FAILED:     {word}   {test_output}   {test_key[idx]}")
         
+
 
 ###############################################################################
 
@@ -229,8 +230,7 @@ reflexive_participle_endings = ["ийся",
 ой_stems = set(["прост", "люб", "остальн", "друг", "ин", "чуж","втор", "густ","годов", "трудов",
             "языков","адов", "путев", "сед", "полов","смыслов", "седьм", "худ"])
 
-
-
+енний_stems = set(["внутр","утр","ос","вес","искр","неискр","ранневес","предутр"])
 
 
 
@@ -248,7 +248,7 @@ def russ_match(word: str, ending_list: set) -> int:
     #match = 0
     #if any(word.endswith(ending) for ending in ending_list):
     match = 1
-    global stem
+    global stem # If word ends in NONE of endings in ending list, it is never assigned a stem and the previous call is used [!!!]
     for ending in ending_list:
         if word.endswith(ending):
             stem = word[:-len(ending)]
@@ -280,7 +280,7 @@ for row in words:
 
 try:
     with open("dictionary_forms.pkl", "rb") as f: # Bring up the current state of pickle
-        dictionary_forms = pickle.load(f)
+        dictionary_forms = pickle.load(f) # BEWARE: Alterations to this script will not remove past flawed entries unless it contains a catch for their words!
 except: 
     dictionary_forms = dict() # or make it 
 
@@ -377,6 +377,13 @@ for word in word_list:
                     dictionary_forms[word] = dict_form
                     print("\033[0;32mой adjective ", word, dict_form, "\033[0m\n\n======================================")
                     continue
+                
+                elif stem.endswith("енн") and stem not in енний_stems:
+                    dict_form = stem + "ый"
+                    for ending in hard_adjective_endings:
+                        dictionary_forms[(stem + ending)] = dict_form
+                        print("\033[0;32mенный adjective ", stem + ending, dict_form, "\033[0m\n\n======================================")
+                        continue
 
                 elif stem[-1] in spelling_rule_1_letters: # Stem possibility 1
                     dict_form = stem + "ий"
@@ -422,8 +429,6 @@ for word in word_list:
                         continue
 
 
-                    
-                
 
     
     
@@ -577,7 +582,7 @@ for word in word_list:
                 
     if any(word.endswith(ending) for ending in сти_trns_endings):
         print("\n\n          сти_trns_endings")
-        if russ_match(word, сти_trns_endings) > 4:
+        if russ_match(word, сти_trns_endings) > 5:
             if stem[-1] in сти_infixes:
                 stem = stem[:-1]
             dict_form = stem + "сти"
@@ -587,7 +592,7 @@ for word in word_list:
     
     if any(word.endswith(ending) for ending in сти_refl_endings):
         print("\n\n          сти_refl_endings")
-        if russ_match(word, сти_refl_endings) > 4:
+        if russ_match(word, сти_refl_endings) > 5:
             if stem[-1] in сти_infixes:
                 stem = stem[:-1]
             dict_form = stem + "стись"
@@ -646,7 +651,7 @@ for word in word_list:
 # Fleeting vowels mainly captured by words ending in к or ц (before ending)
 fleeting_overrides = ["бугор"]
 fleeting_overrides_к = ["крючок", "новичок","подшерсток","рожок","бугорок"]
-fleeting_overrides_ц = ["танец","американец","резец"]
+fleeting_overrides_ц = ["танец","американец","резец","конец"]
 
 for word in fleeting_overrides:
     dictionary_forms[word] = word
@@ -776,6 +781,8 @@ for form in ["долг","долга","долги","долгов","долгам",
     dictionary_forms[form] = "долг"
 # компания as компания
 
+
+# уметь forms need to overwrite less important умести's forms
 
 
 

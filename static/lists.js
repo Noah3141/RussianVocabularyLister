@@ -59,21 +59,18 @@ for (let i = 1; i < list.length; i++) {
 
       // Get the value of the button (which is the data we want to send)
       const data = updateButton.value;
-
-      try {
-        const input_tag = document.getElementById("input_text");
-        const input_text = input_tag.value; 
-      } catch {
-        input_text = "N/A"
-      }
       
+      const input_tag = document.getElementById("input_text")
+      const input_text = input_tag.value
+
+
   
       // Send an AJAX request to the server
       fetch('/flag-word', {
         method: 'POST',
-        body: JSON.stringify({ value: data, input_text: input_text }),
+        body: JSON.stringify({ value: data, input_text: input_text}),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json;charset=utf-8'
         }
       })
       .then(response => {

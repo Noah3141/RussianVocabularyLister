@@ -14,30 +14,49 @@ from database_cleaner import clean_database
 with open("backflow_to_database_text.txt", "r", encoding="UTF-8") as f:
     user_text = f.readlines()
 
-words = []
+backflow_words = []
 for line in user_text[1:]:
     line = line.strip()
     if line.endswith("**"):
         continue
-    words.append(line)
+    backflow_words.append(line)
 
-if len(words) == 0:
+if len(backflow_words) == 0:
     sys.exit()
-  
+ 
+backflow_words = set(backflow_words) 
+backflow_words = list(backflow_words)
+    
+ 
 conn = mysql.connector.connect(
     host = "localhost",
     user = "root",
     password = "nnssoteck3434###",
     database = "Database_001")
-
 cursor = conn.cursor()
 
-for word in words:
+cursor.execute("SELECT word FROM words")
+db_words = cursor.fetchall()
+
+
+stop_words = set()
+stop_words_txt = open("stop_words.txt", 'r', encoding='UTF-8')
+for line in stop_words_txt:
+    stop_words.add(line.rstrip())
+
+db_list = list()
+for row in db_words:
+    word = row[0]
+    if word not in stop_words:
+        db_list.append(word)
+
+db_list_set = set(db_list)
+
+
+for word in backflow_words:
     
     print("Next word: ", word)
-    cursor.execute(f"SELECT 1 FROM words WHERE word = '{word}'")
-    find = cursor.fetchall()
-    if len(find) == 0:
+    if word not in db_list_set:
         print(word, " not found in database. Adding...")
         cursor.execute(f"INSERT INTO words (word) VALUES ('{word}');")
         conn.commit()
