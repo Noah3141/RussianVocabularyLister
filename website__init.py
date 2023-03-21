@@ -83,7 +83,7 @@ def FlagWord():
     value = data['value']
     
     while True: # This allows us to double-dutch into the update at exactly the right moment not to trip over unpickling error from overlapping open-&-save
-        with open("updator_status.txt", "r", encoding="UTF-8") as f:
+        with open("updater_status.txt", "r", encoding="UTF-8") as f:
             status = f.read()
         if status == "Open": break
         else: time.sleep(0.5)
@@ -187,15 +187,6 @@ def FlagWord():
     return '', 201 # Return an empty response with a "Created" status code
 
     
-    
-    
-    
-    
-    
-
-@app.route("/treeModel", methods=["GET"])  
-def TreeModel():
-    return render_template("treeModel.html")
 
 
 @app.route("/ankiDeck", methods=["GET"])  

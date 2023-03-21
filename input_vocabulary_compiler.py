@@ -108,6 +108,12 @@ def rubit(input_text: str, breadth: str, style: str) -> dict:
            if dictionary_input_words[word] <= (ave_count - 1): # Filter certain threshold of words
                del_list.append(word)
                pass
+           
+    if breadth == "Rare Words":
+       for word in dictionary_input_words:
+           if dictionary_input_words[word] >= (ave_count): # Filter certain threshold of words
+               del_list.append(word)
+               pass
                
     for word in del_list:
         del dictionary_input_words[word]

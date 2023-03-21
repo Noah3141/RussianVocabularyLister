@@ -38,12 +38,13 @@ cursor = conn.cursor()
 cursor.execute("SELECT word FROM words")
 db_words = cursor.fetchall()
 
-
+# Prepare stop words filter
 stop_words = set()
 stop_words_txt = open("stop_words.txt", 'r', encoding='UTF-8')
 for line in stop_words_txt:
     stop_words.add(line.rstrip())
 
+# Make the list of database words from the cursor
 db_list = list()
 for row in db_words:
     word = row[0]
@@ -57,7 +58,7 @@ for word in backflow_words:
     
     print("Next word: ", word)
     if word not in db_list_set:
-        print(word, " not found in database. Adding...")
+        print("          not found in database. Adding...")
         cursor.execute(f"INSERT INTO words (word) VALUES ('{word}');")
         conn.commit()
     else: 

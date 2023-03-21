@@ -74,17 +74,16 @@ book_page_links = []
 # for i in range(1 , 239):
 #     book_page_links.append(link + "1099/p." + str(i) + "/index.html")
 
-all_books = {"http://loveread.ec/read_book.php?id=1352&p":101,
-             "http://loveread.ec/read_book.php?id=1552&p=":110,
-             "": ,
-             "": ,
-             "": ,
-             "": ,
-             "": ,
-             "": ,
-             "": ,
-             "":    
-                 }
+# all_books = {"http://loveread.ec/read_book.php?id=1352&p=" : 101,
+#              "http://loveread.ec/read_book.php?id=1552&p=" : 110,
+#              "" : ,
+#              "" : ,
+#              "" : ,
+#              "" : ,
+#              "" : ,
+#              "" : ,
+#              "" : ,
+#              "" :  }
 
 #(["p"], class_="MsoNormal")  << Insert this  at the "body_paras = soup.find_all" below
 

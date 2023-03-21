@@ -221,7 +221,7 @@ def clean_database():
         password = "nnssoteck3434###",
         database = "Database_001")
     cursor = conn.cursor()
-    print("Connected to database!")
+    print("\nConnected to database!")
     
     
     print("Inputting data from database...")
