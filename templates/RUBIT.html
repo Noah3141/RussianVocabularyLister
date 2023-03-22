@@ -9,25 +9,30 @@
 
 <h1>Russian Vocabulary List Maker</h1>
         <img src="/static/images/Underline-Stroke.png">
-        <p>The most important part of learning language is not that you use the best methods for learning. It is that you use methods that 
-            can be sustained. Varying what tools you use goes a long way towards longevity in learning. While vocabulary lists in and of themselves
-            are not incredible tools for language input, they can be very helpful for augmenting the usefulness of a text. Beginners and more advanced
-            learners both can benefit from easily being able to quickly create vocabulary lists for unstructured, uncurated, naturally
-            produced content.
-        </p>
         <p>
-            This tool can be used to create vocabulary lists from YouTube transcripts of podcasts or speeches, book chapters, articles — any
-            Russian text.
+            This tool can be used to create vocabulary lists from Russian text. Try YouTube transcripts of podcasts or speeches, book chapters, or articles.
         </p>
         <p>
             Input your study material text and choose settings for what kind of list output you want. 
-            You can set the "breadth" to include the "Full List" (all words), "Broad List" (words that occur more than once)
-            and "Top Words" (words that occur [right now based on more than 4 times but it should be based on list size]). 
-            "Raw Vocabulary" will return all words, while "Verb Pairs" will return the aspectual pairs in your text, 
+            You can set the "breadth" to include:</p>
+            <ul>
+                <li>
+                    "Full List" (all words)
+                </li>
+                <li>
+                    "Broad List" (exclude the least common words)
+                </li>
+                <li>
+                    "Top Words" (only the most common words)
+                </li>
+                <li>
+                    "Bottom Words" (only the least common words)
+                </li>
+            </ul>,  . 
+            <p>"Raw Vocabulary" will return all words, while "Verb Pairs" will return the aspectual pairs in your text, 
             and "Verb Trees" will return verbs in the tree model, in the simplest form: 
-            Root Forms (-Branch Forms)
+            Root Forms (-Branch Forms)</p>
 
-        </p>
         <form class="Entry-Group" action="/rubit/output" method="post">
             <label for="text-field">Enter your study material here:</label><br>
             <textarea name="text_field" id="text-field"></textarea><br>
