@@ -1,0 +1,402 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+  background: var(--Background-Default);
+  color: var(--Text-Color);
+  width: 100%;
+  position: relative;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+#content-wrap {
+  padding-bottom: 8rem; /* Footer height */
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  padding: 20px;
+  border-bottom: 3px solid var(--Dark-Outline);
+  background: var(--Background-Fronted);
+}
+nav div {
+  cursor: pointer;
+  background-color: var(--Element-Default);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 2px solid var(--Dark-Outline);
+  transition: background-color 0.25s;
+}
+nav div:hover {
+  background-color: var(--Color-Base);
+}
+nav a {
+  text-decoration: none;
+  color: var(--Text-Color);
+}
+
+h1 {
+  text-align: center;
+  margin: 15px;
+  margin-bottom: 2rem;
+}
+img {
+  height: 20px;
+  display: block;
+  width: 300px;
+  margin: auto;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+p {
+  margin: 2px 30px 1rem 30px;
+}
+form.Entry-Group {
+  margin-top: 60px;
+  padding: 0px 35px 0px 20px;
+}
+
+label {
+  margin: 0px 30px;
+  margin-top: 60px;
+}
+
+#text-field {
+  width: 100%;
+  height: 10rem;
+  border: 2px solid var(--Dark-Outline);
+  border-radius: 8px;
+  margin: 5px 0px;
+  background-color: var(--Element-Default);
+  color: var(--Text-Color);
+  resize: vertical;
+  padding: 6px;
+  scroll-behavior: smooth;
+}
+/* scrollbar width */
+::-webkit-scrollbar {
+  width: 0.6rem;
+  border-radius: 0.5px;
+  height: 95%;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background: rgb(42, 42, 42);
+  margin: 5px 0px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: var(--Element-Default);
+  border: 0.5px solid var(--Dark-Outline);
+}
+
+#text-field:focus {
+  outline: 2px solid var(--Color-Base);
+  outline-offset: 1px;
+  border: 2px solid var(--Dark-Outline);
+}
+
+/* BUTTON LINE SECTION */
+
+.button-line {
+  display: flex;
+}
+
+/* Tries to apply to all three buttons */
+.btn {
+  background-color: var(--Element-Default);
+  padding: 4px 8px;
+  cursor: pointer;
+  color: var(--Text-Color);
+  outline: none;
+  border-bottom: 2px solid var(--Dark-Outline);
+  border-top: 2px solid var(--Dark-Outline);
+  width: 7rem;
+  transition: background-color 0.25s;
+}
+
+/* Applies to the SUBMIT button */
+button#Create_List {
+  border-radius: 16px 0px 0px 16px;
+  border: 2px solid var(--Dark-Outline);
+  border-left: 2px solid var(--Dark-Outline);
+  border-right: 1px solid var(--Dark-Outline);
+}
+/* Applies to the Righthand button */
+#Output_Style {
+  border-radius: 0px 16px 16px 0px;
+  background-color: var(--Element-Default);
+  width: 9.2rem;
+  border-right: 2px solid var(--Dark-Outline);
+  border-left: 1px solid var(--Dark-Outline);
+}
+/* Applies to the Middle button */
+#Output_Breadth {
+  border-right: none;
+  border-left: none;
+}
+
+/* Hover over orange effect for EACH BUTTON CHRIST */
+button.btn:hover {
+  background-color: var(--Color-Base);
+}
+select.btn#Output_Breadth:hover {
+  background-color: var(--Color-Base);
+}
+select.btn#Output_Style:hover {
+  background-color: var(--Color-Base);
+}
+option {
+  background-color: var(--Background-Default);
+  color: var(--Text-Color);
+}
+#Output_Style::after {
+  content: "Top Words: Only from 10% to 30% Broad List: Only from 5% to 80% Full List: All words from input text";
+}
+
+footer div {
+  background: linear-gradient(vertical, rgb(40, 40, 40), red);
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 40px;
+  border-top: 3px solid var(--Dark-Outline);
+  padding: 20px 30px 20px 30px;
+  text-align: right;
+  height: 20px;
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  line-height: 1.5rem;
+}
+ul {
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+footer div a,
+footer div a:visited {
+  text-decoration: underline;
+  color: var(--Text-Color);
+}
+.list-row a {
+  color: var(--Text-Color);
+  text-decoration: none;
+}
+.list-row a:visited {
+  color: var(--Color-Base);
+  text-decoration: none;
+}
+.link {
+  color: var(--Color-Base);
+}
+.link:visited {
+  color: var(--Element-Default);
+  text-decoration: none;
+}
+.list-row {
+  font-size: 25px;
+  margin: 0px 30px 0px 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  border-bottom: 2px solid var(--Dark-Outline);
+  transition: all 0.25s;
+  z-index: 0;
+}
+#list-header {
+  margin-top: 15px;
+  margin-left: 30px;
+  margin-bottom: 15px;
+}
+
+/* Add Floating Buttons */
+
+#wiki-button:hover {
+  background-color: var(--Color-Base);
+}
+.button-row {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  right: 130px;
+  z-index: 5;
+}
+#wiki-row {
+  top: 205px;
+}
+#toggle-row {
+  top: 245px;
+}
+h3 {
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+.button-row div {
+  background: var(--Element-Default);
+  border: 2px solid var(--Dark-Outline);
+  border-radius: 0px 20px 20px 0px;
+  padding: 4px 8px;
+  outline: none;
+  margin-bottom: 15px;
+  border-left: 0.5px solid var(--Dark-Outline);
+  box-shadow: 2px 2px rgb(15, 15, 15);
+  font-size: 1rem;
+}
+#wiki-button {
+  background-color: var(--Element-Default);
+  padding: 4px 8px;
+  cursor: pointer;
+  color: var(--Text-Color);
+  outline: none;
+  border: 2px solid var(--Dark-Outline);
+  width: 125px;
+  border-radius: 20px 0px 0px 20px;
+  transition: background-color 0.25s;
+  margin-left: 30px;
+  margin-bottom: 15px;
+  border-right: 0.5px solid var(--Dark-Outline);
+  box-shadow: 2px 2px rgb(15, 15, 15);
+}
+#tog,
+#lang {
+  width: 25px;
+}
+
+#toggle-button:hover {
+  background-color: var(--Color-Base);
+}
+
+#toggle-button {
+  background-color: var(--Element-Default);
+  padding: 4px 8px;
+  cursor: pointer;
+  color: var(--Text-Color);
+  outline: none;
+  border: 2px solid var(--Dark-Outline);
+  width: 125px;
+  border-radius: 20px 0px 0px 20px;
+  transition: background-color 0.25s;
+  margin-left: 30px;
+  margin-bottom: 15px;
+  border-right: 0.5px solid var(--Dark-Outline);
+  box-shadow: 2px 2px rgb(15, 15, 15);
+}
+/* End Floating Buttons */
+
+#output-readout {
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+.image-pair {
+  display: flex;
+}
+.TreeDiagram-right {
+  width: 600px;
+  height: auto;
+  margin: 15px;
+  border: 3px solid rgb(5, 5, 5);
+}
+.TreeDiagram-left {
+  width: 600px;
+  height: auto;
+  margin: 15px;
+  border: 3px solid rgb(5, 5, 5);
+}
+.prefix-image {
+  max-width: 300px;
+  height: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border: 3px solid rgb(5, 5, 5);
+  float: right;
+  right: 30px;
+}
+.text_adjacent {
+  float: left;
+}
+.semantic-map-1 {
+  width: 800px;
+  height: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border: 3px solid rgb(5, 5, 5);
+}
+.semantic-map-2 {
+  width: 600px;
+  height: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border: 3px solid rgb(5, 5, 5);
+}
+.download-btn {
+  background-color: var(--Element-Default);
+  padding: 8px 12px;
+  cursor: pointer;
+  color: var(--Text-Color);
+  outline: none;
+  border: 2px solid var(--Dark-Outline);
+  width: 12rem;
+  transition: background-color 0.25s;
+  border-radius: 30px;
+  margin-left: 30px;
+}
+.download-btn:hover {
+  background-color: var(--Color-Base);
+}
+#asterisk-label {
+  margin: 35px;
+  position: relative;
+  bottom: 0px;
+}
+
+#list-entry {
+  display: inline;
+}
+#update {
+  color: var(--Element-Default);
+  display: inline;
+  position: absolute;
+  right: 30px;
+  transition: background-color 0.25s;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 2px solid var(--Dark-Outline);
+}
+.update-entry {
+  background: none;
+  padding: 0px;
+  border: none;
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  cursor: pointer;
+}
+#update:hover {
+  background-color: var(--Background-Fronted);
+}
+
+.fa-flag {
+  color: var(--Element-Default);
+  transition: all ease-in-out 0.25s;
+}
+
+#update:hover .fa-flag {
+  color: var(--Color-Base);
+}
+.page {
+  padding: 40px;
+}
