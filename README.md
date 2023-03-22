@@ -16,4 +16,5 @@ Finally, the site includes an anki deck, and the contents of that deck explained
 See wiki section for deployment instruction on an AWS EC2 Ubuntu server, using Nginx and Gunicorn.
 
 Excluding the verb pairs and verb trees, the app's data flow is as follows:
-![Data_Flow (1)](https://user-images.githubusercontent.com/66894106/226459257-86734978-6a81-4dee-81f8-c5f722eaf857.png)
+
+![Data_Flow (1)](https://user-images.githubusercontent.com/66894106/227043315-80e0e30d-bc85-4ac8-9a01-998083d5c3d3.png)
