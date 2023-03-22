@@ -109,7 +109,6 @@ python-slugify==5.0.2
 python-utils==3.3.3
 pytoolconfig==1.2.5
 pytz==2022.7
-pywin32==305.1
 pywin32-ctypes==0.2.0
 PyYAML==6.0
 pyzmq==23.2.0
