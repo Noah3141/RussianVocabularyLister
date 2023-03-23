@@ -40,6 +40,8 @@ nav div:hover {
 nav a {
   text-decoration: none;
   color: var(--Text-Color);
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 h1 {
@@ -55,6 +57,17 @@ img {
   margin-top: -20px;
   margin-bottom: 20px;
 }
+
+#logo {
+  height: 30px;
+  display: block;
+  width: auto;
+  margin: auto;
+  margin: 0px;
+  margin-left: 10px;
+  margin-right: -10px;
+}
+
 p {
   margin: 2px 30px 1rem 30px;
 }
@@ -147,7 +160,6 @@ button#Create_List {
   border-left: none;
 }
 
-/* Hover over orange effect for EACH BUTTON CHRIST */
 button.btn:hover {
   background-color: var(--Color-Base);
 }
@@ -161,12 +173,9 @@ option {
   background-color: var(--Background-Default);
   color: var(--Text-Color);
 }
-#Output_Style::after {
-  content: "Top Words: Only from 10% to 30% Broad List: Only from 5% to 80% Full List: All words from input text";
-}
 
 footer div {
-  background: linear-gradient(vertical, rgb(40, 40, 40), red);
+  background-color: var(--Background-Fronted);
   display: flex;
   flex-direction: row-reverse;
   gap: 40px;
@@ -179,6 +188,18 @@ footer div {
   right: 0;
   width: 100%;
   line-height: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+footer div img {
+  width: auto;
+  height: 40px;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  bottom: 10px;
+  left: 20px;
 }
 ul {
   margin-left: 30px;

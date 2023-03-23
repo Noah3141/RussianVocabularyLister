@@ -3,3 +3,11 @@ When a user manually labels a word as in need of update, special attention is gi
 by logging the original here, along with the updated form given by pinging the Russian dictioanary website 
 (which *may* still give the wrong answer, or more likely, ping a non-existent page, leaving the word updated to 
 the autochthonic form + '**', e.g.  Хэндерсон**)
+
+
+'soft' call: 2023-03-22 @ 17:37:14-17:37:18
+Updated 3 inputs: [придя   лет   автосалона   ]
+With 3 dict forms: [придти   лет   автосалон   ]
+
+'hard' call: 2023-03-22 @ 17:37:18
+Nothing needed updated.
