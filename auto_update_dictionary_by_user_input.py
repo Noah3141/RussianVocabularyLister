@@ -145,7 +145,7 @@ def update_dictionary(setting: str):
         with open("dictionary_forms.pkl", "wb") as f:
             pickle.dump(dictionary_forms, f)
         
-        with open("updator_status.txt", "w", encoding="UTF-8") as f:
+        with open("updater_status.txt", "w", encoding="UTF-8") as f:
             f.write("Open")
         
         

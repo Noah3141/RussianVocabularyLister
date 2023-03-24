@@ -21,7 +21,6 @@ import time
 import os
 import re
 
-
 app = Flask(__name__)
 api = Api(app)
 
@@ -36,6 +35,10 @@ def home():
 @app.route("/rubit", methods=["POST","GET"])
 def RUBIT():
         return render_template("RUBIT.html")
+    
+@app.route("/changelog", methods=["GET"])
+def changelog():
+        return render_template("changelog.html")
     
 @app.route("/rubit/output", methods=["POST"])
 def RUBIT_OUTPUT():
@@ -57,17 +60,23 @@ def RUBIT_OUTPUT():
             if output_dictionary[word] == "*":
                 missing_count += 1
         missing_count = round(missing_count / 14)
-                                            # In the format:   HTML_Jinja_Variable = Python_Variable
-        return render_template("RUBIT_Output.html", dictionary = output_dictionary, breadth = output_breadth, style = output_style, input_text=input_text, missing = missing_count)
-
-
+        
+        
+        if output_style == "Raw Vocabulary":
+            # In the format:   HTML_Jinja_Variable = Python_Variable
+            return render_template("RUBIT_Output.html", dictionary = output_dictionary, breadth = output_breadth, style = output_style, input_text=input_text, missing = missing_count)
+        if output_style == "Verb Pairs":
+            return render_template("pairs.html", pair_list = output_dictionary)
+        if output_style == "Verb Trees":
+            return render_template("trees.html", tree_list = output_dictionary)
 @app.route("/pairs", methods=["GET"])
 def PairsList():
     if request.method == "GET":
         with open("pair_list.pkl", "rb") as f:
             pair_list = pickle.load(f)
-        return render_template("pairs.html", pair_list = pair_list)
+        
 
+        return render_template("pairs.html", pair_list = pair_list)
 
 @app.route("/trees", methods=["GET"])  
 def TreesList():
@@ -75,6 +84,11 @@ def TreesList():
         with open("tree_list.pkl", "rb") as f:
             tree_list = pickle.load(f)
         return render_template("trees.html", tree_list = tree_list)
+   
+    
+   
+    
+   
     
     
 @app.route("/flag-word", methods=["POST"])
@@ -200,7 +214,7 @@ def AnkiDeck():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='127.0.0.1', port='5000') # Add port 
+    app.run(debug=True, host='127.0.0.1', port='5500') # Add port 
     
 
 

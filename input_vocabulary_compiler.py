@@ -15,6 +15,7 @@
 import re
 import pickle
 from reference_lists_creator import create_verb_list
+from get_full_verbs import root_match, prefix_list
 
 
 # Cleans user input, then creates a dictionary_input_words which is used to generate
@@ -121,10 +122,55 @@ def rubit(input_text: str, breadth: str, style: str) -> dict:
     # Style
     #################################################### In need of update to phase out "reference_lists_creator" and "create_verb_list"
     if style == "Verb Pairs":
-        dictionary_input_words, _ = create_verb_list(dictionary_input_words)
-
-    if style == "Verb Trees":
-        _ , dictionary_input_words = create_verb_list(dictionary_input_words)
+        with open("pair_list.pkl", "rb") as f:
+            pair_list = pickle.load(f)
+            
+            
+        for imp in list(pair_list):
+            if imp in dictionary_input_words or pair_list[imp] in dictionary_input_words:
+                    continue
+            else:
+              del pair_list[imp]  
+            pass
+        
+        
+        return pair_list, input_count
     
+    
+    
+    
+    
+    
+    if style == "Verb Trees":
+        with open("tree_list.pkl", "rb") as f:
+            tree_dict = pickle.load(f)
+        with open("pair_list.pkl", "rb") as f:
+            pair_list = pickle.load(f)    
+            
+        for imp in list(pair_list):
+            if imp in dictionary_input_words or pair_list[imp] in dictionary_input_words:
+                    continue
+            else:
+              del pair_list[imp]  
+            pass
+          
+        input_roots = set()    
+        for word in pair_list:
+            root = root_match(word)
+            input_roots.add(root)
+        
+        for root in list(tree_dict):
+            if root in input_roots:
+                continue
+            else: del tree_dict[root]
+            pass  
+            
+            
+        return tree_dict, input_count
+          
+
+        pass
 
     return dictionary_input_words, input_count
+            # dictionary forms with count, the uncombined list of words and their counts
+

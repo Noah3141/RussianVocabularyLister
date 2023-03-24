@@ -5,9 +5,3 @@ by logging the original here, along with the updated form given by pinging the R
 the autochthonic form + '**', e.g.  Хэндерсон**)
 
 
-'soft' call: 2023-03-22 @ 17:37:14-17:37:18
-Updated 3 inputs: [придя   лет   автосалона   ]
-With 3 dict forms: [придти   лет   автосалон   ]
-
-'hard' call: 2023-03-22 @ 17:37:18
-Nothing needed updated.

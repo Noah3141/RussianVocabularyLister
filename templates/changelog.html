@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}
+<title>Changelog</title>
+{% endblock %} {% block content %}
+
+<div style="margin: 20px">
+  <h3>3/24/2023</h3>
+  <ul>
+    <li>Added changelog page</li>
+    <li>Fixed overfitting consonant mutations in verb pairs</li>
+    <li>Fixed prefix analysis in verb tree</li>
+    <li>Gave a few specific words overrides</li>
+    <li>Added -нуть verbs to the full verb lists</li>
+    <li>
+      Removed unnecessary flag buttons from verb list outputs (pairs and trees),
+      as these are generated wholesale and cannot be updated individually
+    </li>
+    <li>
+      Fixed some consonant cluster misformations, and arranged for
+      multiplicative correction going forward
+    </li>
+    <li>
+      Made verb lists generate from the product of the dictionary key, meaning
+      that database growth is slightly more effective at improving verb lists
+    </li>
+  </ul>
+
+  <h3>3/23/2023</h3>
+  <ul>
+    <li>Added logos</li>
+  </ul>
+</div>
+{% endblock %}
