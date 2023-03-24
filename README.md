@@ -5,7 +5,9 @@ In order to create a web application that automatically generates a (lemmatized)
 
 To complete this task, the Flask app is complete with a large scale language corpus stored in a mySQL database, which is fed cumulatively through 
 1) A Russian wikipedia web scraper, capable of quickly compiling multiple hundreds of thousands of unique words
-2) A script intended to scrape entire Russian books from public websites. 
+2) A script intended to scrape entire Russian books from public websites.
+3) User input on the site
+4) User flagged words on the site
 
 Together, these fill a database which is used to triangulate lemma forms of a given Russian word. The site also allows users to browse the database’s verbs in two different grammatical models, and see their inputted text processed into one of these grammatical models, each of which requires another layer of language processing and derivational analysis.
 
