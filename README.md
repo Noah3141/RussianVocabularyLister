@@ -18,3 +18,12 @@ See wiki section for deployment instruction on an AWS EC2 Ubuntu server, using N
 Excluding the verb pairs and verb trees, the app's data flow is as follows:
 
 ![Data_Flow (1)](https://user-images.githubusercontent.com/66894106/227043315-80e0e30d-bc85-4ac8-9a01-998083d5c3d3.png)
+
+Okay, but what does it do that wasn't already available?
+
+1) Offers vocabulary list generation based on user input for Russian text
+2) Also allows these lists to be generated in verb pairs (the standard model of and mimimum necessary way of learning Russian verbs)
+3) Even allows these lists to be generated in a novel verbal model, which approximates the languages base lexemes - verb tree. That's a novel, revolutionary grammatical model, and a novel list generator that uses that model!
+4) Complete, single page, total lexicon verb lists in both pair and tree. While it is possible to find "Top 500 Russian Verbs", nowhere else is it possible to find a comprehensive, total-lexicon list of nearly all the Russian verbs on a _single page_ (even Wiktionary splits up the pages), not to mention the entire language's list of verb trees. Verb trees approximate lexemes close enough that learning the entire Russian verb tree page is akin to learning most of the words in the language (not just the verbs!). This means that the Russian verb tree page is the first available resource which completely obliterates the entire intermediate stage of Russian language learning, extending well into advanced levels.
+
+For Russian learners and Russian teachers - this web app changes the game.
