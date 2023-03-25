@@ -9,3 +9,6 @@ russian_inflection_collapser.py
 russian_inflection_collapser_old.py
 russian_inflection_collapser_v.75.py
 reference_lists_creator.py
+backflow_to_database_text.txt
+updater_status.txt
+user_flagged_update_log.txt
