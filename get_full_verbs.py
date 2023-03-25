@@ -135,11 +135,11 @@ prefix_list = ["преду", "предъ", "пред",
 
 def root_match(word: str) -> str:
     root = "*"
-    print("\n\nRoot_Match checking word", word)
+    #print("\n\nRoot_Match checking word", word)
     for prefix in prefix_list:
         if word.startswith(prefix) and any(pref + word[len(prefix):] in word_list_set for pref in (pf for pf in prefix_list if pf != prefix) ):
             root = word[len(prefix):]
-            print("proposed root", root)
+            #print("proposed root", root)
             break
     if root == "*":
         root == word
@@ -167,6 +167,7 @@ for word in delete_words:
         word_list.remove(word)
  
 print("Word List Ready...")
+print("Getting full verbs.")
 ###############################################################################
 
 
@@ -467,17 +468,19 @@ for root in root_list:
         if prefix + root in pair_dict:
             if prefix not in words_prefixes.get(root,""):
                 words_prefixes[root] = words_prefixes.get(root,"") + "  " + prefix + "-"
+ 
     
+ # Fill in the branch inperfective forms by rootmatching the prefixed imperfectives
 for word in pair_dict:
    root = root_match(word)
    tree_dict[root_match(pair_dict[word])] = ("-" + root, words_prefixes.get(root, "")) 
 
  
 
-
-
-
-
+doubled_roots = {"искать":"ыскать","играть":"ыграть"}
+for correct in doubled_roots:
+    tree_dict[correct] = tree_dict.get(correct,"")[1] + tree_dict.get(doubled_roots[correct], "")[1] 
+    del tree_dict[doubled_roots[correct]]
 
 
 
@@ -497,6 +500,8 @@ for key in list(tree_dict):
     elif tree_dict[key][1].startswith("ъ"):
         del tree_dict[key]
 
+
+del tree_dict["ать"] # Faulty interpretation of взывать as вз-ывать
 del tree_dict["елить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
 ###############################################################################    
 
@@ -517,4 +522,4 @@ with open("pair_list.pkl", "wb") as f:
 with open("tree_list.pkl", "wb") as f:
     pickle.dump(tree_dict, f)
 
-
+print("Verb lists saved to pickles.")

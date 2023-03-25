@@ -10,9 +10,9 @@
 ###############################################################################
 
 
-from flask import Flask, request, redirect, render_template, url_for
+from flask import Flask, request, redirect, render_template, url_for, send_from_directory
 from flask_restful import Api
-from input_vocabulary_compiler import rubit
+from input_vocabulary_compiler import rubit #Which imports get_full verbs, which can take a second
 import pickle
 import threading
 from auto_update_dictionary_by_user_input import update_dictionary
@@ -86,9 +86,6 @@ def TreesList():
         return render_template("trees.html", tree_list = tree_list)
    
     
-   
-    
-   
     
     
 @app.route("/flag-word", methods=["POST"])
@@ -103,9 +100,6 @@ def FlagWord():
         else: time.sleep(0.5)
 
     # The data sent from each of the three pages looks like the following:
-
-
-
     
     # "Raw Vocabulary: языка - 1" , "Raw Vocabulary: рядо - 1" 
     # "Raw Vocabulary: ый - 2"
@@ -162,37 +156,25 @@ def FlagWord():
     
     
     
+    # # "Verb Pairs: поддерзить - поддерживать" 
+    # # Update verb list (will be undone when get_full_verbs.py is run)
+    # if value.startswith("Verb Pairs:"):
+    #     with open("pair_list.pkl", "rb") as f:
+    #         pair_list = pickle.load(f)  
+        
+    #     word_start = value.find("- ") + 2
+    #     caught_imperfective = value[word_start:]
+    #     with open("morfo_list.pkl", "wb") as f:
+    #         pickle.dump(morfo, f)
+    #     pass
     
-    
-    # "Verb Pairs: поддерзить - поддерживать" 
-    # Update verb list (will be undone when get_full_verbs.py is run)
-    if value.startswith("Verb Pairs:"):
-        with open("pair_list.pkl", "rb") as f:
-            pair_list = pickle.load(f)  
-        
-        word_start = value.find("- ") + 2
-        caught_imperfective = value[word_start:]
-        
-        
-        
-        
-        with open("morfo_list.pkl", "wb") as f:
-            pickle.dump(morfo, f)
-        pass
-    
-    # "Verb Trees: канкать (-канчивать): за-"
-    # Update verb list (will be undone when get_full_verbs.py is run)
-    if value.startswith("Verb Trees:"):        
-        with open("tree_list.pkl", "rb") as f:
-            tree_list = pickle.load(f)
-            
-            
-            
+    # # "Verb Trees: канкать (-канчивать): за-"
+    # # Update verb list (will be undone when get_full_verbs.py is run)
+    # if value.startswith("Verb Trees:"):        
+    #     with open("tree_list.pkl", "rb") as f:
+    #         tree_list = pickle.load(f)
 
-        pass
-    
-    
-    
+    #     pass
     
     
  
