@@ -1,4 +1,4 @@
-# RussianVocabularyLister
+# russianvocabularylistmaker.com/rubit
 
 
 In order to create a web application that automatically generates a (lemmatized) vocabulary list from user-inputted Russian text, a very large amount of natural language processing is necessary, due to the ambiguities in inflectional forms. Prior to this project, no solution was publicly available. Previous linguistic analyses offered lemmatization libraries in Python, but their level of accuracy was designed for search engines, not second language study. 
