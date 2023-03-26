@@ -93,11 +93,6 @@ def FlagWord():
     data = request.json
     value = data['value']
     
-    while True: # This allows us to double-dutch into the update at exactly the right moment not to trip over unpickling error from overlapping open-&-save
-        with open("updater_status.txt", "r", encoding="UTF-8") as f:
-            status = f.read()
-        if status == "Open": break
-        else: time.sleep(0.5)
 
     # The data sent from each of the three pages looks like the following:
     
@@ -147,7 +142,7 @@ def FlagWord():
         thread_2 = threading.Thread(target=update_dictionary,args=["last"])
         thread_2.start()
         
-        log = f"\n\nInput text:    {input_text}\nFlagged entry: <{problem_word_out}> generated from '{problem_word_in}'"
+        log = f"\n\n\nInput text:    {input_text}\n\nFlagged entry: <{problem_word_out}> generated from '{problem_word_in}'"
         # Save log of all this in user_flagged_update_log.txt
         with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
             f.write(log)

@@ -103,7 +103,13 @@ def update_dictionary(setting: str):
         
         
         if delayer: # This is to avoid pinging their poor site 500 times relentlessly, spreading out the load over time
-            time.sleep(2)
+            time.sleep(1)
+            
+        while True: # This allows us to double-dutch into the update at exactly the right moment not to trip over unpickling error from overlapping open-&-save
+            with open("updater_status.txt", "r", encoding="UTF-8") as f:
+                status = f.read()
+            if status == "Open": break
+            else: time.sleep(0.2)
         
         with open("updater_status.txt", "w", encoding="UTF-8") as f:
             f.write(f"Running '{setting}' call on word {word}")
