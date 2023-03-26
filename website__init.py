@@ -49,11 +49,9 @@ def RUBIT_OUTPUT():
         output_style = request.form["Output_Style"]
         
         output_dictionary, _ = rubit(input_text, output_breadth, output_style)
-        
-        updates, _ = update_dictionary("soft")
-        if len(updates) >= 3:
-            thread = threading.Thread(target=update_dictionary,args=["hard"])
-            thread.start()
+
+        thread = threading.Thread(target=update_dictionary,args=["hard"])
+        thread.start()
 
         missing_count = 0
         for word in output_dictionary:
@@ -61,14 +59,15 @@ def RUBIT_OUTPUT():
                 missing_count += 1
         missing_count = round(missing_count / 14)
         
-        
+                                        # In the format:   HTML_Jinja_Variable = Python_Variable
         if output_style == "Raw Vocabulary":
-            # In the format:   HTML_Jinja_Variable = Python_Variable
             return render_template("RUBIT_Output.html", dictionary = output_dictionary, breadth = output_breadth, style = output_style, input_text=input_text, missing = missing_count)
         if output_style == "Verb Pairs":
             return render_template("pairs.html", pair_list = output_dictionary)
         if output_style == "Verb Trees":
             return render_template("trees.html", tree_list = output_dictionary)
+        
+        
 @app.route("/pairs", methods=["GET"])
 def PairsList():
     if request.method == "GET":
