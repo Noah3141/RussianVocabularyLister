@@ -103,16 +103,18 @@ def update_dictionary(setting: str):
         
         
         if delayer: # This is to avoid pinging their poor site 500 times relentlessly, spreading out the load over time
-            time.sleep(1)
+            time.sleep(2)
             
         while True: # This allows us to double-dutch into the update at exactly the right moment not to trip over unpickling error from overlapping open-&-save
             with open("updater_status.txt", "r", encoding="UTF-8") as f:
                 status = f.read()
-            if status == "Open": break
-            else: time.sleep(0.2)
+            if status == "Open": 
+                with open("updater_status.txt", "w", encoding="UTF-8") as f:
+                    f.write(f"Running '{setting}' call on word {word}")
+                break
+            else: time.sleep(0.3)
         
-        with open("updater_status.txt", "w", encoding="UTF-8") as f:
-            f.write(f"Running '{setting}' call on word {word}")
+
         
         # We need a within loop instance of morfo so that the function doesn't constantly overlap itself and overwrite previous fixes
         with open("morfo_list.pkl", "rb") as f:
