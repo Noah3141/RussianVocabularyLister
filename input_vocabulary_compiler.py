@@ -16,6 +16,7 @@ import re
 import pickle
 from reference_lists_creator import create_verb_list
 from get_full_verbs import root_match, prefix_list
+import time
 
 
 # Cleans user input, then creates a dictionary_input_words which is used to generate
@@ -23,9 +24,13 @@ from get_full_verbs import root_match, prefix_list
 # of a dictionary form, and that input word is entered into the "morfo" pickle, to be later updated
 # by "from auto_update_dictionary_by_user_input import update_dictionary" in website__init.py
 
-def rubit(input_text: str, breadth: str, style: str) -> dict:
+def rubit(input_text: str, breadth: str, style: str, waitful=False) -> dict:
     
-    
+    while waitful:
+        with open("updater_status.txt", "r", encoding="UTF-8") as f:
+            status = f.read()
+        if status == "Open": break
+        else: time.sleep(.2)
     try:
         with open("dictionary_forms.pkl", "rb") as f:
             dictionary_forms = pickle.load(f)

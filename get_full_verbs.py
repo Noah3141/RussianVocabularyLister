@@ -505,7 +505,7 @@ del tree_dict["ать"] # Faulty interpretation of взывать as вз-ыва
 del tree_dict["елить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
 ###############################################################################    
 
-
+# Sorting pair dictionary by root, by sorting back to front of the word alphabetically
 pair_dict = {v: k for k, v in pair_dict.items()}
 pair_dict_sub = dict()
 alphabetized_list = sorted(pair_dict.keys(), key = lambda x: x[::-1])
@@ -514,6 +514,15 @@ for key in alphabetized_list:
     pair_dict_sub[key] = pair_dict[key]
 
 pair_dict = pair_dict_sub
+
+# Sorting tree dictionary by length of prefix list
+
+
+
+
+
+
+
 
 with open("pair_list.pkl", "wb") as f:
     pickle.dump(pair_dict, f)

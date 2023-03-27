@@ -19,6 +19,7 @@ import pickle
 import sys
 import datetime
 import time
+import atexit
 
 
 # When run, the morfo pickle is opened, the words updated in the 
@@ -26,9 +27,24 @@ import time
 
 def update_dictionary(setting: str):
    
+    def open_status_exit():
+        with open("updater_status.txt", "w", encoding="UTF-8") as f:
+            f.write("Open")
+        with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
+                f.write("\nExit caused automatic set to Open")
+        pass
+    def open_status(): 
+        with open("updater_status.txt", "w", encoding="UTF-8") as f:
+            f.write("Open")
+        pass
+    def close_status(word: str):
+        with open("updater_status.txt", "w", encoding="UTF-8") as f:
+            f.write(f"Running '{setting}' call on word {word}")
+        pass
 
-
-    
+    with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
+            f.write(f"\nFunction call received ({setting})")
+ 
     log_time = datetime.datetime.now().strftime("%Y-%m-%d @ %H:%M:%S")
 
     
@@ -51,20 +67,19 @@ def update_dictionary(setting: str):
         sys.exit()
      
         
-    # Get dictionary forms
-    with open("dictionary_forms.pkl", "rb") as f:
-        dictionary_forms = pickle.load(f)
-    
+
     updated_words = list()
     new_forms = list()
     
-    # Clear out the double asterisk from morfo variable
-    for word in morfo:
-        if word.endswith("**"):
-            morfo.remove(word)
-            with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
-                f.write(f"\n{log_time}\n{word} was entered in morfo. Skipping...")
     
+    if setting == "hard":
+        # Clear out the double asterisk from morfo variable
+        for word in morfo:
+            if word.endswith("**"):
+                morfo.remove(word)
+                with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
+                    f.write(f"\n{log_time}\n{word} was entered in morfo. Skipping...")
+        
     # Save that variable back to morfo
     with open("morfo_list.pkl", "wb") as f:
         pickle.dump(morfo, f)
@@ -97,25 +112,39 @@ def update_dictionary(setting: str):
  
 
 ###############################################################################
-
+    atexit.register(open_status_exit) 
     # Going through the words in the morfo as it was at the start, minus the **
     for word in morfo[start:end]:
-        
-        
-        if delayer: # This is to avoid pinging their poor site 500 times relentlessly, spreading out the load over time
-            time.sleep(2)
-            
-        while True: # This allows us to double-dutch into the update at exactly the right moment not to trip over unpickling error from overlapping open-&-save
-            with open("updater_status.txt", "r", encoding="UTF-8") as f:
-                status = f.read()
-            if status == "Open": 
-                with open("updater_status.txt", "w", encoding="UTF-8") as f:
-                    f.write(f"Running '{setting}' call on word {word}")
-                break
-            else: time.sleep(0.3)
-        
+        with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
+                f.write(f"\nEntering {setting} call on '{word}' loop")
 
         
+        if delayer: # This is to avoid pinging their poor site 500 times relentlessly, spreading out the load over time
+            with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
+                    f.write(f"\nDelaying 2 seconds ({setting} on {word})")
+            time.sleep(1) 
+            
+        while True: # This allows us to double-dutch into the update at exactly the right moment not to trip over unpickling error from overlapping open-&-save
+            
+            with open("updater_status.txt", "r", encoding="UTF-8") as f:
+                status = f.read()
+            with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
+                    f.write(f"\nWithin lock, read status as {status} ({setting} on {word})")
+            
+            
+            if status == "Open": 
+                with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
+                        f.write(f"\nStatus was Open! Writing {setting} call on {word}")
+                close_status(word)
+                break 
+            else:
+                time.sleep(0.2) 
+        
+
+        # Get dictionary forms
+        with open("dictionary_forms.pkl", "rb") as f:
+            dictionary_forms = pickle.load(f)
+            
         # We need a within loop instance of morfo so that the function doesn't constantly overlap itself and overwrite previous fixes
         with open("morfo_list.pkl", "rb") as f:
             morfo_iter = pickle.load(f) # Open the current state of morfo pickle as morfo_iter
@@ -153,8 +182,10 @@ def update_dictionary(setting: str):
         with open("dictionary_forms.pkl", "wb") as f:
             pickle.dump(dictionary_forms, f)
         
-        with open("updater_status.txt", "w", encoding="UTF-8") as f:
-            f.write("Open")
+        with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
+                f.write(f"\nWork on {word} done, setting updater to Open")
+        
+        open_status()
         
         
         pass
@@ -181,7 +212,7 @@ def update_dictionary(setting: str):
         with open("backflow_to_database_text.txt", "a", encoding="UTF-8") as f:
             f.write(f"\n{word}")
     
-    
+
     return updated_words, new_forms
 
 

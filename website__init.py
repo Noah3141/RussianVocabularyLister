@@ -92,26 +92,28 @@ def FlagWord():
     data = request.json
     value = data['value']
     
-
-    # The data sent from each of the three pages looks like the following:
     
-    # "Raw Vocabulary: языка - 1" , "Raw Vocabulary: рядо - 1" 
-    # "Raw Vocabulary: ый - 2"
-    # Update dictionary_forms through 'auto_update_dictionary_by_user_input.py'
     if value.startswith("Raw Vocabulary:"):
         
         input_text = data['input_text'] 
         input_text = re.sub("\n", " ", input_text) # Remove newlines for when we file away the input txt in the log
         
-        with open("dictionary_forms.pkl", "rb") as f:
-            dictionary_forms = pickle.load(f)
-        
-        with open("morfo_list.pkl", "rb") as f:
-            morfo = pickle.load(f)
-        
+        while True:
+            with open("updater_status.txt", "r", encoding="UTF-8") as f:
+                status = f.read()    
+            if status == "Open":
+                with open("dictionary_forms.pkl", "rb") as f:
+                    dictionary_forms = pickle.load(f)
+                
+                with open("morfo_list.pkl", "rb") as f:
+                    morfo = pickle.load(f)
+                break 
+            else: time.sleep(.2)
+            
         flag_word_start = value.find(": ") + 2
         flag_word_end = value.find(" -")
         problem_word_out = value[flag_word_start:flag_word_end] # Extract the problem word from the list-entry (e.g. "казить - 12")
+        
         
         if problem_word_out.endswith("**"): #
             log_time = datetime.now().strftime("%Y-%m-%d @ %H:%M:%S")
@@ -120,8 +122,7 @@ def FlagWord():
                 return '', 405 # Return an empty response with a "Method not allowed" code
         
         
-        
-        _, input_count = rubit(input_text, "Full List", "Raw Vocabulary")
+        _, input_count = rubit(input_text, "Full List", "Raw Vocabulary", waitful=True)
         
         for word in input_count:
             try:
@@ -133,19 +134,21 @@ def FlagWord():
                 if problem_word_in not in morfo:
                     morfo.append(problem_word_in) 
                 break
-            pass
+
         
         with open("morfo_list.pkl", "wb") as f:
             pickle.dump(morfo, f)
     
-        thread_2 = threading.Thread(target=update_dictionary,args=["last"])
-        thread_2.start()
-        
-        log = f"\n\n\nInput text:    {input_text}\n\nFlagged entry: <{problem_word_out}> generated from '{problem_word_in}'"
-        # Save log of all this in user_flagged_update_log.txt
-        with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
-            f.write(log)
-        
+        with open("updater_status.txt", "r", encoding="UTF-8") as f:
+            status = f.read()    
+        if status == "Open":
+            update_dictionary("last")    
+            log = f"\n\n\nInput text:    {input_text}\nFlagged entry: <{problem_word_out}> generated from '{problem_word_in}'"
+            with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
+                f.write(log)
+        else:
+            with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
+                f.write(f"\nLast Call: Updater in use. '{problem_word_in}' is added to morfo_list. Addressing later.")
         pass
     
     

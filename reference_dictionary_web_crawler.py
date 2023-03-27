@@ -43,7 +43,7 @@ for line in stop_words_txt:
 reference_dictionary = dict()
 
 
-non_russian_stop_words = set(" нея "," воно "," він "," це ", " тя ", " мене ", " па ", " з ", " від ")
+non_russian_stop_words = set([" нея "," воно "," він "," це ", " тя ", " мене ", " па ", " з ", " від "])
 
 
 
@@ -152,75 +152,6 @@ for word in reference_dictionary:
         del word
 ###############################################################################
 
-
-# print("Adding book texts...")
-
-
-
-# # Build links
-
-# link = "https://ilibrary.ru/text/"
-# book_n = range(1,99) # gives the book
-# page_n = [] # gives the page
-# for i in range(1,99):
-#     page_n.append("/p." + str(i))
-
-# book_page_links = []
-
-# for book in book_n:
-#     for page in page_n:
-#         book_page_links.append(link + str(book) + page + "/index.html")
-
-# # Cull ends across repeated runs:
- 
-    
-    
-    
-# # Collect words from famous books:
-# broken_book_links = []
-# for link in book_page_links:
-#     old_size = len(reference_dictionary)
-#     page = ""
-#     link_index = link_index + 1
-#     try:
-#         rcv = urllib.request.urlopen(link, context =ctx).read()
-#     except: 
-#         print("\n\n!Something went wrong opening this link:\n", link, "\n\n")
-#         broken_book_links.append(link)
-#         continue
-    
-#     soup = BeautifulSoup(rcv, 'html.parser')
-#     print("================================")
-#     print('Link', link_index, "soup created.")    
-    
-#     body_paras = soup.find_all("span")
-#     for p in body_paras:
-#         page = page + p.text
-    
-#     #Word processing
-#     page_words = re.findall('([А-Я]*[а-я]+)', page)
-    
-#     #   If a non-Russian slavic language is found, we need to reject the whole page and move on:
-#     if any(word in non_russian_stop_words for word in page_words):
-#         print("\x1b[31mThis page may have not been Russian: \x1b[0m", link)
-#         continue
-    
-#     page_words = [word.lower() for word in page_words if word not in stop_words]
-#     for word in page_words:
-#         reference_dictionary[word] = reference_dictionary.get(word, 0) + 1
-    
-#     print('New length of dictionary:', len(reference_dictionary))
-#     new_size = len(reference_dictionary)
-#     print("Number of new words:", new_size-old_size)
-#     if new_size-old_size > 100:
-#         print("Found at:", link)
-    
-    
-# with open("delete_links.pkl", "wb") as f:
-#     pickle.dump(broken_book_links, f)
-
-###############################################################################
-
 # Enter the dictionary into a database
 
 conn = mysql.connector.connect(
@@ -230,8 +161,7 @@ conn = mysql.connector.connect(
     database = "Database_001")
 
 cursor = conn.cursor()
-#cursor.execute("DROP TABLE words")
-cursor.execute("CREATE TABLE IF NOT EXISTS words (id int NOT NULL AUTO_INCREMENT PRIMARY KEY, word varchar(64) NOT NULL, frequency INT)")
+#cursor.execute("CREATE TABLE IF NOT EXISTS words (id int NOT NULL AUTO_INCREMENT PRIMARY KEY, word varchar(64) NOT NULL, frequency INT)")
 
 
 
