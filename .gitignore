@@ -12,3 +12,4 @@ reference_lists_creator.py
 backflow_to_database_text.txt
 updater_status.txt
 user_flagged_update_log.txt
+morfo_list.pkl
