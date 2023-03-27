@@ -134,7 +134,7 @@ def update_dictionary(setting: str):
             
             if status == "Open": 
                 with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
-                        f.write(f"\nStatus was Open! Writing {setting} call on {word}")
+                        f.write(f"\nStatus was Open! Updater set to: {setting} call on {word}")
                 close_status(word)
                 break 
             else:

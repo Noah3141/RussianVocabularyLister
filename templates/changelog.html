@@ -7,17 +7,24 @@
   <ul>
     <li>
       Fixed flag word update not working, and automatic missing key update not
-      working in deployment conditions
+      working in deployment conditions, by rearranging and adding locks, and
+      having flagged word update stash its work when unable to complete it
+      immediately. Unfortunately, this will result in some flagged words not
+      updating until after the wait time of the next list creation.
     </li>
     <li>
       Made tree lists sorted by prefix length, so that the most proliferated
-      trees are most accessible
+      trees are at the top
+    </li>
+    <li>
+      Added further sorting to the Tree List on The Tree Model page, pulling out
+      a Sound/Vocalization verb section
     </li>
     <li>
       Set up a back up server ready to accept web app should the current ever
       fail, and complete the server set up diagram (github)
     </li>
-    <li>Radically increased loggin on updater to facilitate debugging</li>
+    <li>Radically increased logging on updater to facilitate debugging</li>
   </ul>
 
   <h3>3/25/2023</h3>

@@ -177,12 +177,13 @@ pair_dict = dict()
 
 
 for word in word_list:
+    next_up = False
     if len(word) <= 6: continue
-
+    if word.endswith("ться"): word = word[:-2]
     
     if word.endswith("ивать"): #Must check for possible stem's consonant mutations
-        stem = word[:len(word)-len("ивать")]
-        # выплач , заканч, рассматр, огораж
+        stem = word[:len(word) - 5]
+        # выплач , заканч, рассматр, огораж, затраг, покрик
         
         
         for i in range(0, len(mutation_key)): # Going one by one through possible mutations
@@ -192,17 +193,37 @@ for word in word_list:
                 if last_vowel(stem) == "а": # Check to see if the stem has an "а", if so, check if an "о" replacement exists (e.g. отговорить when analyzing отговаривать), IF it exists, you may assume отговорить instead of отговарить
                     before = stem.rfind("а")
                     after = stem.rfind("а") + 1
-                    if (stem[:before] + "о" + mutation_key[i][1] + "ить") in word_list_set:
+                    if (stem[:before] + "о" + mutation_key[i][1] + "ить") in word_list_set or (stem[:before] + "о" + "нуть") in word_list_set:
                         stem = stem[:before] + "о" + stem[after:]
 
                 if stem[:-len(mutation_key[i][0])] + mutation_key[i][1] + "ить" in word_list_set:
                     stem = stem[:-len(mutation_key[i][0])] + mutation_key[i][1]
                     break
-            elif last_vowel(stem) == "а": # Check to see if the stem has an "а", if so, check if an "о" replacement exists (e.g. отговорить when analyzing отговаривать), IF it exists, you may assume отговорить instead of отговарить
-                before = stem.rfind("а")
-                after = stem.rfind("а") + 1
-                if (stem[:before] + "о" + stem[after:] + "ить") in word_list_set:
-                    stem = stem[:before] + "о" + stem[after:]
+                elif stem[:before] + "о" + "нуть" in word_list_set:
+                    pair_dict[word] = stem[:before] + "о" + "нуть"
+                    next_up = True
+                    break
+                
+            if stem.endswith(mutation_key[i][1]):
+                
+                if last_vowel(stem) == "а": # Check to see if the stem has an "а", if so, check if an "о" replacement exists (e.g. отговорить when analyzing отговаривать), IF it exists, you may assume отговорить instead of отговарить
+                    before = stem.rfind("а")
+                    after = stem.rfind("а") + 1
+                    if (stem[:before] + "о" + mutation_key[i][0] + "ать") in word_list_set or (stem[:before] + "о" + "нуть") in word_list_set:
+                        stem = stem[:before] + "о" + stem[after:]
+                
+                if stem[:-len(mutation_key[i][1])] + mutation_key[i][0] + "ать" in word_list_set:
+                    pair_dict[word] = stem[:-len(mutation_key[i][1])] + mutation_key[i][0] + "ать"
+                    next_up = True
+                    break
+                
+        if next_up: continue
+        
+        if last_vowel(stem) == "а": # Check to see if the stem has an "а", if so, check if an "о" replacement exists (e.g. отговорить when analyzing отговаривать), IF it exists, you may assume отговорить instead of отговарить
+            before = stem.rfind("а")
+            after = stem.rfind("а") + 1
+            if (stem[:before] + "о" + stem[after:] + "ить") in word_list_set:
+                stem = stem[:before] + "о" + stem[after:]
                     
                     
         # # Catch consonant mutations in stem
@@ -291,17 +312,25 @@ for word in word_list:
             except: continue
             
         pair_dict[word] = stem + "ить"
-
-    # # откинуть - откидать, отряхнуть - отрясать
-    elif word.endswith("нуть"):
-        if word.endswith("ануть"):
-            pair_dict[word] = word[:-5] + "ать"
-        else:
-            pair_dict[word] = word[:-4] + "ать"
-        continue
+        pass
+ 
         
-
+    elif word.endswith("нуть") and any(word.startswith(prefix) for prefix in prefix_list):
+         if word.endswith("ануть"):
+             pair_dict[word] = word[:-5] + "ать"
+         else:
+             stem = word[:-4]
+             #if any(stem.endswith(vowel) for vowel in ["а","о","э","ы","у","я","е","и","ю"]:
+             
+             
+             pair_dict[stem + "ать"] = word
+         continue
+     
     
+    
+    
+    pass
+     
     # elif russ_match(word, ывать_trns_endings) > 4:
     #     for ending in ывать_trns_endings:
     #         if word.endswith(ending):
@@ -312,7 +341,7 @@ for word in word_list:
     
     # Before adding these blocks in, finished the above
         
-
+   
    
 
     
@@ -479,7 +508,7 @@ for word in pair_dict:
 
 doubled_roots = {"искать":"ыскать","играть":"ыграть"}
 for correct in doubled_roots:
-    tree_dict[correct] = tree_dict.get(correct,"")[1] + tree_dict.get(doubled_roots[correct], "")[1] 
+    tree_dict[correct] = (tree_dict.get(correct,"")[0], tree_dict.get(correct,"")[1] + tree_dict.get(doubled_roots[correct], "")[1])
     del tree_dict[doubled_roots[correct]]
 
 
@@ -503,6 +532,8 @@ for key in list(tree_dict):
 
 del tree_dict["ать"] # Faulty interpretation of взывать as вз-ывать
 del tree_dict["елить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+del tree_dict["елать"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+
 ###############################################################################    
 
 # Sorting pair dictionary by root, by sorting back to front of the word alphabetically
@@ -517,12 +548,18 @@ pair_dict = pair_dict_sub
 
 # Sorting tree dictionary by length of prefix list
 
+tree_dict_sub = dict()
+prefixes_length = dict()
 
+for key in tree_dict:
+    prefixes_length[key] = len(tree_dict[key][1].split("  "))
+    
+prefixes_length = sorted(prefixes_length, key = lambda x: prefixes_length[x], reverse=True)
 
+for key in prefixes_length:
+    tree_dict_sub[key] = tree_dict[key]
 
-
-
-
+tree_dict = tree_dict_sub
 
 with open("pair_list.pkl", "wb") as f:
     pickle.dump(pair_dict, f)

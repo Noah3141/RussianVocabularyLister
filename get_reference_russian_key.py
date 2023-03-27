@@ -789,3 +789,9 @@ for form in ["долг","долга","долги","долгов","долгам",
 with open("dictionary_forms.pkl", "wb") as f:
     pickle.dump(dictionary_forms, f)
 
+
+with open("word_list_set.pkl", "wb") as f:
+    pickle.dump(word_list_set, f)
+    
+print("Dictionary forms pickle saved!")
+print("Word list set saved!")

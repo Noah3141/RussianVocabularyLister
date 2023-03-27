@@ -15,7 +15,6 @@
 import re
 import pickle
 from reference_lists_creator import create_verb_list
-from get_full_verbs import root_match, prefix_list
 import time
 
 
@@ -147,6 +146,41 @@ def rubit(input_text: str, breadth: str, style: str, waitful=False) -> dict:
     
     
     if style == "Verb Trees":
+        
+        prefix_list = ["преду", "предъ", "пред",
+                       "пере",
+                       "при",
+                       "обо", "об","объ", "о",
+                       "воз", "вос", "вс", "взъ", "вз", 
+                       "подъ", "под",
+                       "надъ", "над",
+                       "разъ", "раз", "рас",
+                       "про",
+                       "пре",
+                       "ото", "отъ", "от",
+                       "до",
+                       "вы",
+                       "на",
+                       "за",
+                       "по",
+                       "со", "съ", "с",
+                       "в",
+                       "у"] 
+        
+        def root_match(word: str) -> str:
+            root = "*"
+            #print("\n\nRoot_Match checking word", word)
+            for prefix in prefix_list:
+                if word.startswith(prefix) and any(pref + word[len(prefix):] in word_list_set for pref in (pf for pf in prefix_list if pf != prefix) ):
+                    root = word[len(prefix):]
+                    #print("proposed root", root)
+                    break
+            if root == "*":
+                root == word
+            return root
+        
+        with open("word_list_set.pkl", "rb") as f:
+            word_list_set = pickle.load(f)
         with open("tree_list.pkl", "rb") as f:
             tree_dict = pickle.load(f)
         with open("pair_list.pkl", "rb") as f:
