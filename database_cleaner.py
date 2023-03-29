@@ -231,7 +231,7 @@ def clean_database():
     for row in words:
         word = row[0]
         word_list.append(word)
-    
+    word_list_set = set(word_list)
     clear_list = list() # List culled from database's words, that will be deleted from it
 
 ###############################################################################
@@ -292,8 +292,9 @@ def clean_database():
         if ("ааа" in word) or ("ууу" in word) or ("эээ" in word) or ("ыы" in word) or ("ооо" in word):
             clear_list.append(word)
         
-
-
+    for word in word_list:
+        if any(word == ending for ending in ["иться", "юсь", "ишься", "ится", "итесь", "имся", "ятся", "ился", "ились", "илось", "илась", "ясь", "ись","ется"]):
+            clear_list.append(word)
 ###############################################################################
 
 # Comment out the following section, check the clear list for accuracy,
@@ -303,11 +304,16 @@ def clean_database():
     print("Deleting clear_list words from database:")
 
     for word in clear_list:
-        cursor.execute(f"DELETE FROM words WHERE word = '{word}';")
-        conn.commit()
-        print("Deleted word ", word, " from database.")
+        if word in word_list_set:
+            cursor.execute(f"DELETE FROM words WHERE word = '{word}';")
+            conn.commit()
+            print("Deleted word ", word, " from database.")
 
     length = len(clear_list)
     print(f"Cleared database of {length} words.")
     cursor.close()
     conn.close() 
+    
+    
+if __name__ == "__main__":
+    clean_database()

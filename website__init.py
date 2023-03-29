@@ -29,7 +29,7 @@ api = Api(app)
 
 @app.route("/", methods=["GET"])
 def home():
-    return redirect(url_for("RUBIT")) #Named after the def RUBIT
+    return redirect(url_for("RUBIT")) 
 
 
 @app.route("/rubit", methods=["POST","GET"])
@@ -107,7 +107,7 @@ def FlagWord():
                 
                 with open("morfo_list.pkl", "rb") as f:
                     morfo = pickle.load(f)
-                break 
+                break   
             else: time.sleep(.2)
             
         flag_word_start = value.find(": ") + 2

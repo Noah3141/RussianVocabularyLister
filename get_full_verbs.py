@@ -85,14 +85,14 @@ def russ_match(word: str, ending_list: list) -> int:
 prefix_list = ["преду", "предъ", "пред",
                "пере",
                "при",
-               "обо", "об","объ", "о",
+               "обо", "об","объ", 
                "воз", "вос", "вс", "взъ", "вз", 
                "подъ", "под",
                "надъ", "над",
                "разъ", "раз", "рас",
                "про",
                "пре",
-               "ото", "отъ", "от",
+               "ото", "отъ", "от", "о",
                "до",
                "вы",
                "на",
@@ -136,8 +136,8 @@ prefix_list = ["преду", "предъ", "пред",
 def root_match(word: str) -> str:
     root = "*"
     #print("\n\nRoot_Match checking word", word)
-    for prefix in prefix_list:
-        if word.startswith(prefix) and any(pref + word[len(prefix):] in word_list_set for pref in (pf for pf in prefix_list if pf != prefix) ):
+    for prefix in prefix_list: # If word starts with a prefix looking thing and you can put on any other prefix other than that prefix and the other prefix doesn't undo a mistaken prefix removal: eg. с-тавлять  вс-тавлять = в-ставлять 
+        if word.startswith(prefix) and any(pref + word[len(prefix):] in word_list_set for pref in (pf for pf in prefix_list if pf != prefix and not any(pf == undo for undo in ["вс","преду","со"])) ):
             root = word[len(prefix):]
             #print("proposed root", root)
             break
@@ -158,14 +158,18 @@ def last_vowel(stem: str) -> str:
     
 
 
+
 word_list_set = set(word_list)
 
-
-delete_words = ("пять","девять","десять","вспять","зять","память")
+delete_words = ("пять","девять","десять","вспять","зять","память","овать")
 for word in delete_words:
     if word in word_list_set:
         word_list.remove(word)
- 
+
+
+word_list_set = set(word_list)
+
+
 print("Word List Ready...")
 print("Getting full verbs.")
 ###############################################################################
@@ -179,9 +183,10 @@ pair_dict = dict()
 for word in word_list:
     next_up = False
     if len(word) <= 6: continue
-    if word.endswith("ться"): word = word[:-2]
+    if word.endswith("ться") or word.endswith("стись"): 
+        word = word[:-2]
     
-    if word.endswith("ивать"): #Must check for possible stem's consonant mutations
+    elif word.endswith("ивать"): #Must check for possible stem's consonant mutations
         stem = word[:len(word) - 5]
         # выплач , заканч, рассматр, огораж, затраг, покрик
         
@@ -196,15 +201,15 @@ for word in word_list:
                     if (stem[:before] + "о" + mutation_key[i][1] + "ить") in word_list_set or (stem[:before] + "о" + "нуть") in word_list_set:
                         stem = stem[:before] + "о" + stem[after:]
 
-                if stem[:-len(mutation_key[i][0])] + mutation_key[i][1] + "ить" in word_list_set:
-                    stem = stem[:-len(mutation_key[i][0])] + mutation_key[i][1]
-                    break
-                elif stem[:before] + "о" + "нуть" in word_list_set:
-                    pair_dict[word] = stem[:before] + "о" + "нуть"
-                    next_up = True
-                    break
+                    if stem[:-len(mutation_key[i][0])] + mutation_key[i][1] + "ить" in word_list_set:
+                        stem = stem[:-len(mutation_key[i][0])] + mutation_key[i][1]
+                        break
+                    if stem[:before] + "о" + "нуть" in word_list_set:
+                        pair_dict[word] = stem[:before] + "о" + "нуть"
+                        next_up = True
+                        break
                 
-            if stem.endswith(mutation_key[i][1]):
+            elif stem.endswith(mutation_key[i][1]):
                 
                 if last_vowel(stem) == "а": # Check to see if the stem has an "а", if so, check if an "о" replacement exists (e.g. отговорить when analyzing отговаривать), IF it exists, you may assume отговорить instead of отговарить
                     before = stem.rfind("а")
@@ -291,6 +296,7 @@ for word in word_list:
             #            if stem looks mutated            and    you can propose and undoal of the mutation and add "ить" to make a real word
             if stem.endswith(mutation_key[i][0]) and stem[:-len(mutation_key[i][0])] + mutation_key[i][1] + "ить" in word_list_set:
                 stem = stem[:-len(mutation_key[i][0])] + mutation_key[i][1]
+                break
         
         # # Catch consonant mutations in stem
         # if any(stem.endswith(mutation) for mutation in mutation_key):
@@ -301,7 +307,7 @@ for word in word_list:
         
         # Catch о > а mutations in stem
         try:
-            if stem[-2] == "а": # Check to see if the stem has an "а", if so, check if an "о" replacement exists (e.g. отговорить when analyzing отговаривать), IF it exists, you may assume отговорить instead of отговарить
+            if last_vowel(word) == "а": # Check to see if the stem has an "а", if so, check if an "о" replacement exists (e.g. отговорить when analyzing отговаривать), IF it exists, you may assume отговорить instead of отговарить
                 if (stem[:len(stem)-2] + "о" + stem[len(stem)-1] + "ить") in word_list_set:
                     stem = stem[:len(stem)-2] + "о" + stem[len(stem)-1]
         except:
@@ -350,7 +356,7 @@ for word in word_list:
 
 
 # Overrides:
-############  
+############################################################################### 
 
 
         
@@ -362,8 +368,9 @@ for word in list(pair_dict):
     if word.endswith("стоять"):
         del pair_dict[word]
         pair_dict[word[:-4] + "аивать"] = word
-del pair_dict["противостаивать"]
-
+try:
+    del pair_dict["противостаивать"]
+except:pass
 for word in list(pair_dict):
     if word.endswith("кашлять"):
         del pair_dict[word]
@@ -383,9 +390,6 @@ for word in list(pair_dict):
     if word.endswith("сеять"):
         del pair_dict[word]
         pair_dict[word[:-3] + "ивать"] = word
-  
-        
-  
     
 # Overwrites faulty perfective
     
@@ -400,19 +404,47 @@ for word in list(pair_dict):
         pair_dict[word] =  word[:-5] + "ать"
 
 
-# Override all prefixed forms
 
-override_list = {"калывать":"колоть","крывать":"крыть",
-                 "кладывать":"ложить", "рывать":"рвать","мирать":"мереть", "бирать": "брать",
+
+
+
+
+# Input full check of stem for these forms, and overwrite 
+##########################################################
+
+override_list = {"калывать":"колоть","крывать":"крыть", "едать":"есть","ведать":"вести","метать":"мести",
+                 "кладывать":"ложить", "рывать":"рвать","мирать":"мереть", "бирать": "брать", "пасть":"падать","пасти":"пасать",
                  "секать":"сечь", "зывать":"звать", "бывать":"быть", "бивать": "бить", "ращивать":"расти", 
-                 "плывать":"плыть","мывать":"мыть", "гонять":"гнать","вывать":"выть","нывать":"ныть"}
+                 "плывать":"плыть","мывать":"мыть", "гонять":"гнать","вывать":"выть","нывать":"ныть","забывать":"забыть",
+                 "вертывать":"вернуть","швыривать":"швырнуть","сыпать":"сыпать","тягивать":"тянуть","пускать":"пустить","жидать":"ждать",
+                 "тирать":"тереть","буждать":"будить","плетать":"плести","влекать":"влечь","тыкать":"ткнуть","берегать":"беречь",
+                 "трагивать":"тронуть","лизывать":"лизать","касать":"каснуть","сматривать":"смотреть","равнивать":"равнять","кипать":"кипеть",
+                 "жигать":"жечь","ражать":"разить","драгивать":"дрожать","льщать":"льстить","зревать":"зреть",
+                 "зирать":"зреть","мечать":"метить","пинать":"пнуть","горать":"гореть","минать":"мять","гребать":"грести",
+                 "чинивать":"чинить","чинять":"чинить","гибать":"гибать","качивать":"качать","следовать":"следовать","цветать":"цвести",
+                 "решать":"решить","гружать":"грузить","бредать":"брести","винчивать":"винтить","ливать":"лить","вивать":"вить",
+                 "пихивать":"пихать","растать":"расти","топать":"тонуть","теривать":"терять",
+                 "пекать":"печь","вирать":"врать","лыгать":"лгать","тушать":"тушить","стаивать":"стоить","грызать":"грызть","седать":"сесть","гревать":"греть","дувать":"дуть","маивать":"маять","мигивать":"мигать",
+                 "таивать":"таить","манывать":"мануть","шагивать":"шагать","стерегать":"стеречь","хлынивать":"хлынуть","плавливать":"плавить",
+                 "станывать":"стонать","шипывать":"шипеть","званивать":"звонить","звенивать":"звенеть","сапывать":"сопеть","хрипывать":"хрипеть",
+                 "пискивать":"пищать","храмывать":"хромать","жинать":"жать","жимать":"жать","мелькивать":"мелькать","тряхивать":"трясти",
+                 "глядывать":"глядеть","даивать":"доить","совывать":"совать","двигать":"двигать","поминать":"помнить","карабкивать":"карабкать","скакивать":"скочить",
+                 }
+
+
 # Our pair list is arranged as imperfective:perfective. We catch verb pairs from the database
 # by catching the imperfective (almost always -ывать/-ивать). A handful of verbs
 # end in these endings in the imperfective, but their perfective form ends in a non-routine
 # form, e.g. откалывать - отколоть. 
 
+for word in list(pair_dict):
+    if any(word.endswith(imp) for imp in override_list):
+        try: del pair_dict[word]
+        except:pass
+
 for override_imp in override_list: # For each imperfective form, tied to a perfective override
-    for imperfective in [imperfective for imperfective in pair_dict if root_match(imperfective) == override_imp]:
+    for imperfective in [imperfective for imperfective in word_list if root_match(imperfective) == override_imp]:
+        print(f"{override_imp} - {imperfective}")
         pair_dict[imperfective] = (imperfective[:len(imperfective)-len(override_imp)] + override_list[override_imp])
     
 # For each pair we made up above, look at the imperfective, and remove the prefix,
@@ -423,7 +455,9 @@ for override_imp in override_list: # For each imperfective form, tied to a perfe
 # e.g. We find скрывать, it matches крывать, therefore с- + крыть is its REAL perfective.
     
  
-    
+###############################################################################
+
+  
 # These words got caught by their PERFECTIVE, and so this block does the converse
 # of the above.
 
@@ -444,27 +478,9 @@ for imp in unprefixed_override_list:
 
 
 
-# Certain prefixes naturally gain a vowel to prevent consonant clusters.
-# When an imperfective is converted to its perfective form, consonant arrangements
-# Can change in a subset of verbs, causing the vowel to appear, e.g. -рывать -рвать
-# Fixing consonant cluster mistakes
-clusters = dict()
-for start in ["от","раз","об","с","под","над","вз"]:
-    for end in ["рв","зв","гн"]:
-        clusters[start+end] = start+"о"+end
-
-
-for word in pair_dict:
-    for cluster in clusters:
-        if cluster in pair_dict[word]:
-            mismade_word = pair_dict[word]
-            pair_dict[word] = mismade_word.replace(cluster, clusters[cluster])
-# If you find "отрв" in the perfective of a pair (that is, the one we generated,
-# not the one we found naturalistically), take that word and replace the cluster
-# with the corresponding fix.
 
 # Iterative roots shouldn't come up as pairs
-iterative_forms = ["певать", "говаривать","леживать"]
+iterative_forms = ["певать", "говаривать","леживать","стреливать"]
 for imp in iterative_forms:
     try: del pair_dict[imp]
     except: continue
@@ -505,10 +521,14 @@ for word in pair_dict:
    tree_dict[root_match(pair_dict[word])] = ("-" + root, words_prefixes.get(root, "")) 
 
  
-
+# Unite these two spellings into one entry
 doubled_roots = {"искать":"ыскать","играть":"ыграть"}
 for correct in doubled_roots:
-    tree_dict[correct] = (tree_dict.get(correct,"")[0], tree_dict.get(correct,"")[1] + tree_dict.get(doubled_roots[correct], "")[1])
+    try: imp = tree_dict.get(correct,"")[0]
+    except: continue
+    prefs = tree_dict.get(correct,"")[1]
+    more_prefs = tree_dict.get(doubled_roots[correct], "")[1]
+    tree_dict[correct] = (imp, prefs + more_prefs)
     del tree_dict[doubled_roots[correct]]
 
 
@@ -517,9 +537,9 @@ for correct in doubled_roots:
 
 # Tree list overrides:
     
-tree_overrides = {"имать":"-ять"}
-for imperfective in tree_overrides:
-    tree_dict[imperfective] = [tree_overrides[imperfective] ,  (words_prefixes.get(root, "")) ]
+# tree_overrides = {"имать":"-ять"}
+# for imperfective in tree_overrides:
+#     tree_dict[imperfective] = [tree_overrides[imperfective] ,  (words_prefixes.get(root, "")) ]
 
 
 
@@ -529,22 +549,91 @@ for key in list(tree_dict):
     elif tree_dict[key][1].startswith("ъ"):
         del tree_dict[key]
 
+try: del tree_dict["ать"] # Faulty interpretation of взывать as вз-ывать
+except:pass
+try: del tree_dict["елить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass
+try: del tree_dict["елать"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass
+try: del tree_dict["ить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass
+try: del tree_dict["авить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass
+try: del tree_dict["тавить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass
+try: del tree_dict["тучить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass
+try: del tree_dict["кать"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass
+try: del tree_dict["ть"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass
+try: del tree_dict["адить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass
+try: del tree_dict["овать"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass
+try: del tree_dict["аить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass    
 
-del tree_dict["ать"] # Faulty interpretation of взывать as вз-ывать
-del tree_dict["елить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
-del tree_dict["елать"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+# Certain prefixes naturally gain a vowel to prevent consonant clusters.
+# When an imperfective is converted to its perfective form, consonant arrangements
+# Can change in a subset of verbs, causing the vowel to appear, e.g. -рывать -рвать
+# Fixing consonant cluster mistakes
+
+#Build me a dictioanry with all the clusters as keys and their opened up form as values
+clusters = dict()
+for start in ["от","раз","об","с","под","над","вз"]:
+    for end in ["рв","зв","гн"]:
+        clusters[start+end] = start+"о"+end
+
+# Go through the pairs, if the perfective contains a cluster, replace it with the opened form
+for word in pair_dict:
+    for cluster in clusters:
+        if cluster in pair_dict[word]:
+            mismade_word = pair_dict[word]
+            pair_dict[word] = mismade_word.replace(cluster, clusters[cluster])
+# If you find "отрв" in the perfective of a pair (that is, the one we generated,
+# not the one we found naturalistically), take that word and replace the cluster
+# with the corresponding fix.
+
+
+###############################################################################
+# Returning to the pair list to add in the reflexives which... Don't matter as much to show in tree model
+
+for word in list(pair_dict):
+    if word + "ся" in word_list_set:
+        if pair_dict[word].endswith("и"):
+                pair_dict[word + "ся"] = pair_dict[word] + "сь"
+        else:
+            pair_dict[word + "ся"] = pair_dict[word] + "ся"
+    elif word + "сь" in word_list_set:
+        if pair_dict[word].endswith("и"):
+                pair_dict[word + "сь"] = pair_dict[word] + "сь"
+        else:
+            pair_dict[word + "сь"] = pair_dict[word] + "ся"
 
 ###############################################################################    
+def ignore_suffix_and_flip_backwards(word:str) -> str:
+    if word.endswith("ся") or word.endswith("сь"):
+        word = word[:-2]
+    word = word[::-1]
+    return word
+
 
 # Sorting pair dictionary by root, by sorting back to front of the word alphabetically
 pair_dict = {v: k for k, v in pair_dict.items()}
 pair_dict_sub = dict()
-alphabetized_list = sorted(pair_dict.keys(), key = lambda x: x[::-1])
+alphabetized_list = sorted(pair_dict.keys(), key = lambda x: ignore_suffix_and_flip_backwards(x))
 
 for key in alphabetized_list:
     pair_dict_sub[key] = pair_dict[key]
 
 pair_dict = pair_dict_sub
+
+
+
+
+
+
 
 # Sorting tree dictionary by length of prefix list
 

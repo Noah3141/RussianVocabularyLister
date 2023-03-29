@@ -3,14 +3,48 @@
 {% endblock %} {% block content %}
 
 <div style="margin: 20px">
+  <h3>3/28/2023</h3>
+  <ul>
+    <li>
+      The verb pair page is now loaded at base with much of the manual deck I
+      made (see The Tree Model), such that a good deal of the squirrel-y
+      language processing from database only applies to the outskirts of
+      vocabulary. This means the fundamentals are manual, and accurate, and the
+      output is only left to complex and faulty processing where necessary. This
+      isn't as cool from a natural langauge processing perspective, but it
+      speeds up getting the app to a hyper-useful, very accurate level. Less
+      coding, more manual, less errors, less time, more success. (Where doubled
+      imperfective branches occur, preference was given to the -ать, -еть or
+      -сти form over the -нуть)
+    </li>
+    <li>
+      Reflexives are in! And they have been sorted next to their transitive
+      counterparts.
+    </li>
+    <li>
+      Fixed some of the correct Trees page entries being accompanied by a broken
+      duplicate of themselves
+    </li>
+    <li>
+      The words in over 100 books were added to the database, hopefully making a
+      dent in the amount of manual update necessary, and improving contents of
+      total lists.
+    </li>
+    <li>
+      Attempts were made to fix the web app not loading using
+      "russianvocabularylistmaker.com/" (as of now it still requires /rubit
+      explicitly)
+    </li>
+  </ul>
+
   <h3>3/27/2023</h3>
   <ul>
     <li>
-      Fixed flag word update not working, and automatic missing key update not
-      working in deployment conditions, by rearranging and adding locks, and
-      having flagged word update stash its work when unable to complete it
-      immediately. Unfortunately, this will result in some flagged words not
-      updating until after the wait time of the next list creation.
+      Worked towards fixing flag word update not working, and automatic missing
+      key update not working in deployment conditions, by rearranging and adding
+      locks, and having flagged word update stash its work when unable to
+      complete it immediately. Unfortunately, this will result in some flagged
+      words not updating until after the wait time of the next list creation.
     </li>
     <li>
       Made tree lists sorted by prefix length, so that the most proliferated

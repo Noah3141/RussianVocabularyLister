@@ -11,7 +11,7 @@
 # Define test set
 
 def Test_Output(dictionary: dict):
-    print(        "Test        Input    Dictionary   Should Be")
+    #print(        "Test        Input    Dictionary   Should Be")
     test_input = ["языки", "языков","стреляют","кошку","кошек","разговаривает","говорит", "сказал","хороших", "последнем"]
     test_output = [dictionary.get(word, "-") for word in test_input]
     
@@ -41,7 +41,7 @@ conn = mysql.connector.connect(
     database = "Database_001")
 
 cursor = conn.cursor()
-print("Connected to database!")
+#print("Connected to database!")
 
 
 ###############################################################################
@@ -236,7 +236,7 @@ reflexive_participle_endings = ["ийся",
 
 
 
-print("Lists initialized.")
+#print("Lists initialized.")
 ###############################################################################
 
 word_list = list()
@@ -256,13 +256,15 @@ def russ_match(word: str, ending_list: set) -> int:
                 if stem + other_ending in word_list_set:
                     match += 1
             break
-    print("\nMatch calculated for", word, "against", ending_list, "as", match)
-    print("Stem calculated as : ", stem)
+    if stem == "":
+        stem = "*    *"
+    #print("\nMatch calculated for", word, "against", ending_list, "as", match)
+    #print("Stem calculated as : ", stem)
     return match  
 
 ###############################################################################
 
-print("Inputting data from database...")
+#print("Inputting data from database...")
 cursor.execute("SELECT word FROM words")
 words = cursor.fetchall()
 
@@ -298,18 +300,18 @@ word_list_set = set(word_list)
 # one of these easy, long, static endings)
 
 
-print("Database inputted. Beginning scan...")
+#print("Database inputted. Beginning scan...")
 for word in word_list:
     
-    print("\033[0m==========================================")
-    print("\nCurrent word: ", word)
+    #print("\033[0m==========================================")
+    #print("\nCurrent word: ", word)
     
     if any(word.endswith(ending) for ending in ие_endings): 
         if russ_match(word, ие_endings) >= 8: 
             
             dict_form = stem + "ие"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mие        ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mие        ", word, dict_form, "\033[0m\n\n======================================")
             continue
       
     if any(word.endswith(ending) for ending in ия_endings): 
@@ -317,7 +319,7 @@ for word in word_list:
             
             dict_form = stem + "ия"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mия        ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mия        ", word, dict_form, "\033[0m\n\n======================================")
             continue
     
         
@@ -326,7 +328,7 @@ for word in word_list:
             
             dict_form = stem + "ийся"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mийся      ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mийся      ", word, dict_form, "\033[0m\n\n======================================")
             continue
         
     
@@ -336,7 +338,7 @@ for word in word_list:
             
             dict_form = stem + "ание"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mание      ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mание      ", word, dict_form, "\033[0m\n\n======================================")
             continue
     
     if any(word.endswith(ending) for ending in ение_endings):
@@ -344,7 +346,7 @@ for word in word_list:
             
             dict_form = stem + "ение"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mение      ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mение      ", word, dict_form, "\033[0m\n\n======================================")
             continue
             
 
@@ -354,7 +356,7 @@ for word in word_list:
             
             dict_form = stem + "ство"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mство      ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mство      ", word, dict_form, "\033[0m\n\n======================================")
             continue
     
    
@@ -363,46 +365,46 @@ for word in word_list:
            
             dict_form = stem + "ница"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mница      ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mница      ", word, dict_form, "\033[0m\n\n======================================")
             continue
     
     
     if any(word.endswith(ending) for ending in all_adjective_endings): 
-        print("\n\n          all_adjective_endings")
+        #print("\n\n          all_adjective_endings")
         if russ_match(word, all_adjective_endings) >= 3: # Is AN adjective
                     
 
                 if stem in ой_stems:
                     dict_form = stem + "ой"
                     dictionary_forms[word] = dict_form
-                    print("\033[0;32mой adjective ", word, dict_form, "\033[0m\n\n======================================")
+                    #print("\033[0;32mой adjective ", word, dict_form, "\033[0m\n\n======================================")
                     continue
                 
                 elif stem.endswith("енн") and stem not in енний_stems:
                     dict_form = stem + "ый"
                     for ending in hard_adjective_endings:
                         dictionary_forms[(stem + ending)] = dict_form
-                        print("\033[0;32mенный adjective ", stem + ending, dict_form, "\033[0m\n\n======================================")
+                        #print("\033[0;32mенный adjective ", stem + ending, dict_form, "\033[0m\n\n======================================")
                         continue
 
                 elif stem[-1] in spelling_rule_1_letters: # Stem possibility 1
                     dict_form = stem + "ий"
                     dictionary_forms[word] = dict_form
-                    print("\033[0;32mspelling rule 1 adjective ", word, dict_form, "\033[0m\n\n======================================")
+                    #print("\033[0;32mspelling rule 1 adjective ", word, dict_form, "\033[0m\n\n======================================")
                     continue
 
                     
                 elif stem[-1] in spelling_rule_2_letters: # Stem possibility 2
                      dict_form = stem + "ий"
                      dictionary_forms[word] = dict_form
-                     print("\033[0;32mspelling rule 2 adjective ", word, dict_form, "\033[0m\n\n======================================")
+                     #print("\033[0;32mspelling rule 2 adjective ", word, dict_form, "\033[0m\n\n======================================")
                      continue
 
                      
                 elif stem[-1] in spelling_rule_ц_letters: # Stem possibility ц
                      dict_form = stem + "ый"
                      dictionary_forms[word] = dict_form
-                     print("\033[0;32m ц adjective ", word, dict_form, "\033[0m\n\n======================================")
+                     #print("\033[0;32m ц adjective ", word, dict_form, "\033[0m\n\n======================================")
                      continue
                 
 
@@ -411,21 +413,21 @@ for word in word_list:
                     if russ_match(word, soft_adjective_endings) >= 3:
                         dict_form = stem + "ий"
                         dictionary_forms[word] = dict_form
-                        print("\033[0;32madjective ", word, dict_form, "\033[0m\n\n======================================")
+                        #print("\033[0;32madjective ", word, dict_form, "\033[0m\n\n======================================")
                         continue
                 
                 elif word.endswith("ее"):
                     if russ_match(word[:-2] + "ый", hard_adjective_endings) >= 4:
                         dict_form = stem + "ый"
                         dictionary_forms[word] = dict_form
-                        print("\033[0;32mcomparative ", word, dict_form, "\033[0m\n\n======================================")
+                        #print("\033[0;32mcomparative ", word, dict_form, "\033[0m\n\n======================================")
                         continue
                 
                 if any(word.endswith(ending) for ending in hard_adjective_endings):
                     if russ_match(word, hard_adjective_endings) >= 3:
                         dict_form = stem + "ый"
                         dictionary_forms[word] = dict_form
-                        print("\033[0;32madjective ", word, dict_form, "\033[0m\n\n======================================")
+                        #print("\033[0;32madjective ", word, dict_form, "\033[0m\n\n======================================")
                         continue
 
 
@@ -440,7 +442,7 @@ for word in word_list:
             
             dict_form = stem + "ить"    
             dictionary_forms[word] = dict_form
-            print("\033[0;32mить       ", word, dict_form, "\033[0m\n\n======================================") 
+            #print("\033[0;32mить       ", word, dict_form, "\033[0m\n\n======================================") 
             continue
     
     if any(word.endswith(ending) for ending in ить_refl_endings):
@@ -448,7 +450,7 @@ for word in word_list:
             
             dict_form = stem + "иться"    
             dictionary_forms[word] = dict_form
-            print("\033[0;32mиться       ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mиться       ", word, dict_form, "\033[0m\n\n======================================")
             continue
     
     
@@ -458,14 +460,14 @@ for word in word_list:
         if (score >= 1) and (stem[-2:] == "ыв" or stem[-2:] == "ив"):
             dict_form = stem + "ать"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mать       ", word, dict_form, "\033[0m\n\n======================================")    
+            #print("\033[0;32mать       ", word, dict_form, "\033[0m\n\n======================================")    
             continue
         
         if score > 4:
            
             dict_form = stem + "ать"    
             dictionary_forms[word] = dict_form
-            print("\033[0;32mать       ", word, dict_form, "\033[0m\n\n======================================")    
+            #print("\033[0;32mать       ", word, dict_form, "\033[0m\n\n======================================")    
             continue
         
     if any(word.endswith(ending) for ending in ать_refl_endings):    
@@ -473,7 +475,7 @@ for word in word_list:
            
             dict_form = stem + "аться"    
             dictionary_forms[word] = dict_form
-            print("\033[0;32mаться     ", word, dict_form, "\033[0m\n\n======================================")  
+            #print("\033[0;32mаться     ", word, dict_form, "\033[0m\n\n======================================")  
             continue
         
     if any(word.endswith(ending) for ending in ять_trns_endings):
@@ -481,7 +483,7 @@ for word in word_list:
            
             dict_form = stem + "ять"    
             dictionary_forms[word] = dict_form
-            print("\033[0;32mять       ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mять       ", word, dict_form, "\033[0m\n\n======================================")
             continue
         
     if any(word.endswith(ending) for ending in ять_refl_endings):  
@@ -489,7 +491,7 @@ for word in word_list:
     
             dict_form = stem + "яться"    
             dictionary_forms[word] = dict_form
-            print("\033[0;32mяться     ", word, dict_form, "\033[0m\n\n======================================") 
+            #print("\033[0;32mяться     ", word, dict_form, "\033[0m\n\n======================================") 
             continue
 
 
@@ -498,7 +500,7 @@ for word in word_list:
             
             dict_form = stem + "ость"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mость      ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mость      ", word, dict_form, "\033[0m\n\n======================================")
             continue
         
     
@@ -509,42 +511,42 @@ for word in word_list:
            
             dict_form = stem + "тель"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mтель      ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mтель      ", word, dict_form, "\033[0m\n\n======================================")
             continue
    
     
        
     if any(word.endswith(ending) for ending in я_feminine_endings):
-        print("\n\n          я_feminine_endings")
+        #print("\n\n          я_feminine_endings")
         if word[:-1] + "ем" not in word_list:
             if russ_match(word, я_feminine_endings) > 6: 
                 
                 dict_form = stem + "я"
                 dictionary_forms[word] = dict_form
-                print("\033[0;32mя fem  ", word, dict_form, "\033[0m\n\n======================================")
+                #print("\033[0;32mя fem  ", word, dict_form, "\033[0m\n\n======================================")
                 continue
 
 
     
     if any(word.endswith(ending) for ending in ь_masc_endings):
-        print("\n\n          ь_masc_endings")
+        #print("\n\n          ь_masc_endings")
         if (word[:-1] + "ью") not in word_list and (word[:-2] + "ью") not in word_list:
             if russ_match(word, ь_masc_endings) > 6: # Hardset Minimum 
                 
                 dict_form = stem + "ь"
                 dictionary_forms[word] = dict_form
-                print("\033[0;32mь masc     ", word, dict_form, "\033[0m\n\n======================================")
+                #print("\033[0;32mь masc     ", word, dict_form, "\033[0m\n\n======================================")
                 continue
     
     
         
     if any(word.endswith(ending) for ending in ь_feminine_endings):
-        print("\n\n          ь_feminine_endings")
+        #print("\n\n          ь_feminine_endings")
         if russ_match(word, ь_feminine_endings) > 4: 
             
             dict_form = stem + "ь"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mь fem     ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mь fem     ", word, dict_form, "\033[0m\n\n======================================")
             continue
 
     
@@ -552,88 +554,88 @@ for word in word_list:
     
 
     if any(word.endswith(ending) for ending in fem_hard_endings_all):
-        print("\n\n          fem_hard_endings_all")
+        #print("\n\n          fem_hard_endings_all")
         if russ_match(word, fem_hard_endings_all) > 8:
             
             dict_form = stem + "а"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mfeminine  ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mfeminine  ", word, dict_form, "\033[0m\n\n======================================")
             continue
         
     if any(word.endswith(ending) for ending in neuter_hard_endings_all): # Beware sneaking vocative forms
-        print("\n\n          neuter_hard_endings_all")
+        #print("\n\n          neuter_hard_endings_all")
         if russ_match(word, neuter_hard_endings_all) == 6:
             if stem + "о" in word_list_set:
                 
                 dict_form = stem + "о"
                 dictionary_forms[word] = dict_form
-                print("\033[0;32mneuter    ", word, dict_form, "\033[0m\n\n======================================")
+                #print("\033[0;32mneuter    ", word, dict_form, "\033[0m\n\n======================================")
                 continue
                 
         
     if any(word.endswith(ending) for ending in masc_hard_endings_all):
-        print("\n\n          masc_hard_endings_all")
+        #print("\n\n          masc_hard_endings_all")
         if russ_match(word, masc_hard_endings_all) > 6:
            
             dict_form = stem 
             dictionary_forms[word] = dict_form
-            print("\033[0;32mmasculine ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mmasculine ", word, dict_form, "\033[0m\n\n======================================")
             continue
                 
     if any(word.endswith(ending) for ending in сти_trns_endings):
-        print("\n\n          сти_trns_endings")
+        #print("\n\n          сти_trns_endings")
         if russ_match(word, сти_trns_endings) > 5:
             if stem[-1] in сти_infixes:
                 stem = stem[:-1]
             dict_form = stem + "сти"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mсти ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mсти ", word, dict_form, "\033[0m\n\n======================================")
             continue    
     
     if any(word.endswith(ending) for ending in сти_refl_endings):
-        print("\n\n          сти_refl_endings")
+        #print("\n\n          сти_refl_endings")
         if russ_match(word, сти_refl_endings) > 5:
             if stem[-1] in сти_infixes:
                 stem = stem[:-1]
             dict_form = stem + "стись"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mстись ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mстись ", word, dict_form, "\033[0m\n\n======================================")
             continue  
     
     if any(word.endswith(ending) for ending in овать_endings):
-        print("\n\n          овать_endings")
+        #print("\n\n          овать_endings")
         if russ_match(word, овать_endings) > 4:
             if word.endswith("cь") or word.endswith("ся"):
                 dict_form = stem + "оваться"
             else:
                 dict_form = stem + "овать"
             dictionary_forms[word] = dict_form
-            print("\033[0;32mовать ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32mовать ", word, dict_form, "\033[0m\n\n======================================")
             continue 
         
     if "ц" in word[-4:] and any(word.endswith(ending) for ending in masc_hard_endings_spelling_ц):
-        print("\n\n          masc_hard_endings_spelling_ц")
+        #print("\n\n          masc_hard_endings_spelling_ц")
         if russ_match(word, masc_hard_endings_all) > 6:
             dict_form = stem 
             dictionary_forms[word] = dict_form
-            print("\033[0;32masc ц ", word, dict_form, "\033[0m\n\n======================================")
+            #print("\033[0;32masc ц ", word, dict_form, "\033[0m\n\n======================================")
             continue
 
 ################ ADDRESSING INSUFFICIENT DATABASE VARIETY #####################
 ################## These are less necessary as db grows #######################
      
     # if "н" in word[-4:]: # Volatile block, produces "ый" outputs on some words
-    #      print("\n\n          hard_adjective_endings")
+    #      #print("\n\n          hard_adjective_endings")
     #      if russ_match(word, hard_adjective_endings + ["о", "ы", "а"]) >= 1:
     #          dict_form = stem + "ый" 
     #          dictionary_forms[word] = dict_form
-    #          print("\033[35mный ", word, dict_form, "\033[0m\n\n======================================")
+    #          #print("\033[35mный ", word, dict_form, "\033[0m\n\n======================================")
     #          continue
     
  
 
-    print("\033[1;31mEscaped all capture!      ", word, "\033[0m\n\n======================================")
-    pass
+    #print("\033[1;31mEscaped all capture!      ", word, "\033[0m\n\n======================================")
+    # =pass
 
 
 
@@ -793,5 +795,5 @@ with open("dictionary_forms.pkl", "wb") as f:
 with open("word_list_set.pkl", "wb") as f:
     pickle.dump(word_list_set, f)
     
-print("Dictionary forms pickle saved!")
-print("Word list set saved!")
+#print("Dictionary forms pickle saved!")
+#print("Word list set saved!")
