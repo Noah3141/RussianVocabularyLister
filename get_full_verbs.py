@@ -132,6 +132,7 @@ prefix_list = ["преду", "предъ", "пред",
 # подставлять - *дставлять
 # отворить - *ворить
 
+# BEING RUN INSIDE OF COMPILER, COPY CHANGES TO THERE
 
 def root_match(word: str) -> str:
     root = "*"
@@ -324,6 +325,10 @@ for word in word_list:
     elif word.endswith("нуть") and any(word.startswith(prefix) for prefix in prefix_list):
          if word.endswith("ануть"):
              pair_dict[word] = word[:-5] + "ать"
+         elif word == "заснуть" or word == "уснуть" or word == "проснуть":
+             stem = word[:-4]
+             pair_dict[stem + "ыпать"] = word
+             continue
          else:
              stem = word[:-4]
              #if any(stem.endswith(vowel) for vowel in ["а","о","э","ы","у","я","е","и","ю"]:
@@ -412,25 +417,37 @@ for word in list(pair_dict):
 # Input full check of stem for these forms, and overwrite 
 ##########################################################
 
-override_list = {"калывать":"колоть","крывать":"крыть", "едать":"есть","ведать":"вести","метать":"мести",
-                 "кладывать":"ложить", "рывать":"рвать","мирать":"мереть", "бирать": "брать", "пасть":"падать","пасти":"пасать",
-                 "секать":"сечь", "зывать":"звать", "бывать":"быть", "бивать": "бить", "ращивать":"расти", 
-                 "плывать":"плыть","мывать":"мыть", "гонять":"гнать","вывать":"выть","нывать":"ныть","забывать":"забыть",
-                 "вертывать":"вернуть","швыривать":"швырнуть","сыпать":"сыпать","тягивать":"тянуть","пускать":"пустить","жидать":"ждать",
-                 "тирать":"тереть","буждать":"будить","плетать":"плести","влекать":"влечь","тыкать":"ткнуть","берегать":"беречь",
-                 "трагивать":"тронуть","лизывать":"лизать","касать":"каснуть","сматривать":"смотреть","равнивать":"равнять","кипать":"кипеть",
-                 "жигать":"жечь","ражать":"разить","драгивать":"дрожать","льщать":"льстить","зревать":"зреть",
-                 "зирать":"зреть","мечать":"метить","пинать":"пнуть","горать":"гореть","минать":"мять","гребать":"грести",
-                 "чинивать":"чинить","чинять":"чинить","гибать":"гибать","качивать":"качать","следовать":"следовать","цветать":"цвести",
-                 "решать":"решить","гружать":"грузить","бредать":"брести","винчивать":"винтить","ливать":"лить","вивать":"вить",
-                 "пихивать":"пихать","растать":"расти","топать":"тонуть","теривать":"терять",
+override_list = {"калывать":"колоть","крывать":"крыть", "едать":"есть","ведать":"вести","метать":"мести","ключать":"ключить","водить":"вести","дергивать":"дергать","мазывать":"мазать",
+                 "кладывать":"класть", "рывать":"рвать","мирать":"мереть", "бирать": "брать", "падать":"пасть","пасать":"пасти","возить":"везти","тесывать":"тесать",
+                 "секать":"сечь", "зывать":"звать", "бывать":"быть", "бивать": "бить", "ращивать":"расти", "нимать":"нять","казывать":"казать","леживать":"лежать","клевывать":"клевать",
+                 "плывать":"плыть","мывать":"мыть", "гонять":"гнать","вывать":"выть","нывать":"ныть","забывать":"забыть","орать":"орать","плескивать":"плескать",
+                 "вертывать":"вертеть","швыривать":"швырнуть","сыпать":"сыпать","тягивать":"тянуть","пускать":"пустить","жидать":"ждать","брасывать":"бросать","хлестывать":"хлестать",
+                 "тирать":"тереть","буждать":"будить","плетать":"плести","влекать":"влечь","тыкать":"ткнуть","берегать":"беречь","читывать":"читать","давать":"дать",
+                 "трагивать":"трогать","лизывать":"лизать","касать":"каснуть","сматривать":"смотреть","равнивать":"равнять","кипать":"кипеть","воротить":"ворачивать","шаривать":"шарить","далбливать":"долбить","молатывать":"молоть",
+                 "жигать":"жечь","ражать":"разить","драгивать":"дрожать","льщать":"льстить","зревать":"зреть", "ванивать":"вонять","ласкивать":"ласкать","черкивать":"черкать","волакивать":"волочь",
+                 "зирать":"зреть","мечать":"метить","пинать":"пнуть","горать":"гореть","минать":"мять","гребать":"грести","значать":"значить","хмуривать":"хмурить","еживать":"ежить","ряжать":"рядить","волновать":"волновать",
+                 "чинивать":"чинить","чинять":"чинить","гибать":"гибать","качивать":"качать","следовать":"следовать","цветать":"цвести","хваливать":"хвалить","сылать":"слать",
+                 "решать":"решить","гружать":"грузить","бредать":"брести","винчивать":"винтить","ливать":"лить","вивать":"вить","мучивать":"мучить","молять":"молить",
+                 "пихивать":"пихать","растать":"расти","ронять":"ронить","топать":"тонуть","теривать":"терять", "мыкать":"мкнуть","дыхать":"дохнуть","капливать":"копить","морщивать":"морщить",
                  "пекать":"печь","вирать":"врать","лыгать":"лгать","тушать":"тушить","стаивать":"стоить","грызать":"грызть","седать":"сесть","гревать":"греть","дувать":"дуть","маивать":"маять","мигивать":"мигать",
-                 "таивать":"таить","манывать":"мануть","шагивать":"шагать","стерегать":"стеречь","хлынивать":"хлынуть","плавливать":"плавить",
-                 "станывать":"стонать","шипывать":"шипеть","званивать":"звонить","звенивать":"звенеть","сапывать":"сопеть","хрипывать":"хрипеть",
-                 "пискивать":"пищать","храмывать":"хромать","жинать":"жать","жимать":"жать","мелькивать":"мелькать","тряхивать":"трясти",
-                 "глядывать":"глядеть","даивать":"доить","совывать":"совать","двигать":"двигать","поминать":"помнить","карабкивать":"карабкать","скакивать":"скочить",
+                 "таивать":"таить","манывать":"мануть","шагивать":"шагать","стерегать":"стеречь","хлынивать":"хлынуть","плавливать":"плавить","валивать":"валить","купать":"купить","прятывать":"прятать","вевать":"веять",
+                 "станывать":"стонать","шипывать":"шипеть","званивать":"звонить","звенивать":"звенеть","сапывать":"сопеть","хрипывать":"хрипеть","жевывать":"жевать",
+                 "пискивать":"пищать","храмывать":"хромать","жинать":"жать","жимать":"жать","мелькивать":"мелькать","тряхивать":"трясти", "храпывать":"храпеть",
+                 "глядывать":"глядеть","длевать":"длить","рождать":"родить","спаривать":"спорить","стегивать":"стегать","бадривать":"бодрить","даивать":"доить","совывать":"совать","двигать":"двигать","поминать":"помнить","карабкивать":"карабкать","скакивать":"скочить",
                  }
 
+with open("dictionary_forms.pkl", "rb") as f:
+    dictionary_forms = pickle.load(f)
+all_infinitives = list()
+
+for key in dictionary_forms:
+    all_infinitives.append(dictionary_forms[key])
+
+all_infinitives = list(set(all_infinitives))
+
+for word in all_infinitives:
+    if word.endswith("ться") or word.endswith("тись"):
+        word = word[:-2]
 
 # Our pair list is arranged as imperfective:perfective. We catch verb pairs from the database
 # by catching the imperfective (almost always -ывать/-ивать). A handful of verbs
@@ -443,8 +460,9 @@ for word in list(pair_dict):
         except:pass
 
 for override_imp in override_list: # For each imperfective form, tied to a perfective override
-    for imperfective in [imperfective for imperfective in word_list if root_match(imperfective) == override_imp]:
-        print(f"{override_imp} - {imperfective}")
+    print(f"\n\nChecking for {override_imp}:")
+    for imperfective in [imperfective for imperfective in all_infinitives if root_match(imperfective) == override_imp]:
+        print(f"For {override_imp} found {imperfective}")
         pair_dict[imperfective] = (imperfective[:len(imperfective)-len(override_imp)] + override_list[override_imp])
     
 # For each pair we made up above, look at the imperfective, and remove the prefix,
@@ -454,6 +472,10 @@ for override_imp in override_list: # For each imperfective form, tied to a perfe
 # imperfective, from the override list. 
 # e.g. We find скрывать, it matches крывать, therefore с- + крыть is its REAL perfective.
     
+
+
+# two different branch perfectives correspond to: -таивать (таить таять) -капывать (копать капать)
+
  
 ###############################################################################
 
@@ -480,7 +502,7 @@ for imp in unprefixed_override_list:
 
 
 # Iterative roots shouldn't come up as pairs
-iterative_forms = ["певать", "говаривать","леживать","стреливать"]
+iterative_forms = ["певать", "говаривать","леживать","стреливать","едать"]
 for imp in iterative_forms:
     try: del pair_dict[imp]
     except: continue
@@ -517,9 +539,17 @@ for root in root_list:
     
  # Fill in the branch inperfective forms by rootmatching the prefixed imperfectives
 for word in pair_dict:
-   root = root_match(word)
-   tree_dict[root_match(pair_dict[word])] = ("-" + root, words_prefixes.get(root, "")) 
+   imp_root = root_match(word)
+   
+   if imp_root in override_list:
+       perf_root = override_list[imp_root]
+   else:
+       perf_root = root_match(pair_dict[word])
+   
+   
+   tree_dict[perf_root] = ["-" + imp_root, words_prefixes.get(imp_root, "")] 
 
+    
  
 # Unite these two spellings into one entry
 doubled_roots = {"искать":"ыскать","играть":"ыграть"}
@@ -573,6 +603,18 @@ try: del tree_dict["овать"] # produced by the rare overlap of на-дели
 except:pass
 try: del tree_dict["аить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
 except:pass    
+try: del tree_dict["орить"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass   
+try: del tree_dict["ять"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass  
+try: del tree_dict["глянуть"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass  
+try: del tree_dict["кинуть"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass  
+try: del tree_dict["мыкать"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass  
+try: del tree_dict["чать"] # produced by the rare overlap of на-делить в-селить mixing as над-елить вс-елить
+except:pass  
 
 # Certain prefixes naturally gain a vowel to prevent consonant clusters.
 # When an imperfective is converted to its perfective form, consonant arrangements
@@ -630,25 +672,7 @@ for key in alphabetized_list:
 pair_dict = pair_dict_sub
 
 
-
-
-
-
-
-# Sorting tree dictionary by length of prefix list
-
-tree_dict_sub = dict()
-prefixes_length = dict()
-
-for key in tree_dict:
-    prefixes_length[key] = len(tree_dict[key][1].split("  "))
-    
-prefixes_length = sorted(prefixes_length, key = lambda x: prefixes_length[x], reverse=True)
-
-for key in prefixes_length:
-    tree_dict_sub[key] = tree_dict[key]
-
-tree_dict = tree_dict_sub
+# Sorting for trees occurs in front_face_tree.py, whose function is called in website__init.py
 
 with open("pair_list.pkl", "wb") as f:
     pickle.dump(pair_dict, f)

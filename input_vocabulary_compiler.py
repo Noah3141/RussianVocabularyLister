@@ -150,14 +150,14 @@ def rubit(input_text: str, breadth: str, style: str, waitful=False) -> dict:
         prefix_list = ["преду", "предъ", "пред",
                        "пере",
                        "при",
-                       "обо", "об","объ", "о",
+                       "обо", "об","объ", 
                        "воз", "вос", "вс", "взъ", "вз", 
                        "подъ", "под",
                        "надъ", "над",
                        "разъ", "раз", "рас",
                        "про",
                        "пре",
-                       "ото", "отъ", "от",
+                       "ото", "отъ", "от", "о",
                        "до",
                        "вы",
                        "на",
@@ -165,13 +165,13 @@ def rubit(input_text: str, breadth: str, style: str, waitful=False) -> dict:
                        "по",
                        "со", "съ", "с",
                        "в",
-                       "у"] 
-        
+                       "у"]
+                
         def root_match(word: str) -> str:
             root = "*"
             #print("\n\nRoot_Match checking word", word)
-            for prefix in prefix_list:
-                if word.startswith(prefix) and any(pref + word[len(prefix):] in word_list_set for pref in (pf for pf in prefix_list if pf != prefix) ):
+            for prefix in prefix_list: # If word starts with a prefix looking thing and you can put on any other prefix other than that prefix and the other prefix doesn't undo a mistaken prefix removal: eg. с-тавлять  вс-тавлять = в-ставлять 
+                if word.startswith(prefix) and any(pref + word[len(prefix):] in word_list_set for pref in (pf for pf in prefix_list if pf != prefix and not any(pf == undo for undo in ["вс","преду","со"])) ):
                     root = word[len(prefix):]
                     #print("proposed root", root)
                     break
@@ -196,14 +196,16 @@ def rubit(input_text: str, breadth: str, style: str, waitful=False) -> dict:
         input_roots = set()    
         for word in pair_list:
             root = root_match(word)
+            if root == "ложить" or root == "лагать": root = "класть"
             input_roots.add(root)
+        
         
         for root in list(tree_dict):
             if root in input_roots:
                 continue
             else: del tree_dict[root]
             pass  
-            
+           
             
         return tree_dict, input_count
           

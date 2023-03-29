@@ -20,6 +20,7 @@ from datetime import datetime
 import time
 import os
 import re
+from front_face_trees import front_face_trees
 
 app = Flask(__name__)
 api = Api(app)
@@ -65,6 +66,8 @@ def RUBIT_OUTPUT():
         if output_style == "Verb Pairs":
             return render_template("pairs.html", pair_list = output_dictionary)
         if output_style == "Verb Trees":
+            
+            output_dictionary = front_face_trees(output_dictionary)
             return render_template("trees.html", tree_list = output_dictionary)
         
         
@@ -82,6 +85,9 @@ def TreesList():
     if request.method == "GET":
         with open("tree_list.pkl", "rb") as f:
             tree_list = pickle.load(f)
+        
+        
+        tree_list = front_face_trees(tree_list)
         return render_template("trees.html", tree_list = tree_list)
    
     

@@ -453,6 +453,10 @@ for word in word_list:
             #print("\033[0;32mиться       ", word, dict_form, "\033[0m\n\n======================================")
             continue
     
+    if word.endswith("иваться") or word.endswith("ываться"):
+        dictionary_forms[word] = word
+        continue
+    
     
     if any(word.endswith(ending) for ending in ать_trns_endings):      
         score = russ_match(word, ать_trns_endings)
@@ -698,11 +702,6 @@ for word in nasal_я_words:
 
    
 class_6c_words = ["свистать", "искать", "чесать", "писать", "казаться", "казать", "вязать", "топтать", "хлестать", "плескать"]
-    
-
-
-
-
 
 class_6c_endings_trns = ["у","ешь","ем","ете","ет","ут","а"]
 class_6c_endings_refl = ["усь","ешься","емся","етесь","ется","утся","ась"]
@@ -775,6 +774,50 @@ for word in class_6c_words:
                 stem = word[:-4] + "ч"
                 for ending in class_6c_endings_trns:
                     dictionary_forms[stem + ending] = word
+
+
+class14_verbs = {"начать":"начн","зачать":"зачн","брать":"бер","взять":"возьм","жать":"жм","cжать":"сожму","вжать":"вожму","зажать":"зажм","принять":"прим","обнять":"обним","разнять":"разним","снять":"сним","поднять":"подим","приподнять":"приподним","смять":"сомн","размять":"разомн","подмять":"подомн","замять":"замн","прижать":"прижм","нажать":"нажм","понять":"пойм","нанять":"найм","занять":"займ"}
+
+for infinitive in class14_verbs:
+    dictionary_forms[infinitive] = infinitive
+    for ending in ["у","ешь","ет","ем","ете","ут","и","ите"]:
+        dictionary_forms[class14_verbs[infinitive] + ending] = infinitive
+    for ending in ["л","ла","ло","ли","в","вши"]:
+        dictionary_forms[infinitive[:-2] + ending] = infinitive
+
+class14_verbs = {"начаться":"начн","браться":"бер","взяться":"возьм","жаться":"жм","cжаться":"сожму","вжаться":"вожму","зажаться":"зажм","приняться":"прим","подняться":"подним","приподняться":"приподним","смяться":"сомн","размяться":"разомн","наняться":"найм"}
+
+for infinitive in class14_verbs:
+    dictionary_forms[infinitive] = infinitive
+    for ending in ["усь","ешься","ется","емся","етесь","утся","ись","итесь"]:
+        dictionary_forms[class14_verbs[infinitive] + ending] = infinitive
+    for ending in ["лся","лась","лось","лись","вся","вшись"]:
+        dictionary_forms[infinitive[:-4] + ending] = infinitive
+
+
+
+class9_verbs = {"умереть":"умр","помереть":"помр","стереть":"сотр","вытереть":"вытр","замереть":"замр","обмереть":"обомр","запереть":"запр","упереть":"упр","спереть":"сопр","простереть":"простр","отпереть":"отопр","втереть":"вотр","распростереть":"распростру","распереть":"расопр","опереть":"обопр","вымереть":"вымр"}
+
+for infinitive in class9_verbs:
+    dictionary_forms[infinitive] = infinitive
+    for ending in ["у","ешь","ет","ем","ете","ут","и","ите"]:
+        dictionary_forms[class9_verbs[infinitive] + ending] = infinitive
+
+    for ending in ["","ла","ло","ли","ев","ши"]:
+        dictionary_forms[infinitive[:-3] + ending] = infinitive
+
+
+class9_verbs = {"стереться":"сотр","вытереться":"вытр","упереться":"упр","натереться":"натр","опереться":"обопр"}
+
+for infinitive in class9_verbs:
+    dictionary_forms[infinitive] = infinitive
+    for ending in ["усь","ешься","ется","емся","етесь","утся","ись","итесь"]:
+        dictionary_forms[class9_verbs[infinitive] + ending] = infinitive
+
+    for ending in ["ся","лась","лось","лись","евся","шись"]:
+        dictionary_forms[infinitive[:-5] + ending] = infinitive
+
+
 
 
 # долг's forms as долг, because долгий interferes
