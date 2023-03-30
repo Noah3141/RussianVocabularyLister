@@ -175,8 +175,8 @@ def rubit(input_text: str, breadth: str, style: str, waitful=False) -> dict:
                     root = word[len(prefix):]
                     #print("proposed root", root)
                     break
-            if root == "*":
-                root == word
+            if root.endswith("ся") or root.endswith("сь"):
+                root = root[:-2]
             return root
         
         with open("word_list_set.pkl", "rb") as f:

@@ -29,6 +29,8 @@ def front_face_trees(tree_dictionary):
     except: pass
     try:tree_dictionary["лежать"][0] = "-лёживать"
     except: pass
+    try:tree_dictionary["равнить"][0] = "-равнять, -равнивать"
+    except: pass
     try:tree_dictionary["веять"][0] = "-вевать, -веивать"
     except: pass
     try:tree_dictionary["тесать"][0] = "-тёсывать"
@@ -45,6 +47,30 @@ def front_face_trees(tree_dictionary):
     try:tree_dictionary["хлестать"][0] = "-хлёстывать"
     except: pass
     
+    try:
+        tree_dictionary["-вратить"] = tree_dictionary["вратить"]
+        del tree_dictionary["вратить"]
+        tree_dictionary["-вратить"][0] = "-вращать"
+    except: pass
+
+    try:
+        tree_dictionary["-становить"] = tree_dictionary["становить"]
+        del tree_dictionary["становить"]
+        tree_dictionary["-становить"][0] = "-становлять, -станавливать"
+    except: pass
+
+    try:
+        tree_dictionary["-личить"] = tree_dictionary["личить"]
+        del tree_dictionary["личить"]
+        tree_dictionary["-личить"][0] = "-личать"
+    except: pass
+
+    try:
+        tree_dictionary["-прячь"] = tree_dictionary["прячь"]
+        del tree_dictionary["прячь"]
+        tree_dictionary["-прячь"][0] = "-прягать"
+    except: pass
+
 
     # Sorting tree dictionary by length of prefix list
 

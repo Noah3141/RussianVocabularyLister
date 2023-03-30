@@ -291,6 +291,7 @@ cursor.close()
 conn.close()
 
 word_list_set = set(word_list)
+word_list = list(word_list_set)
 ###############################################################################
 #  The higher the ending length scanned, the lower the threshold can be.
 # The lower the threshold, the less comprehensive the database needs to be.
