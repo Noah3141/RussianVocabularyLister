@@ -214,4 +214,3 @@ def rubit(input_text: str, breadth: str, style: str, waitful=False) -> dict:
 
     return dictionary_input_words, input_count
             # dictionary forms with count, the uncombined list of words and their counts
-
