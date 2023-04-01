@@ -8,6 +8,13 @@
 ###############################################################################
 ###############################################################################
 
+# from update_database_by_user_input import update_database_by_user_input 
+# update_database_by_user_input()
+
+
+
+###############################################################################
+
 # Define test set
 
 def Test_Output(dictionary: dict):
@@ -228,7 +235,7 @@ reflexive_participle_endings = ["ийся",
 сти_infixes = ["д", "с", "б","т"]
 
 ой_stems = set(["зл", "прост", "люб", "остальн", "друг", "ин", "чуж","втор", "густ","годов", "трудов",
-            "языков","адов", "путев", "сед", "полов","смыслов", "седьм", "худ"])
+            "языков","адов", "путев", "сед", "полов","смыслов", "седьм", "худ","жив","так"])
 
 енний_stems = set(["внутр","утр","ос","вес","искр","неискр","ранневес","предутр"])
 
@@ -657,8 +664,8 @@ for word in word_list:
 
 # Fleeting vowels mainly captured by words ending in к or ц (before ending)
 fleeting_overrides = ["бугор"]
-fleeting_overrides_к = ["крючок", "новичок","подшерсток","рожок","бугорок"]
-fleeting_overrides_ц = ["танец","американец","резец","конец"]
+fleeting_overrides_к = ["крючок", "новичок","подшерсток","рожок","бугорок","порядок"]
+fleeting_overrides_ц = ["танец","американец","резец","конец","австриец","боец","гонец","горец","гребец","дворец","ранец","рубец","старец","студенец","колодец","стрелец"]
 
 for word in fleeting_overrides:
     dictionary_forms[word] = word
@@ -681,13 +688,17 @@ for word in fleeting_overrides_к:
         
 for word in fleeting_overrides_ц:
     dictionary_forms[word] = word
-    stem = word[:-2] + word[-1]
+    if word[-3] == "л":
+        stem = word[:-3] + "льц"
+    else:
+        stem = word[:-2] + word[-1]
     for ending in masc_hard_endings_spelling_ц[:-1]:
         oblique_fleeting_word = stem + ending
         dictionary_forms[oblique_fleeting_word] = word
         pass
     pass
 
+print("Generating the nasal я nouns...")
 nasal_я_words = ["имя","пламя","знамя","пленя","беремя","время", "бремя","семя","темя","стремя","рамя"]
 nasal_я_endings = ["ени", "енам", "енами", "енах", "ен", "енем"]
 
@@ -698,6 +709,26 @@ for word in nasal_я_words:
         form = stem + ending
         dictionary_forms[form] = word
         
+print("Generating some key neuter nouns...")
+# Neuter nouns which never seemed to catch right
+key_neuters = ["слов","дел","блюд","ведр","болот","бедр","вен","дерьм","горл","говно","быдл","бельм","долот","бревн","варев","гребл","вин","гнезд","тел","жал","жевел","желез","жерл",
+               "забрал","жит","звен","зарев","зеркал","зерн","зл","золот","колен","корзн","копыт","кресл","крыло","лет","логов","мазл","мест","мыл","мяс","числ","начал","добр",
+               "письм","небо","нутр","огнив","одеял","озер","олов","орал","палев","падл","пекл","пив","прав","сал","сверл","рыл","русл","ребр","полотн","пятн","сел","седл","сит",
+               "стад","стебл","стекл","судн","сукн","тавр","тепл","утр","ядр","хуйл","ярм"]
+neuter_hard_endings_all = ["о", "а", "у", "е", "ом", "ах", "ами", "ам", ""]
+for stem in key_neuters:
+    for ending in neuter_hard_endings_all:
+        form = stem + ending
+        dictionary_forms[form] = stem + "о"
+key_neuters = ["бытье","былье","белье"]
+neuter_hard_endings_all = ["о", "а", "у", "е", "ом", "ах", "ами", "ам", ""]
+for stem in key_neuters:
+    for ending in neuter_hard_endings_all:
+        form = stem + ending
+        dictionary_forms[form] = stem + "о"
+
+
+
 
 # The dreaded class 6c verbs
 
@@ -708,14 +739,21 @@ class_6c_endings_trns = ["у","ешь","ем","ете","ет","ут","а"]
 class_6c_endings_refl = ["усь","ешься","емся","етесь","ется","утся","ась"]
    
 
-for word in class_6c_words:
+for root in class_6c_words:
     for prefix in ["","по","при","с","рас","раз","о","об","за","под","от","из"]:
         
-        if word == "искать" and prefix == "раз" or prefix == "от" or prefix == "под" or prefix == "об" or prefix == "с" or prefix == "из":
-            word = "ыскать"
+        if (root == "искать") and (prefix == "раз" or prefix == "от" or prefix == "под" or prefix == "об" or prefix == "с" or prefix == "из"):
+            root = "ыскать"
         
-        word = prefix + word    
-            
+        word = prefix + root    
+        
+        if word.endswith("ть"):
+            for ending in ["л","ла","ло","ли","в","вши"]:
+                dictionary_forms[word[:-2] + ending] = word
+        if word.endswith("ться"):
+            for ending in ["лся","лась","лось","лись","вся","вшись"]:
+                dictionary_forms[word[:-4] + ending] = word
+        
         if word.endswith("зать") or word.endswith("заться"):
             if word.endswith("ся"):
                 stem = word[:-6] + "ж"
@@ -786,7 +824,7 @@ for infinitive in class14_verbs:
     for ending in ["л","ла","ло","ли","в","вши"]:
         dictionary_forms[infinitive[:-2] + ending] = infinitive
 
-class14_verbs = {"начаться":"начн","браться":"бер","взяться":"возьм","жаться":"жм","cжаться":"сожму","вжаться":"вожму","зажаться":"зажм","приняться":"прим","подняться":"подним","приподняться":"приподним","смяться":"сомн","размяться":"разомн","наняться":"найм"}
+class14_verbs = {"начаться":"начн","браться":"бер","обраться":"обер","перебраться":"перебер","забраться":"забер","взяться":"возьм","жаться":"жм","cжаться":"сожму","вжаться":"вожм","зажаться":"зажм","приняться":"прим","подняться":"подним","приподняться":"приподним","смяться":"сомн","размяться":"разомн","наняться":"найм"}
 
 for infinitive in class14_verbs:
     dictionary_forms[infinitive] = infinitive
@@ -794,6 +832,25 @@ for infinitive in class14_verbs:
         dictionary_forms[class14_verbs[infinitive] + ending] = infinitive
     for ending in ["лся","лась","лось","лись","вся","вшись"]:
         dictionary_forms[infinitive[:-4] + ending] = infinitive
+
+
+
+for prefix in ["на","взо","во","вы","до","за","из","обо","ото","пере","по","разо","подо","поза","пона","при","про","с","разу","у"]:
+    trns = prefix + "брать"
+    refl = prefix + "браться"
+    stem = "бер"
+    
+    for ending in ["у","ешь","ет","ем","ете","ут","и","ите"]:
+        dictionary_forms[stem + ending] = trns
+        
+    for ending in ["л","ла","ло","ли","в","вши"]:
+        dictionary_forms[trns[:-2] + ending] = trns
+    
+    for ending in ["усь","ешься","ется","емся","етесь","утся","ись","итесь"]:
+        dictionary_forms[stem + ending] = refl
+
+    for ending in ["лся","лась","лось","лись","вся","вшись"]:
+        dictionary_forms[refl[:-4] + ending] = refl
 
 
 

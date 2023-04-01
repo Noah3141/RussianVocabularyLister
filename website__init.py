@@ -103,7 +103,7 @@ def FlagWord():
         
         input_text = data['input_text'] 
         input_text = re.sub("\n", " ", input_text) # Remove newlines for when we file away the input txt in the log
-        
+
         while True:
             with open("updater_status.txt", "r", encoding="UTF-8") as f:
                 status = f.read()    
@@ -148,7 +148,9 @@ def FlagWord():
         with open("updater_status.txt", "r", encoding="UTF-8") as f:
             status = f.read()    
         if status == "Open":
-            update_dictionary("last")    
+            update_dictionary("last")
+            idx = input_text.find(problem_word_in)
+            input_text = input_text[idx-40:idx+40]
             log = f"\n\n\nInput text:    {input_text}\nFlagged entry: <{problem_word_out}> generated from '{problem_word_in}'"
             with open("user_flagged_update_log.txt", "a", encoding="UTF-8") as f:
                 f.write(log)

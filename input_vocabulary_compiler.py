@@ -169,14 +169,22 @@ def rubit(input_text: str, breadth: str, style: str, waitful=False) -> dict:
                 
         def root_match(word: str) -> str:
             root = "*"
+            refl = word.endswith("ся") or word.endswith("сь")
             #print("\n\nRoot_Match checking word", word)
             for prefix in prefix_list: # If word starts with a prefix looking thing and you can put on any other prefix other than that prefix and the other prefix doesn't undo a mistaken prefix removal: eg. с-тавлять  вс-тавлять = в-ставлять 
-                if word.startswith(prefix) and any(pref + word[len(prefix):] in word_list_set for pref in (pf for pf in prefix_list if pf != prefix and not any(pf == undo for undo in ["вс","преду","со"])) ):
-                    root = word[len(prefix):]
-                    #print("proposed root", root)
-                    break
+                if refl:
+                    if word.startswith(prefix) and any(pref + word[len(prefix):] in word_list_set or (pref + word[len(prefix):-2]) in word_list_set for pref in (pf for pf in prefix_list if pf != prefix and not any(pf == undo for undo in ["вс","преду","со"])) ):
+                        root = word[len(prefix):]
+                        #print("proposed root", root)
+                        break
+                else:
+                    if word.startswith(prefix) and any(pref + word[len(prefix):] in word_list_set or (pref + word[len(prefix):] + "ся") in word_list_set for pref in (pf for pf in prefix_list if pf != prefix and pf[-1] != prefix[-1] and not any(pf == undo for undo in ["вс","преду","со"])) ):
+                        root = word[len(prefix):]
+                        #print("proposed root", root)
+                        break
             if root.endswith("ся") or root.endswith("сь"):
                 root = root[:-2]
+          
             return root
         
         with open("word_list_set.pkl", "rb") as f:

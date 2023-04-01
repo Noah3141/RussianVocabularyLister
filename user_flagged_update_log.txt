@@ -1,0 +1,852 @@
+
+Function call received (hard)
+Entering hard call on 'преминув' loop
+Delaying 2 seconds (hard on преминув)
+Within lock, read status as Open (hard on преминув)
+Status was Open! Updater set to: hard call on преминув
+Work on преминув done, setting updater to Open
+Entering hard call on 'ягнят' loop
+Delaying 2 seconds (hard on ягнят)
+Within lock, read status as Open (hard on ягнят)
+Status was Open! Updater set to: hard call on ягнят
+Work on ягнят done, setting updater to Open
+Entering hard call on 'воинственно' loop
+Delaying 2 seconds (hard on воинственно)
+Within lock, read status as Open (hard on воинственно)
+Status was Open! Updater set to: hard call on воинственно
+Work on воинственно done, setting updater to Open
+Entering hard call on 'надеюсь' loop
+Delaying 2 seconds (hard on надеюсь)
+Within lock, read status as Open (hard on надеюсь)
+Status was Open! Updater set to: hard call on надеюсь
+Work on надеюсь done, setting updater to Open
+Entering hard call on 'сатане' loop
+Delaying 2 seconds (hard on сатане)
+Within lock, read status as Open (hard on сатане)
+Status was Open! Updater set to: hard call on сатане
+Work on сатане done, setting updater to Open
+Entering hard call on 'людьми' loop
+Delaying 2 seconds (hard on людьми)
+Within lock, read status as Open (hard on людьми)
+Status was Open! Updater set to: hard call on людьми
+Work on людьми done, setting updater to Open
+Entering hard call on 'курс' loop
+Delaying 2 seconds (hard on курс)
+Within lock, read status as Open (hard on курс)
+Status was Open! Updater set to: hard call on курс
+Work on курс done, setting updater to Open
+Entering hard call on 'уверткам' loop
+Delaying 2 seconds (hard on уверткам)
+Within lock, read status as Open (hard on уверткам)
+Status was Open! Updater set to: hard call on уверткам
+Work on уверткам done, setting updater to Open
+Entering hard call on 'повозку' loop
+Delaying 2 seconds (hard on повозку)
+Within lock, read status as Open (hard on повозку)
+Status was Open! Updater set to: hard call on повозку
+Work on повозку done, setting updater to Open
+Entering hard call on 'повозка' loop
+Delaying 2 seconds (hard on повозка)
+Within lock, read status as Open (hard on повозка)
+Status was Open! Updater set to: hard call on повозка
+Work on повозка done, setting updater to Open
+Entering hard call on 'поодаль' loop
+Delaying 2 seconds (hard on поодаль)
+Within lock, read status as Open (hard on поодаль)
+Status was Open! Updater set to: hard call on поодаль
+Work on поодаль done, setting updater to Open
+Entering hard call on 'медик' loop
+Delaying 2 seconds (hard on медик)
+Within lock, read status as Open (hard on медик)
+Status was Open! Updater set to: hard call on медик
+Work on медик done, setting updater to Open
+Entering hard call on 'лисья' loop
+Delaying 2 seconds (hard on лисья)
+Within lock, read status as Open (hard on лисья)
+Status was Open! Updater set to: hard call on лисья
+Work on лисья done, setting updater to Open
+Entering hard call on 'торчком' loop
+Delaying 2 seconds (hard on торчком)
+Within lock, read status as Open (hard on торчком)
+Status was Open! Updater set to: hard call on торчком
+Work on торчком done, setting updater to Open
+Entering hard call on 'голубизны' loop
+Delaying 2 seconds (hard on голубизны)
+Within lock, read status as Open (hard on голубизны)
+Status was Open! Updater set to: hard call on голубизны
+Work on голубизны done, setting updater to Open
+Entering hard call on 'красавцем' loop
+Delaying 2 seconds (hard on красавцем)
+Within lock, read status as Open (hard on красавцем)
+Status was Open! Updater set to: hard call on красавцем
+Work on красавцем done, setting updater to Open
+Entering hard call on 'замолчал' loop
+Delaying 2 seconds (hard on замолчал)
+Within lock, read status as Open (hard on замолчал)
+Status was Open! Updater set to: hard call on замолчал
+Work on замолчал done, setting updater to Open
+Entering hard call on 'переключил' loop
+Delaying 2 seconds (hard on переключил)
+Within lock, read status as Open (hard on переключил)
+Status was Open! Updater set to: hard call on переключил
+Work on переключил done, setting updater to Open
+Entering hard call on 'расстегнул' loop
+Delaying 2 seconds (hard on расстегнул)
+Within lock, read status as Open (hard on расстегнул)
+Status was Open! Updater set to: hard call on расстегнул
+Work on расстегнул done, setting updater to Open
+Entering hard call on 'вытатуированы' loop
+Delaying 2 seconds (hard on вытатуированы)
+Within lock, read status as Open (hard on вытатуированы)
+Status was Open! Updater set to: hard call on вытатуированы
+Work on вытатуированы done, setting updater to Open
+Entering hard call on 'адрес' loop
+Delaying 2 seconds (hard on адрес)
+Within lock, read status as Open (hard on адрес)
+Status was Open! Updater set to: hard call on адрес
+Work on адрес done, setting updater to Open
+Entering hard call on 'отправкой' loop
+Delaying 2 seconds (hard on отправкой)
+Within lock, read status as Open (hard on отправкой)
+Status was Open! Updater set to: hard call on отправкой
+Work on отправкой done, setting updater to Open
+Entering hard call on 'прочесть' loop
+Delaying 2 seconds (hard on прочесть)
+Within lock, read status as Open (hard on прочесть)
+Status was Open! Updater set to: hard call on прочесть
+Work on прочесть done, setting updater to Open
+Entering hard call on 'взглянуть' loop
+Delaying 2 seconds (hard on взглянуть)
+Within lock, read status as Open (hard on взглянуть)
+Status was Open! Updater set to: hard call on взглянуть
+Work on взглянуть done, setting updater to Open
+Entering hard call on 'разок' loop
+Delaying 2 seconds (hard on разок)
+Within lock, read status as Open (hard on разок)
+Status was Open! Updater set to: hard call on разок
+Work on разок done, setting updater to Open
+Entering hard call on 'самая' loop
+Delaying 2 seconds (hard on самая)
+Within lock, read status as Open (hard on самая)
+Status was Open! Updater set to: hard call on самая
+Work on самая done, setting updater to Open
+Entering hard call on 'томаса' loop
+Delaying 2 seconds (hard on томаса)
+Within lock, read status as Open (hard on томаса)
+Status was Open! Updater set to: hard call on томаса
+Work on томаса done, setting updater to Open
+Entering hard call on 'счастью' loop
+Delaying 2 seconds (hard on счастью)
+Within lock, read status as Open (hard on счастью)
+Status was Open! Updater set to: hard call on счастью
+Work on счастью done, setting updater to Open
+Entering hard call on 'врач' loop
+Delaying 2 seconds (hard on врач)
+Within lock, read status as Open (hard on врач)
+Status was Open! Updater set to: hard call on врач
+Work on врач done, setting updater to Open
+Entering hard call on 'момент' loop
+Delaying 2 seconds (hard on момент)
+Within lock, read status as Open (hard on момент)
+Status was Open! Updater set to: hard call on момент
+Work on момент done, setting updater to Open
+Entering hard call on 'разрез' loop
+Delaying 2 seconds (hard on разрез)
+Within lock, read status as Open (hard on разрез)
+Status was Open! Updater set to: hard call on разрез
+Work on разрез done, setting updater to Open
+Entering hard call on 'дабы' loop
+Delaying 2 seconds (hard on дабы)
+Within lock, read status as Open (hard on дабы)
+Status was Open! Updater set to: hard call on дабы
+Work on дабы done, setting updater to Open
+Entering hard call on 'скальпель' loop
+Delaying 2 seconds (hard on скальпель)
+Within lock, read status as Open (hard on скальпель)
+Status was Open! Updater set to: hard call on скальпель
+Work on скальпель done, setting updater to Open
+Entering hard call on 'доктор' loop
+Delaying 2 seconds (hard on доктор)
+Within lock, read status as Open (hard on доктор)
+Status was Open! Updater set to: hard call on доктор
+Work on доктор done, setting updater to Open
+Entering hard call on 'жив' loop
+Delaying 2 seconds (hard on жив)
+Within lock, read status as Open (hard on жив)
+Status was Open! Updater set to: hard call on жив
+Work on жив done, setting updater to Open
+Entering hard call on 'неохотой' loop
+Delaying 2 seconds (hard on неохотой)
+Within lock, read status as Open (hard on неохотой)
+Status was Open! Updater set to: hard call on неохотой
+Work on неохотой done, setting updater to Open
+Entering hard call on 'гнилью' loop
+Delaying 2 seconds (hard on гнилью)
+Within lock, read status as Open (hard on гнилью)
+Status was Open! Updater set to: hard call on гнилью
+Work on гнилью done, setting updater to Open
+Entering hard call on 'амулет' loop
+Delaying 2 seconds (hard on амулет)
+Within lock, read status as Open (hard on амулет)
+Status was Open! Updater set to: hard call on амулет
+Work on амулет done, setting updater to Open
+Entering hard call on 'невидимки' loop
+Delaying 2 seconds (hard on невидимки)
+Within lock, read status as Open (hard on невидимки)
+Status was Open! Updater set to: hard call on невидимки
+Work on невидимки done, setting updater to Open
+Entering hard call on 'бормотать' loop
+Delaying 2 seconds (hard on бормотать)
+Within lock, read status as Open (hard on бормотать)
+Status was Open! Updater set to: hard call on бормотать
+Work on бормотать done, setting updater to Open
+Entering hard call on 'негодяй' loop
+Delaying 2 seconds (hard on негодяй)
+Within lock, read status as Open (hard on негодяй)
+Status was Open! Updater set to: hard call on негодяй
+Work on негодяй done, setting updater to Open
+Entering hard call on 'воспользовавшись' loop
+Delaying 2 seconds (hard on воспользовавшись)
+Within lock, read status as Open (hard on воспользовавшись)
+Status was Open! Updater set to: hard call on воспользовавшись
+Work on воспользовавшись done, setting updater to Open
+Entering hard call on 'жалоб' loop
+Delaying 2 seconds (hard on жалоб)
+Within lock, read status as Open (hard on жалоб)
+Status was Open! Updater set to: hard call on жалоб
+Work on жалоб done, setting updater to Open
+Entering hard call on 'шла' loop
+Delaying 2 seconds (hard on шла)
+Within lock, read status as Open (hard on шла)
+Status was Open! Updater set to: hard call on шла
+Work on шла done, setting updater to Open
+Entering hard call on 'мешок' loop
+Delaying 2 seconds (hard on мешок)
+Within lock, read status as Open (hard on мешок)
+Status was Open! Updater set to: hard call on мешок
+Work on мешок done, setting updater to Open
+Entering hard call on 'погреб' loop
+Delaying 2 seconds (hard on погреб)
+Within lock, read status as Open (hard on погреб)
+Status was Open! Updater set to: hard call on погреб
+Work on погреб done, setting updater to Open
+Entering hard call on 'толстозадая' loop
+Delaying 2 seconds (hard on толстозадая)
+Within lock, read status as Open (hard on толстозадая)
+Status was Open! Updater set to: hard call on толстозадая
+Exit caused automatic set to Open
+Function call received (hard)
+Entering hard call on 'толстозадая' loop
+Delaying 2 seconds (hard on толстозадая)
+Within lock, read status as Open (hard on толстозадая)
+Status was Open! Updater set to: hard call on толстозадая
+Work on толстозадая done, setting updater to Open
+Entering hard call on 'крестьянка' loop
+Delaying 2 seconds (hard on крестьянка)
+Within lock, read status as Open (hard on крестьянка)
+Status was Open! Updater set to: hard call on крестьянка
+Work on крестьянка done, setting updater to Open
+Entering hard call on 'ганс' loop
+Delaying 2 seconds (hard on ганс)
+Within lock, read status as Open (hard on ганс)
+Status was Open! Updater set to: hard call on ганс
+Function call received (hard)
+Entering hard call on 'ганс' loop
+Delaying 2 seconds (hard on ганс)
+Within lock, read status as Running 'hard' call on word ганс (hard on ганс)
+Within lock, read status as Running 'hard' call on word ганс (hard on ганс)
+Work on ганс done, setting updater to Open
+Entering hard call on 'увалень' loop
+Delaying 2 seconds (hard on увалень)
+Within lock, read status as Open (hard on ганс)
+Status was Open! Updater set to: hard call on ганс
+Within lock, read status as Running 'hard' call on word ганс (hard on увалень)
+Within lock, read status as Running 'hard' call on word ганс (hard on увалень)
+Work on ганс done, setting updater to Open
+Entering hard call on 'увалень' loop
+Delaying 2 seconds (hard on увалень)
+Within lock, read status as Open (hard on увалень)
+Status was Open! Updater set to: hard call on увалень
+Within lock, read status as Running 'hard' call on word увалень (hard on увалень)
+Within lock, read status as Running 'hard' call on word увалень (hard on увалень)
+Within lock, read status as Running 'hard' call on word увалень (hard on увалень)
+Work on увалень done, setting updater to Open
+Entering hard call on 'горшок' loop
+Delaying 2 seconds (hard on горшок)
+Within lock, read status as Open (hard on увалень)
+Status was Open! Updater set to: hard call on увалень
+Within lock, read status as Running 'hard' call on word увалень (hard on горшок)
+Within lock, read status as Running 'hard' call on word увалень (hard on горшок)
+Work on увалень done, setting updater to Open
+Entering hard call on 'горшок' loop
+Delaying 2 seconds (hard on горшок)
+Within lock, read status as Open (hard on горшок)
+Status was Open! Updater set to: hard call on горшок
+Within lock, read status as Running 'hard' call on word горшок (hard on горшок)
+Within lock, read status as Running 'hard' call on word горшок (hard on горшок)
+Work on горшок done, setting updater to Open
+Entering hard call on 'служанка' loop
+Delaying 2 seconds (hard on служанка)
+Within lock, read status as Open (hard on горшок)
+Status was Open! Updater set to: hard call on горшок
+Within lock, read status as Running 'hard' call on word горшок (hard on служанка)
+Within lock, read status as Running 'hard' call on word горшок (hard on служанка)
+Work on горшок done, setting updater to Open
+Entering hard call on 'служанка' loop
+Delaying 2 seconds (hard on служанка)
+Within lock, read status as Open (hard on служанка)
+Status was Open! Updater set to: hard call on служанка
+Within lock, read status as Running 'hard' call on word служанка (hard on служанка)
+Work on служанка done, setting updater to Open
+Entering hard call on 'картофелин' loop
+Delaying 2 seconds (hard on картофелин)
+Within lock, read status as Open (hard on служанка)
+Status was Open! Updater set to: hard call on служанка
+Within lock, read status as Running 'hard' call on word служанка (hard on картофелин)
+Within lock, read status as Running 'hard' call on word служанка (hard on картофелин)
+Work on служанка done, setting updater to Open
+Entering hard call on 'картофелин' loop
+Delaying 2 seconds (hard on картофелин)
+Within lock, read status as Open (hard on картофелин)
+Status was Open! Updater set to: hard call on картофелин
+Within lock, read status as Running 'hard' call on word картофелин (hard on картофелин)
+Within lock, read status as Running 'hard' call on word картофелин (hard on картофелин)
+Within lock, read status as Running 'hard' call on word картофелин (hard on картофелин)
+Work on картофелин done, setting updater to Open
+Entering hard call on 'пошел' loop
+Delaying 2 seconds (hard on пошел)
+Within lock, read status as Open (hard on картофелин)
+Status was Open! Updater set to: hard call on картофелин
+Within lock, read status as Running 'hard' call on word картофелин (hard on пошел)
+Within lock, read status as Running 'hard' call on word картофелин (hard on пошел)
+Within lock, read status as Running 'hard' call on word картофелин (hard on пошел)
+Work on картофелин done, setting updater to Open
+Entering hard call on 'пошел' loop
+Delaying 2 seconds (hard on пошел)
+Within lock, read status as Open (hard on пошел)
+Status was Open! Updater set to: hard call on пошел
+Within lock, read status as Running 'hard' call on word пошел (hard on пошел)
+Within lock, read status as Running 'hard' call on word пошел (hard on пошел)
+Within lock, read status as Running 'hard' call on word пошел (hard on пошел)
+Within lock, read status as Running 'hard' call on word пошел (hard on пошел)
+Work on пошел done, setting updater to Open
+Entering hard call on 'отвар' loop
+Delaying 2 seconds (hard on отвар)
+Within lock, read status as Open (hard on пошел)
+Status was Open! Updater set to: hard call on пошел
+Within lock, read status as Running 'hard' call on word пошел (hard on отвар)
+Within lock, read status as Running 'hard' call on word пошел (hard on отвар)
+Within lock, read status as Running 'hard' call on word пошел (hard on отвар)
+Within lock, read status as Running 'hard' call on word пошел (hard on отвар)
+Within lock, read status as Running 'hard' call on word пошел (hard on отвар)
+Work on пошел done, setting updater to Open
+Entering hard call on 'отвар' loop
+Delaying 2 seconds (hard on отвар)
+Within lock, read status as Open (hard on отвар)
+Status was Open! Updater set to: hard call on отвар
+Within lock, read status as Running 'hard' call on word отвар (hard on отвар)
+Within lock, read status as Running 'hard' call on word отвар (hard on отвар)
+Work on отвар done, setting updater to Open
+Entering hard call on 'трав' loop
+Delaying 2 seconds (hard on трав)
+Within lock, read status as Open (hard on отвар)
+Status was Open! Updater set to: hard call on отвар
+Within lock, read status as Running 'hard' call on word отвар (hard on трав)
+Within lock, read status as Running 'hard' call on word отвар (hard on трав)
+Within lock, read status as Running 'hard' call on word отвар (hard on трав)
+Work on отвар done, setting updater to Open
+Entering hard call on 'трав' loop
+Delaying 2 seconds (hard on трав)
+Within lock, read status as Open (hard on трав)
+Status was Open! Updater set to: hard call on трав
+Within lock, read status as Running 'hard' call on word трав (hard on трав)
+Within lock, read status as Running 'hard' call on word трав (hard on трав)
+Work on трав done, setting updater to Open
+Entering hard call on 'денек' loop
+Delaying 2 seconds (hard on денек)
+Within lock, read status as Open (hard on трав)
+Status was Open! Updater set to: hard call on трав
+Within lock, read status as Running 'hard' call on word трав (hard on денек)
+Within lock, read status as Running 'hard' call on word трав (hard on денек)
+Work on трав done, setting updater to Open
+Entering hard call on 'денек' loop
+Delaying 2 seconds (hard on денек)
+Within lock, read status as Open (hard on денек)
+Status was Open! Updater set to: hard call on денек
+Within lock, read status as Running 'hard' call on word денек (hard on денек)
+Within lock, read status as Running 'hard' call on word денек (hard on денек)
+Work on денек done, setting updater to Open
+Entering hard call on 'две' loop
+Delaying 2 seconds (hard on две)
+Within lock, read status as Open (hard on денек)
+Status was Open! Updater set to: hard call on денек
+Within lock, read status as Running 'hard' call on word денек (hard on две)
+Within lock, read status as Running 'hard' call on word денек (hard on две)
+Within lock, read status as Running 'hard' call on word денек (hard on две)
+Work on денек done, setting updater to Open
+Entering hard call on 'две' loop
+Delaying 2 seconds (hard on две)
+Within lock, read status as Open (hard on две)
+Status was Open! Updater set to: hard call on две
+Within lock, read status as Running 'hard' call on word две (hard on две)
+Within lock, read status as Running 'hard' call on word две (hard on две)
+Within lock, read status as Running 'hard' call on word две (hard on две)
+Within lock, read status as Running 'hard' call on word две (hard on две)
+Work on две done, setting updater to Open
+Entering hard call on 'позже' loop
+Delaying 2 seconds (hard on позже)
+Within lock, read status as Open (hard on две)
+Status was Open! Updater set to: hard call on две
+Within lock, read status as Running 'hard' call on word две (hard on позже)
+Within lock, read status as Running 'hard' call on word две (hard on позже)
+Within lock, read status as Running 'hard' call on word две (hard on позже)
+Within lock, read status as Running 'hard' call on word две (hard on позже)
+Within lock, read status as Running 'hard' call on word две (hard on позже)
+Work on две done, setting updater to Open
+Entering hard call on 'позже' loop
+Delaying 2 seconds (hard on позже)
+Within lock, read status as Open (hard on позже)
+Status was Open! Updater set to: hard call on позже
+Within lock, read status as Running 'hard' call on word позже (hard on позже)
+Within lock, read status as Running 'hard' call on word позже (hard on позже)
+Within lock, read status as Running 'hard' call on word позже (hard on позже)
+Within lock, read status as Running 'hard' call on word позже (hard on позже)
+Work on позже done, setting updater to Open
+Entering hard call on 'погреба' loop
+Delaying 2 seconds (hard on погреба)
+Within lock, read status as Open (hard on позже)
+Status was Open! Updater set to: hard call on позже
+Within lock, read status as Running 'hard' call on word позже (hard on погреба)
+Within lock, read status as Running 'hard' call on word позже (hard on погреба)
+Within lock, read status as Running 'hard' call on word позже (hard on погреба)
+Within lock, read status as Running 'hard' call on word позже (hard on погреба)
+Work on позже done, setting updater to Open
+Entering hard call on 'погреба' loop
+Delaying 2 seconds (hard on погреба)
+Within lock, read status as Open (hard on погреба)
+Status was Open! Updater set to: hard call on погреба
+Within lock, read status as Running 'hard' call on word погреба (hard on погреба)
+Within lock, read status as Running 'hard' call on word погреба (hard on погреба)
+Within lock, read status as Running 'hard' call on word погреба (hard on погреба)
+Work on погреба done, setting updater to Open
+Entering hard call on 'свалена' loop
+Delaying 2 seconds (hard on свалена)
+Within lock, read status as Open (hard on погреба)
+Status was Open! Updater set to: hard call on погреба
+Within lock, read status as Running 'hard' call on word погреба (hard on свалена)
+Within lock, read status as Running 'hard' call on word погреба (hard on свалена)
+Within lock, read status as Running 'hard' call on word погреба (hard on свалена)
+Within lock, read status as Running 'hard' call on word погреба (hard on свалена)
+Work on погреба done, setting updater to Open
+Entering hard call on 'свалена' loop
+Delaying 2 seconds (hard on свалена)
+Within lock, read status as Open (hard on свалена)
+Status was Open! Updater set to: hard call on свалена
+Within lock, read status as Running 'hard' call on word свалена (hard on свалена)
+Within lock, read status as Running 'hard' call on word свалена (hard on свалена)
+Within lock, read status as Running 'hard' call on word свалена (hard on свалена)
+Within lock, read status as Running 'hard' call on word свалена (hard on свалена)
+Within lock, read status as Running 'hard' call on word свалена (hard on свалена)
+Within lock, read status as Running 'hard' call on word свалена (hard on свалена)
+Work on свалена done, setting updater to Open
+Entering hard call on 'репа' loop
+Delaying 2 seconds (hard on репа)
+Within lock, read status as Open (hard on свалена)
+Status was Open! Updater set to: hard call on свалена
+Within lock, read status as Running 'hard' call on word свалена (hard on репа)
+Within lock, read status as Running 'hard' call on word свалена (hard on репа)
+Within lock, read status as Running 'hard' call on word свалена (hard on репа)
+Within lock, read status as Running 'hard' call on word свалена (hard on репа)
+Within lock, read status as Running 'hard' call on word свалена (hard on репа)
+Within lock, read status as Running 'hard' call on word свалена (hard on репа)
+Work on свалена done, setting updater to Open
+Entering hard call on 'репа' loop
+Delaying 2 seconds (hard on репа)
+Within lock, read status as Open (hard on репа)
+Status was Open! Updater set to: hard call on репа
+Within lock, read status as Running 'hard' call on word репа (hard on репа)
+Within lock, read status as Running 'hard' call on word репа (hard on репа)
+Within lock, read status as Running 'hard' call on word репа (hard on репа)
+Work on репа done, setting updater to Open
+Entering hard call on 'гнездышко' loop
+Delaying 2 seconds (hard on гнездышко)
+Within lock, read status as Open (hard on репа)
+Status was Open! Updater set to: hard call on репа
+Within lock, read status as Running 'hard' call on word репа (hard on гнездышко)
+Within lock, read status as Running 'hard' call on word репа (hard on гнездышко)
+Within lock, read status as Running 'hard' call on word репа (hard on гнездышко)
+Within lock, read status as Running 'hard' call on word репа (hard on гнездышко)
+Work on репа done, setting updater to Open
+Entering hard call on 'гнездышко' loop
+Delaying 2 seconds (hard on гнездышко)
+Within lock, read status as Open (hard on гнездышко)
+Status was Open! Updater set to: hard call on гнездышко
+Within lock, read status as Running 'hard' call on word гнездышко (hard on гнездышко)
+Within lock, read status as Running 'hard' call on word гнездышко (hard on гнездышко)
+Within lock, read status as Running 'hard' call on word гнездышко (hard on гнездышко)
+Work on гнездышко done, setting updater to Open
+Entering hard call on 'ребенок' loop
+Delaying 2 seconds (hard on ребенок)
+Within lock, read status as Open (hard on гнездышко)
+Status was Open! Updater set to: hard call on гнездышко
+Within lock, read status as Running 'hard' call on word гнездышко (hard on ребенок)
+Within lock, read status as Running 'hard' call on word гнездышко (hard on ребенок)
+Work on гнездышко done, setting updater to Open
+Entering hard call on 'ребенок' loop
+Delaying 2 seconds (hard on ребенок)
+Within lock, read status as Open (hard on ребенок)
+Status was Open! Updater set to: hard call on ребенок
+Within lock, read status as Running 'hard' call on word ребенок (hard on ребенок)
+Work on ребенок done, setting updater to Open
+Entering hard call on 'рухнул' loop
+Delaying 2 seconds (hard on рухнул)
+Within lock, read status as Open (hard on ребенок)
+Status was Open! Updater set to: hard call on ребенок
+Within lock, read status as Running 'hard' call on word ребенок (hard on рухнул)
+Within lock, read status as Running 'hard' call on word ребенок (hard on рухнул)
+Work on ребенок done, setting updater to Open
+Entering hard call on 'рухнул' loop
+Delaying 2 seconds (hard on рухнул)
+Within lock, read status as Open (hard on рухнул)
+Status was Open! Updater set to: hard call on рухнул
+Within lock, read status as Running 'hard' call on word рухнул (hard on рухнул)
+Within lock, read status as Running 'hard' call on word рухнул (hard on рухнул)
+Within lock, read status as Running 'hard' call on word рухнул (hard on рухнул)
+Within lock, read status as Running 'hard' call on word рухнул (hard on рухнул)
+Work on рухнул done, setting updater to Open
+Entering hard call on 'наземь' loop
+Delaying 2 seconds (hard on наземь)
+Within lock, read status as Open (hard on рухнул)
+Status was Open! Updater set to: hard call on рухнул
+Within lock, read status as Running 'hard' call on word рухнул (hard on наземь)
+Within lock, read status as Running 'hard' call on word рухнул (hard on наземь)
+Within lock, read status as Running 'hard' call on word рухнул (hard on наземь)
+Within lock, read status as Running 'hard' call on word рухнул (hard on наземь)
+Work on рухнул done, setting updater to Open
+Entering hard call on 'наземь' loop
+Delaying 2 seconds (hard on наземь)
+Within lock, read status as Open (hard on наземь)
+Status was Open! Updater set to: hard call on наземь
+Within lock, read status as Running 'hard' call on word наземь (hard on наземь)
+Within lock, read status as Running 'hard' call on word наземь (hard on наземь)
+Work on наземь done, setting updater to Open
+Entering hard call on 'лодыжку' loop
+Delaying 2 seconds (hard on лодыжку)
+Within lock, read status as Open (hard on наземь)
+Status was Open! Updater set to: hard call on наземь
+Within lock, read status as Running 'hard' call on word наземь (hard on лодыжку)
+Within lock, read status as Running 'hard' call on word наземь (hard on лодыжку)
+Within lock, read status as Running 'hard' call on word наземь (hard on лодыжку)
+Work on наземь done, setting updater to Open
+Entering hard call on 'лодыжку' loop
+Delaying 2 seconds (hard on лодыжку)
+Within lock, read status as Open (hard on лодыжку)
+Status was Open! Updater set to: hard call on лодыжку
+Within lock, read status as Running 'hard' call on word лодыжку (hard on лодыжку)
+Within lock, read status as Running 'hard' call on word лодыжку (hard on лодыжку)
+Within lock, read status as Running 'hard' call on word лодыжку (hard on лодыжку)
+Within lock, read status as Running 'hard' call on word лодыжку (hard on лодыжку)
+Work on лодыжку done, setting updater to Open
+Entering hard call on 'инстинктивно' loop
+Delaying 2 seconds (hard on инстинктивно)
+Within lock, read status as Open (hard on лодыжку)
+Status was Open! Updater set to: hard call on лодыжку
+Within lock, read status as Running 'hard' call on word лодыжку (hard on инстинктивно)
+Within lock, read status as Running 'hard' call on word лодыжку (hard on инстинктивно)
+Work on лодыжку done, setting updater to Open
+Entering hard call on 'инстинктивно' loop
+Delaying 2 seconds (hard on инстинктивно)
+Within lock, read status as Open (hard on инстинктивно)
+Status was Open! Updater set to: hard call on инстинктивно
+Within lock, read status as Running 'hard' call on word инстинктивно (hard on инстинктивно)
+Within lock, read status as Running 'hard' call on word инстинктивно (hard on инстинктивно)
+Work on инстинктивно done, setting updater to Open
+Entering hard call on 'дыбы' loop
+Delaying 2 seconds (hard on дыбы)
+Within lock, read status as Open (hard on инстинктивно)
+Status was Open! Updater set to: hard call on инстинктивно
+Within lock, read status as Running 'hard' call on word инстинктивно (hard on дыбы)
+Within lock, read status as Running 'hard' call on word инстинктивно (hard on дыбы)
+Work on инстинктивно done, setting updater to Open
+Entering hard call on 'дыбы' loop
+Delaying 2 seconds (hard on дыбы)
+Within lock, read status as Open (hard on дыбы)
+Status was Open! Updater set to: hard call on дыбы
+Within lock, read status as Running 'hard' call on word дыбы (hard on дыбы)
+Within lock, read status as Running 'hard' call on word дыбы (hard on дыбы)
+Work on дыбы done, setting updater to Open
+Entering hard call on 'ловушку' loop
+Delaying 2 seconds (hard on ловушку)
+Within lock, read status as Open (hard on дыбы)
+Status was Open! Updater set to: hard call on дыбы
+Within lock, read status as Running 'hard' call on word дыбы (hard on ловушку)
+Within lock, read status as Running 'hard' call on word дыбы (hard on ловушку)
+Work on дыбы done, setting updater to Open
+Entering hard call on 'ловушку' loop
+Delaying 2 seconds (hard on ловушку)
+Within lock, read status as Open (hard on ловушку)
+Status was Open! Updater set to: hard call on ловушку
+Within lock, read status as Running 'hard' call on word ловушку (hard on ловушку)
+Within lock, read status as Running 'hard' call on word ловушку (hard on ловушку)
+Work on ловушку done, setting updater to Open
+Entering hard call on 'решив' loop
+Delaying 2 seconds (hard on решив)
+Within lock, read status as Open (hard on ловушку)
+Status was Open! Updater set to: hard call on ловушку
+Within lock, read status as Running 'hard' call on word ловушку (hard on решив)
+Work on ловушку done, setting updater to Open
+Entering hard call on 'решив' loop
+Delaying 2 seconds (hard on решив)
+Within lock, read status as Open (hard on решив)
+Status was Open! Updater set to: hard call on решив
+Within lock, read status as Running 'hard' call on word решив (hard on решив)
+Within lock, read status as Running 'hard' call on word решив (hard on решив)
+Within lock, read status as Running 'hard' call on word решив (hard on решив)
+Within lock, read status as Running 'hard' call on word решив (hard on решив)
+Within lock, read status as Running 'hard' call on word решив (hard on решив)
+Work on решив done, setting updater to Open
+Entering hard call on 'угрожающе' loop
+Delaying 2 seconds (hard on угрожающе)
+Within lock, read status as Open (hard on решив)
+Status was Open! Updater set to: hard call on решив
+Within lock, read status as Running 'hard' call on word решив (hard on угрожающе)
+Within lock, read status as Running 'hard' call on word решив (hard on угрожающе)
+Within lock, read status as Running 'hard' call on word решив (hard on угрожающе)
+Within lock, read status as Running 'hard' call on word решив (hard on угрожающе)
+Within lock, read status as Running 'hard' call on word решив (hard on угрожающе)
+Within lock, read status as Running 'hard' call on word решив (hard on угрожающе)
+Within lock, read status as Running 'hard' call on word решив (hard on угрожающе)
+Within lock, read status as Running 'hard' call on word решив (hard on угрожающе)
+Work on решив done, setting updater to Open
+Entering hard call on 'угрожающе' loop
+Delaying 2 seconds (hard on угрожающе)
+Within lock, read status as Open (hard on угрожающе)
+Status was Open! Updater set to: hard call on угрожающе
+Within lock, read status as Running 'hard' call on word угрожающе (hard on угрожающе)
+Within lock, read status as Running 'hard' call on word угрожающе (hard on угрожающе)
+Within lock, read status as Running 'hard' call on word угрожающе (hard on угрожающе)
+Within lock, read status as Running 'hard' call on word угрожающе (hard on угрожающе)
+Work on угрожающе done, setting updater to Open
+Entering hard call on 'нависнуть' loop
+Delaying 2 seconds (hard on нависнуть)
+Within lock, read status as Open (hard on угрожающе)
+Status was Open! Updater set to: hard call on угрожающе
+Within lock, read status as Running 'hard' call on word угрожающе (hard on нависнуть)
+Within lock, read status as Running 'hard' call on word угрожающе (hard on нависнуть)
+Work on угрожающе done, setting updater to Open
+Entering hard call on 'нависнуть' loop
+Delaying 2 seconds (hard on нависнуть)
+Within lock, read status as Open (hard on нависнуть)
+Status was Open! Updater set to: hard call on нависнуть
+Within lock, read status as Running 'hard' call on word нависнуть (hard on нависнуть)
+Within lock, read status as Running 'hard' call on word нависнуть (hard on нависнуть)
+Within lock, read status as Running 'hard' call on word нависнуть (hard on нависнуть)
+Work on нависнуть done, setting updater to Open
+Entering hard call on 'девчонкой' loop
+Delaying 2 seconds (hard on девчонкой)
+Within lock, read status as Open (hard on нависнуть)
+Status was Open! Updater set to: hard call on нависнуть
+Within lock, read status as Running 'hard' call on word нависнуть (hard on девчонкой)
+Within lock, read status as Running 'hard' call on word нависнуть (hard on девчонкой)
+Within lock, read status as Running 'hard' call on word нависнуть (hard on девчонкой)
+Work on нависнуть done, setting updater to Open
+Entering hard call on 'девчонкой' loop
+Delaying 2 seconds (hard on девчонкой)
+Within lock, read status as Open (hard on девчонкой)
+Status was Open! Updater set to: hard call on девчонкой
+Within lock, read status as Running 'hard' call on word девчонкой (hard on девчонкой)
+Within lock, read status as Running 'hard' call on word девчонкой (hard on девчонкой)
+Work on девчонкой done, setting updater to Open
+Entering hard call on 'содрогнулся' loop
+Delaying 2 seconds (hard on содрогнулся)
+Within lock, read status as Open (hard on девчонкой)
+Status was Open! Updater set to: hard call on девчонкой
+Within lock, read status as Running 'hard' call on word девчонкой (hard on содрогнулся)
+Within lock, read status as Running 'hard' call on word девчонкой (hard on содрогнулся)
+Work on девчонкой done, setting updater to Open
+Entering hard call on 'содрогнулся' loop
+Delaying 2 seconds (hard on содрогнулся)
+Within lock, read status as Open (hard on содрогнулся)
+Status was Open! Updater set to: hard call on содрогнулся
+Within lock, read status as Running 'hard' call on word содрогнулся (hard on содрогнулся)
+Within lock, read status as Running 'hard' call on word содрогнулся (hard on содрогнулся)
+Within lock, read status as Running 'hard' call on word содрогнулся (hard on содрогнулся)
+Work on содрогнулся done, setting updater to Open
+Entering hard call on 'младенца' loop
+Delaying 2 seconds (hard on младенца)
+Within lock, read status as Open (hard on содрогнулся)
+Status was Open! Updater set to: hard call on содрогнулся
+Within lock, read status as Running 'hard' call on word содрогнулся (hard on младенца)
+Within lock, read status as Running 'hard' call on word содрогнулся (hard on младенца)
+Work on содрогнулся done, setting updater to Open
+Entering hard call on 'младенца' loop
+Delaying 2 seconds (hard on младенца)
+Within lock, read status as Open (hard on младенца)
+Status was Open! Updater set to: hard call on младенца
+Within lock, read status as Running 'hard' call on word младенца (hard on младенца)
+Within lock, read status as Running 'hard' call on word младенца (hard on младенца)
+Work on младенца done, setting updater to Open
+Entering hard call on 'окликнул' loop
+Delaying 2 seconds (hard on окликнул)
+Within lock, read status as Open (hard on младенца)
+Status was Open! Updater set to: hard call on младенца
+Within lock, read status as Running 'hard' call on word младенца (hard on окликнул)
+Within lock, read status as Running 'hard' call on word младенца (hard on окликнул)
+Within lock, read status as Running 'hard' call on word младенца (hard on окликнул)
+Work on младенца done, setting updater to Open
+Entering hard call on 'окликнул' loop
+Delaying 2 seconds (hard on окликнул)
+Within lock, read status as Open (hard on окликнул)
+Status was Open! Updater set to: hard call on окликнул
+Within lock, read status as Running 'hard' call on word окликнул (hard on окликнул)
+Within lock, read status as Running 'hard' call on word окликнул (hard on окликнул)
+Within lock, read status as Running 'hard' call on word окликнул (hard on окликнул)
+Within lock, read status as Running 'hard' call on word окликнул (hard on окликнул)
+Within lock, read status as Running 'hard' call on word окликнул (hard on окликнул)
+Exit caused automatic set to Open
+Work on окликнул done, setting updater to Open
+Exit caused automatic set to Open
+Function call received (hard)
+Entering hard call on 'обидчицу' loop
+Delaying 2 seconds (hard on обидчицу)
+Within lock, read status as Open (hard on обидчицу)
+Status was Open! Updater set to: hard call on обидчицу
+Work on обидчицу done, setting updater to Open
+Entering hard call on 'похож' loop
+Delaying 2 seconds (hard on похож)
+Within lock, read status as Open (hard on похож)
+Status was Open! Updater set to: hard call on похож
+Work on похож done, setting updater to Open
+Entering hard call on 'взглянул' loop
+Delaying 2 seconds (hard on взглянул)
+Within lock, read status as Open (hard on взглянул)
+Status was Open! Updater set to: hard call on взглянул
+Work on взглянул done, setting updater to Open
+Entering hard call on 'циферблат' loop
+Delaying 2 seconds (hard on циферблат)
+Within lock, read status as Open (hard on циферблат)
+Status was Open! Updater set to: hard call on циферблат
+Work on циферблат done, setting updater to Open
+Entering hard call on 'запас' loop
+Delaying 2 seconds (hard on запас)
+Within lock, read status as Open (hard on запас)
+Status was Open! Updater set to: hard call on запас
+Work on запас done, setting updater to Open
+Entering hard call on 'иссяк' loop
+Delaying 2 seconds (hard on иссяк)
+Within lock, read status as Open (hard on иссяк)
+Status was Open! Updater set to: hard call on иссяк
+Work on иссяк done, setting updater to Open
+Entering hard call on 'виноват' loop
+Delaying 2 seconds (hard on виноват)
+Within lock, read status as Open (hard on виноват)
+Status was Open! Updater set to: hard call on виноват
+Work on виноват done, setting updater to Open
+Entering hard call on 'влип' loop
+Delaying 2 seconds (hard on влип)
+Within lock, read status as Open (hard on влип)
+Status was Open! Updater set to: hard call on влип
+Work on влип done, setting updater to Open
+Entering hard call on 'просюсюкал' loop
+Delaying 2 seconds (hard on просюсюкал)
+Within lock, read status as Open (hard on просюсюкал)
+Status was Open! Updater set to: hard call on просюсюкал
+Work on просюсюкал done, setting updater to Open
+Entering hard call on 'вспомнив' loop
+Delaying 2 seconds (hard on вспомнив)
+Within lock, read status as Open (hard on вспомнив)
+Status was Open! Updater set to: hard call on вспомнив
+Work on вспомнив done, setting updater to Open
+Entering hard call on 'прибегнуть' loop
+Delaying 2 seconds (hard on прибегнуть)
+Within lock, read status as Open (hard on прибегнуть)
+Status was Open! Updater set to: hard call on прибегнуть
+Work on прибегнуть done, setting updater to Open
+Entering hard call on 'кладовке' loop
+Delaying 2 seconds (hard on кладовке)
+Within lock, read status as Open (hard on кладовке)
+Status was Open! Updater set to: hard call on кладовке
+Work on кладовке done, setting updater to Open
+Entering hard call on 'ловушка' loop
+Delaying 2 seconds (hard on ловушка)
+Within lock, read status as Open (hard on ловушка)
+Status was Open! Updater set to: hard call on ловушка
+Work on ловушка done, setting updater to Open
+Entering hard call on 'душ' loop
+Delaying 2 seconds (hard on душ)
+Within lock, read status as Open (hard on душ)
+Status was Open! Updater set to: hard call on душ
+Work on душ done, setting updater to Open
+Entering hard call on 'ловушки' loop
+Delaying 2 seconds (hard on ловушки)
+Within lock, read status as Open (hard on ловушки)
+Status was Open! Updater set to: hard call on ловушки
+Work on ловушки done, setting updater to Open
+Entering hard call on 'веревок' loop
+Delaying 2 seconds (hard on веревок)
+Within lock, read status as Open (hard on веревок)
+Status was Open! Updater set to: hard call on веревок
+Work on веревок done, setting updater to Open
+Entering hard call on 'подпоясывались' loop
+Delaying 2 seconds (hard on подпоясывались)
+Within lock, read status as Open (hard on подпоясывались)
+Status was Open! Updater set to: hard call on подпоясывались
+Work on подпоясывались done, setting updater to Open
+Entering hard call on 'капкана' loop
+Delaying 2 seconds (hard on капкана)
+Within lock, read status as Open (hard on капкана)
+Status was Open! Updater set to: hard call on капкана
+Work on капкана done, setting updater to Open
+Entering hard call on 'непреклонно' loop
+Delaying 2 seconds (hard on непреклонно)
+Within lock, read status as Open (hard on непреклонно)
+Status was Open! Updater set to: hard call on непреклонно
+Work on непреклонно done, setting updater to Open
+Entering hard call on 'проклятье' loop
+Delaying 2 seconds (hard on проклятье)
+Within lock, read status as Open (hard on проклятье)
+Status was Open! Updater set to: hard call on проклятье
+Work on проклятье done, setting updater to Open
+Entering hard call on 'бриджит' loop
+Delaying 2 seconds (hard on бриджит)
+Within lock, read status as Open (hard on бриджит)
+Status was Open! Updater set to: hard call on бриджит
+Work on бриджит done, setting updater to Open
+Entering hard call on 'священник' loop
+Delaying 2 seconds (hard on священник)
+Within lock, read status as Open (hard on священник)
+Status was Open! Updater set to: hard call on священник
+Work on священник done, setting updater to Open
+Entering hard call on 'скорее' loop
+Delaying 2 seconds (hard on скорее)
+Within lock, read status as Open (hard on скорее)
+Status was Open! Updater set to: hard call on скорее
+Work on скорее done, setting updater to Open
+Entering hard call on 'ах' loop
+Delaying 2 seconds (hard on ах)
+Within lock, read status as Open (hard on ах)
+Status was Open! Updater set to: hard call on ах
+Work on ах done, setting updater to Open
+Entering hard call on 'протянула' loop
+Delaying 2 seconds (hard on протянула)
+Within lock, read status as Open (hard on протянула)
+Status was Open! Updater set to: hard call on протянула
+Work on протянула done, setting updater to Open
+Entering hard call on 'дашь' loop
+Delaying 2 seconds (hard on дашь)
+Within lock, read status as Open (hard on дашь)
+Status was Open! Updater set to: hard call on дашь
+Work on дашь done, setting updater to Open
+
+'hard' call: 2023-04-01 @ 13:50:06-13:51:17
+Updated 26 inputs: [обидчицу   похож   взглянул   циферблат   запас   иссяк   виноват   влип   просюсюкал   вспомнив   прибегнуть   кладовке   ловушка   душ   ловушки   веревок   подпоясывались   капкана   непреклонно   проклятье   бриджит   священник   скорее   ах   протянула   дашь   ]
+With 26 dict forms: [обидчица   похожий   взглянуть   циферблат   запасти   иссякнуть   виноват   влипнуть   просюсюкать   вспомнить   прибегнуть   кладовка   ловушка   душ   ловушка   веревка   подпоясываться   капкан   непреклонно   проклятье   бриджит**   священник   скорее   ах   протянуть   дать   ]
+Exit caused automatic set to Open
+Function call received (hard)
+
+'hard' call: 2023-04-01 @ 13:55:46
+Nothing needed updated.
+Function call received (hard)
+
+'hard' call: 2023-04-01 @ 13:55:57
+Nothing needed updated.

@@ -3,6 +3,37 @@
 {% endblock %} {% block content %}
 
 <div style="margin: 20px">
+  <h3>3/31/2023</h3>
+  <ul>
+    <li>
+      Investigated URL function:
+      <ul>
+        <li>russianvocabularylistmaker.com/ BAD</li>
+        <li>russianvocabularylistmaker.com/rubit GOOD</li>
+        <li>www.russianvocabularylistmaker.com/ GOOD</li>
+        <li>http://russianvocabularylistmaker.com/ BAD</li>
+        <li>http://www.russianvocabularylistmaker.com/ GOOD</li>
+      </ul>
+    </li>
+    <li>
+      Investigated flag button further: Appears to work well under deployment
+      conditions now
+    </li>
+    <li>
+      Added further support for irregular words, such as the forms of брать and
+      fleeting -ец words.
+    </li>
+    <li>
+      Made improvements to the stop words list, which attempts to prevent benign
+      words (prepositions, pronouns) from being processed or given in the output
+      list.
+    </li>
+    <li>
+      Fixed the class 6c verbs not actually being processed properly (казать,
+      чесать, плескать)
+    </li>
+  </ul>
+
   <h3>3/30/2023</h3>
   <ul>
     <li>
