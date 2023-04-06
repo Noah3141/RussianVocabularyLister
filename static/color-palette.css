@@ -1,12 +1,11 @@
-:root{
-    --Background-Default: rgb(26, 26, 26);
-    --Background-Fronted: rgb(37, 37, 37);
-    --Dark-Outline: rgb(20,20,20);
-    --Element-Default: rgb(71, 71, 71);
-    --Element-Highlight: rgb(104, 104, 104);
-    --Color-Base: rgb(255, 100, 0) ;
-    --Color-Highlight: rgb(255, 112, 17);
-    --Color-Lowlight: rgb(230, 54, 0);
-    --Text-Color: rgb(235, 235, 235);
-    
+:root {
+  --Background-Default: #1a181f;
+  --Background-Fronted: #1a2b35;
+  --Dark-Outline: rgb(20, 20, 20);
+  --Element-Default: rgb(71, 71, 71);
+  --Element-Highlight: rgb(104, 104, 104);
+  --Color-Base: #ec7f19;
+  --Color-Highlight: rgb(255, 127, 42);
+  --Color-Lowlight: rgb(230, 54, 0);
+  --Text-Color: #f0ebe5;
 }
