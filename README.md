@@ -9,9 +9,13 @@ To complete this task, the Flask app is complete with a large scale language cor
 3) User input on the site
 4) User flagged words on the site
 
-Together, these fill a database which is used to triangulate lemma forms of a given Russian word. The site also allows users to browse the database’s verbs in two different grammatical models, and see their inputted text processed into one of these grammatical models, each of which requires another layer of language processing and derivational analysis.
+Together, these fill a database which is used to triangulate lemma forms of a given Russian word. This is done by taking each individual word, and probing the presence of sufficient numbers of proposed alternative forms for a given lexical category, until a score passes the relevant threshold, whereupon the word is processed for subtypes within that lexical category (e.g. -ивать ending verb of subtype that contains an 'o' to 'a' stem change), and its true dictionary form is reverse-engineered.
 
-Since the database is inevitably not large enough, the app notices when words are inputted by the user, which aren't in the key. It then searches these words on *kak-pishetsya.com*, and scrubs the page for the dictionary form. The web app learns over time based on user inputted text, and can have entries explicity flagged for this kind of update when the Python lemmatization script offers a faulty output.
+The site also allows users to browse the database’s verbs in two different grammatical models, and see their inputted text processed into one of these grammatical models, each of which requires another layer of language processing and derivational analysis.
+
+Since the database is inevitably not large enough to find every word in a sufficient variety of forms to triangulate its dictionary form, the app notices when words are inputted by the user, which aren't in the key. It then searches these words on *kak-pishetsya.com*, and scrubs the page for the dictionary form. The web app learns over time based on user inputted text, and can have entries explicity flagged for this kind of update when the Python lemmatization script offers a faulty output.
+
+Upon list creation, one thread is sent to collect any words that the key did not recognize. Simultaneously, a user may use the flag word button, which sends an AJAX request to the server to initiate another worker onto that same update script. Because of this, a locking mechanism and multiple checks are in place to allow the flag button to work even during longer-term background update scrubbing, without causing an "unpickling" data corruption error from simultaneous reading and editing.
 
 Finally, the site includes an anki deck, and the contents of that deck explained and displayed in-page, which proposes an alternative model of Russian verbs as trees, more than pairs. It contains a hand-made list of over 200 verb trees, which, together with the database's tree output, amounts to a fully comprehensive list of Russian verbs for the purposes of second language acquisition.
 
