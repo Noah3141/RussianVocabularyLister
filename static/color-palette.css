@@ -1,11 +1,11 @@
 :root {
-  --Background-Default: #121416;
-  --Background-Fronted: #1e2224;
-  --Dark-Outline: rgb(20, 20, 20);
-  --Element-Default: #1a181f;
-  --Element-Highlight: #1f1c25;
-  --Color-Base: #ee7606;
-  --Color-Highlight: rgb(255, 127, 42);
-  --Color-Lowlight: rgb(230, 54, 0);
-  --Text-Color: #f0ebe5;
+    --Background-Default: #121416;
+    --Background-Fronted: #1a2b35;
+    --Dark-Outline: rgb(20, 20, 20);
+    --Element-Default: #1c1924;
+    --Element-Highlight: #1f1c25;
+    --Color-Base: #ee7606;
+    --Color-Highlight: rgb(255, 127, 42);
+    --Color-Lowlight: rgb(230, 54, 0);
+    --Text-Color: #f0ebe5;
 }
